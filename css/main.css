@@ -159,10 +159,6 @@ ul.share-buttons a:hover img{
 /* ========= RESULTS ======== */
 
 
-.default {
-  width:30rem;
-}
-
 .default a{
   text-decoration: underline;
   padding:0;
@@ -185,6 +181,10 @@ h4 {
 }
 
 @media only screen and (min-width: 36rem){
+  .default {
+    width:30rem;
+  }  
+  
   .main-img {
     margin: -2.5rem 0 2rem 1rem;
   }
@@ -223,7 +223,6 @@ h4 {
 }
 
 @media only screen and (min-width: 55rem){
-
 }
 
 @media only screen and (min-width: 75rem){
