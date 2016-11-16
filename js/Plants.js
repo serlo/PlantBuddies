@@ -78,9 +78,9 @@ function Plants(){
 
 	var fadeReload = function(html){
 
-		var elems = container;//.add(inputWrap);
+		//var elems = container;//.add(inputWrap);
 
-		container.stop().fadeOut('', function() {
+		container.stop(true).fadeOut('', function() {
 			container.html(html);
 			initBuddyClick();
 			gEvents.initClickEvents();
@@ -103,7 +103,6 @@ function Plants(){
 		for (var i = 0; i < relationPlants.length; i++) {
 			html += getOneRelation(relationPlants[i], suggestion);
 		}
-
 
 		return html;
 	}
