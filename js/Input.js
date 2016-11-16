@@ -19,7 +19,7 @@ function Input(){
 			minLength: 0
 		},{
 			name: 'gPlantData',
-			display: 'name',
+			display: buildDisplayString,
 			limit:30,
 			source: substringMatcher(),
 			templates: {
@@ -28,7 +28,9 @@ function Input(){
 					'unable to match the current query',
 				'</div>'
 				].join('\n'),
-				suggestion: function(obj){ return ("<div>"+obj.name+"</div>"); }
+				suggestion: function(obj){
+					if(!obj.alt) obj.alt = '';
+					return ("<div>"+obj.name+" <span class='gray'>"+obj.alt+"</span></div>"); }
 			}
 		});
     } //setupTypeahead
@@ -48,14 +50,22 @@ function Input(){
 	    	substrRegex = new RegExp(q, 'i');
 
 	    for (var i = 0, len = gPlantData.length; i < len; i++) {
-	    	var str = gPlantData[i].name;
-			if (substrRegex.test(str)) {
+	    	var name = gPlantData[i].name;
+	    	var altName = gPlantData[i].alt;
+	    	var id = gPlantData[i].id;
+	    	if( !plantReady(id,gPlantData[i].note) ) continue;
+			if (substrRegex.test(name) || substrRegex.test(altName)) {
 				matches.push( gPlantData[i] );
 			}
 		}
 	    cb(matches);
 	  };
 	} //substringMatcher
+
+	var buildDisplayString = function(suggestion){
+		// if(!suggestion.alt) suggestion.alt = '';
+		return suggestion.name;
+	}
 
 	var initEnterEvent = function() {
 

@@ -6,11 +6,10 @@ function Events(){
 
 		// initKeyEvents();
         initHashEvents();
-        initClickEvents();
+        this.initClickEvents();
 
         defaultHTML = $('#results').html();
     }
-
 
 	var initHashEvents = function(){
 		$( window ).on('hashchange',function() {
@@ -19,16 +18,18 @@ function Events(){
 		});
 	}
 
-	var initClickEvents = function(){
-		$("#results .search-link").click(function() {
+	this. initClickEvents = function(){
+		$("#results a.img-hover").click(function(e) {
 		    e.preventDefault();
 		    var href=$(this).attr("href");
+		    gEvents.updateHash(href.substr(1));
 		    gEvents.loadFromHash(href);
 		});
 
-		$("#results .about-link").click(function() {
+		$("#results .about-link, #home-link, #about-link").click(function(e) {
 		    e.preventDefault();
 		    gEvents.loadStartPage();
+		    scrollToPos(0);
 		});
 	}
 
@@ -37,23 +38,59 @@ function Events(){
 	}
 
 	this.removeHash = function(){
-        history.pushState(null, null, '');
+        //history.pushState(null, null, '');
+        history.pushState("", document.title, window.location.pathname + window.location.search);
 	}
 
 	this.loadFromHash = function(hash) {
 	    hash = hash.substr(1);
+
+	    //special case 
+	    if(hash == 'buddies') { toBuddyGrid(); return false;}
+
+	    //has hash
 	    if(hash.length>1) $('#results .default').hide();
+	    //no hash (or anchor)
+	    else {gEvents.loadStartPage(); scrollToPos(0); return false;}
+		
 		var plantObj = $.grep(gPlantData, function(e){ return e.id == hash })[0];
-		if(plantObj === undefined) return false;
+		
+		//plant not found -> startpage
+		if(plantObj === undefined) {gEvents.loadStartPage(); scrollToPos(0); return false;}
+
 		$('.typeahead').typeahead('val', plantObj.name);
 		gPlants.load(plantObj);
+		scrollToPos(0);
 	}
 
-	this.loadStartPage = function() {
-		this.removeHash();
+	this.loadStartPage = function(keepHash) {
+		if(!keepHash) this.removeHash();
+		gInput.clearInput();
 		gPlants.reload(defaultHTML);
 	}
 
+	var toBuddyGrid = function(){
+		gEvents.loadStartPage();
+		scrollToElem( '#buddy-grid-title' );
+	}
+
+	var scrollToElem = function(selector){
+		var checkExist = setInterval(function() {
+		   if ($(selector).length) {
+		      clearInterval(checkExist);
+
+		      $('html, body').stop().animate({
+	        		scrollTop: $(selector).offset().top
+	    	  }, 600);
+		   }
+		}, 100); // check every 100ms
+	}
+
+	var scrollToPos = function(pos) {
+		$('html, body').stop().animate({
+    		scrollTop: pos
+		}, 600);    	
+	}
 
 	// var initKeyEvents = function(){
 	// 	$(document).keydown(function(e) {
