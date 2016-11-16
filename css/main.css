@@ -134,22 +134,26 @@ ul {
   padding:0;
 }
 
+div.share-note{
+  margin-top: 3rem;
+}
+
 ul.share-buttons li{
   display: inline;
-  opacity: 0.6;
+  opacity: 0.5;
 }
 
 ul.share-buttons li:hover {
-  opacity: 0.8;
+  opacity: 1;
 }
 
 ul.share-buttons a {
-  padding: 0 0.26rem 0 0;
+  padding: 0 0.4rem 0 0;
 }
 
 ul.share-buttons img{
-  width: 1.8rem;
-  height: 1.8rem;
+  width: 2.5rem;
+  height: 2.5rem;
 }
 
 ul.share-buttons a:hover img{
@@ -430,8 +434,11 @@ a.img-hover {
   transition: all 0.5s ease;
 }
 
-
-
-.backlink a {
+.more-options a {
   text-decoration: underline;
+  display: block;
 }
+
+/* .more-options .share-note {
+  float: right;
+} */

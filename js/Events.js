@@ -18,7 +18,7 @@ function Events(){
 		});
 	}
 
-	this. initClickEvents = function(){
+	this.initClickEvents = function(){
 		$("#results a.img-hover").click(function(e) {
 		    e.preventDefault();
 		    var href=$(this).attr("href");
@@ -31,6 +31,13 @@ function Events(){
 		    gEvents.loadStartPage();
 		    scrollToPos(0);
 		});
+
+		// $('.share-buttons a').click(function(e){
+		// 	e.preventDefault();
+		// 	window.open (url);
+		// });
+		
+
 	}
 
 	this.updateHash = function(hash){

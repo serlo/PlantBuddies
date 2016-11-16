@@ -51,7 +51,7 @@ function Plants(){
 		html += '</div><div class="bad"><h3>dislikes</h3>';
 		html += buildRelations(nolikey, result, suggestion);
 
-		html += '</div><hr class="clear"/> <div class="backlink"><a href="#buddies">Show me all the plants</a></div>';
+		html += '</div><hr class="clear"/> <div class="more-options"><a href="#buddies">Show me all the plants</a></div>'+getShareButtons(suggestion.name);
 	  	
 	  	fadeReload(html);
 	}
@@ -84,6 +84,7 @@ function Plants(){
 			container.html(html);
 			initBuddyClick();
 			gEvents.initClickEvents();
+			setShareHrefs();
 		}).fadeIn();
 	}
 
