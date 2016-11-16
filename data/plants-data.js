@@ -863,7 +863,7 @@ var gPlantData = [ {
 }, {
     id: "field_salad",
     name: "Field salad",
-    alt: "Corn salad, Lamb's lettuce"
+    alt: "Corn salad, Lamb's lettuce",
     latin: "",
     note: "I frighten away ants."
 } ];
