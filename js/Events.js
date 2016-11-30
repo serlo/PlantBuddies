@@ -101,9 +101,14 @@ function Events(){
 	}
 
 
-	this.onReload = function(){
+	this.beforeReload = function(){
 		$('body').toggleClass('front',gIsFront);
 	}
+	
+	this.afterReload = function(){
+		gEvents.initClickEvents();
+		if(gIsFront) decodeMail();
+	}	
 
 	// var initKeyEvents = function(){
 	// 	$(document).keydown(function(e) {

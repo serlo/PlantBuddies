@@ -74,7 +74,7 @@ function Plants(){
 	}	
 
 	this.reload = function(html) {
-		gEvents.onReload();
+		gEvents.beforeReload();
 		fadeReload(html);
 	}
 
@@ -82,7 +82,7 @@ function Plants(){
 		container.stop(true).fadeOut('', function() {
 			container.html(html);
 			initBuddyClick();
-			gEvents.initClickEvents();
+			gEvents.afterReload();
 			setShareHrefs();
 		}).fadeIn();
 	}

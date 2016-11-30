@@ -209,8 +209,15 @@ function setShareHrefs() {
                 break;
 
         }
-
         link.attr('href',url);
     });
 }
 
+
+function decodeMail(){
+    var link = $('.mail-address');
+    var at = / \[a\] /;
+    var dot = / \[:\] /;
+    var addr = link.first().text().replace(at,"@").replace(dot,".");
+    link.text(addr).attr('href','mailto:'+addr+'?subject=[PlantBuddies]');
+}
