@@ -26,11 +26,11 @@ function Plants(){
 		html += getMainImage(suggestion.id);
 
 		html += '<div class="note">';
-		if(suggestion.alt) html += '<p class="gray">Also known as <b>'+suggestion.alt+'</b></p><br>';
+		if(suggestion.alt) html += '<p class="gray">Also known as <b>'+suggestion.alt+'</b></p>';
 		html += '<p>'+filterContent(suggestion.note)+'</div>';
 
 		if(result.length === 0) {
-			console.log("sorry, no hits.");
+			console.error("Sorry! no hits.");
 		}
 
 		var likey = [];
@@ -52,8 +52,9 @@ function Plants(){
 		html += buildRelations(nolikey, result, suggestion);
 
 		html += '</div><hr class="clear"/> <div class="more-options"><a href="#buddies">Show me all the plants</a></div>'+getShareButtons(suggestion.name);
-	  	
-	  	fadeReload(html);
+	  		
+	  	gIsFront = false;
+	  	this.reload(html);
 	}
 
 	var getImageSrc = function(slug){
@@ -73,13 +74,11 @@ function Plants(){
 	}	
 
 	this.reload = function(html) {
+		gEvents.onReload();
 		fadeReload(html);
 	}
 
 	var fadeReload = function(html){
-
-		//var elems = container;//.add(inputWrap);
-
 		container.stop(true).fadeOut('', function() {
 			container.html(html);
 			initBuddyClick();
@@ -145,7 +144,11 @@ function Plants(){
 
 			if( plantObj === undefined ) {
 				console.error("error: \r\n secondaryId: "+secondaryId+ "\r\n plant1: "+plant1);
-				return false;
+				console.error("thisrelation: ");
+				console.log(thisRelation);
+				console.error("suggestion: ");
+				console.log(suggestion);
+				return '';
 			}
 
 			var str = '';

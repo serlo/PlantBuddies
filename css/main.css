@@ -23,14 +23,21 @@ html {
 
 body {
   margin:0;
-  background-color: #cbb;
+  /* background-color: #cbb; */
   text-align: center;
+  background: url('../img/companion_planting_bg.svg') repeat #e2cd9f fixed -2rem -2rem;
+  background-size: 6rem;
 }
 
 .main-wrap {
   background-color: #fff;
   padding: 2rem;
   min-height: 100%;
+
+  -webkit-box-shadow: 0 0 1.5rem 0 rgba(0,0,0,0.3);
+  -moz-box-shadow: 0 0 1.5rem 0 rgba(0,0,0,0.3);
+  box-shadow: 0 0 1.5rem 0 rgba(0,0,0,0.3);
+
 }
 
 .content {
@@ -48,7 +55,7 @@ body {
   }
   .main-wrap {
     margin: auto;
-    padding: 3rem 0 0 0;
+    padding: 2rem 0 0 0;
   }
 }
 
@@ -59,13 +66,33 @@ body {
   }
   .main-wrap {
     margin: auto;
+    max-width: 53rem;
   }
 }
 
-h1{
-	margin-bottom: 3rem;
-}
 
+@media only screen and (min-width: 93rem){
+  .main-wrap {
+    width: 53rem;
+  }
+  footer.menu {
+    position: fixed;
+    left: 50%;
+    margin-left: 28.5rem;
+  }
+
+}
+/* h1{
+	margin-bottom: 3rem;
+} */
+
+h4 i {
+  font-weight: normal;
+
+}
+.input-wrap {
+  margin-top: 1rem;
+}
 
 /* ========= MENUS ======== */
 
@@ -211,7 +238,7 @@ h4 {
     float: left;
   }
   div.note {
-    margin-top: -4rem;
+    margin-top: -3rem;
     margin-bottom:3rem;
   } 
   #results {
@@ -379,6 +406,22 @@ a:hover {
 
 .logo {
   width: 100%;
+  transition: all 0.4s ease;
+
+  -webkit-filter: grayscale(100%);
+  filter: grayscale(100%);
+  filter: gray;
+}
+
+.front .logo, .logo:hover {
+  width: 100%;
+  -webkit-filter: none;
+  filter: none;
+}
+
+@media only screen and (min-width: 36rem){
+  .logo, .logo:hover { width: 60%; }
+  .front .logo { width: 100%; }
 }
 
 #buddy-grid ul {
@@ -442,3 +485,6 @@ a.img-hover {
 /* .more-options .share-note {
   float: right;
 } */
+
+
+

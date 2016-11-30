@@ -73,6 +73,7 @@ function Events(){
 	this.loadStartPage = function(keepHash) {
 		if(!keepHash) this.removeHash();
 		gInput.clearInput();
+		gIsFront = true;
 		gPlants.reload(defaultHTML);
 	}
 
@@ -97,6 +98,11 @@ function Events(){
 		$('html, body').stop().animate({
     		scrollTop: pos
 		}, 600);    	
+	}
+
+
+	this.onReload = function(){
+		$('body').toggleClass('front',gIsFront);
 	}
 
 	// var initKeyEvents = function(){

@@ -5,7 +5,7 @@
 $(document).ready(setup);
 
 //obj    
-var gEvents, gInput, gPlants, gLanguage, gCurrentPlantId;
+var gEvents, gInput, gPlants, gLanguage, gCurrentPlantId, gIsFront;
 var activeLanguage;
 var imagesNames = ["amaranth","apple","apricot","asparagus","aubergine","basil","bay","beet","blackberry","blueberry","borage","broad_bean","broccoli","brussels_sprouts","cabbage","carrot","cauliflower","celery","chamomile","cherry","chilli_pepper","chinese_cabbage","citrus_fruits","cucumber","currant","fennel","fig","garlic","ginger","globe_artichoke","gooseberry","horseradish","jerusalem_artichoke","kale","leek","lemon_balm","lettuce","marrow","nasturtium","nectarine","onion","parsnip","pea","peach","peanut","pear","plum","pole_bean","potato","pumpkin","quince","radish","raspberry","rhabarber","rose","rosemary","spinach","staranis","strawberry","sweet_pepper","swiss_chard","tomato","walnut"];
 
