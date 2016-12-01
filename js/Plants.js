@@ -167,13 +167,19 @@ function Plants(){
 
 		//buddyGridTitle.append(' ('+gPlantData.length+')');
 		var html = '<ul>';
+		var num = 0;
 
 		for (var i = 0; i < gPlantData.length; i++) {
 			var id = gPlantData[i].id;
 			if(!plantReady(id,gPlantData[i].note)) continue;
+			
+			if(num == 16) html += '<div class="hidden">';
+			num++;
+
 			html += '<li><a class="img-hover" href="#'+gPlantData[i].id+'"><img src="'+getImageSrc(id)+'"/><div>'+ gPlantData[i].name + '</div></a></li>';
 		}
 
+		html += '</div><a href="#show-all" id="show-all-link">Show me all of them!</a></ul>';
 		buddyGrid.html(html);
 	}
 

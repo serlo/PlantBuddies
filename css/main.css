@@ -427,12 +427,14 @@ a:hover {
 #buddy-grid ul {
   margin: 0;
   list-style-type: none;
+  margin-top: 1rem;
 }
 #buddy-grid ul li img{
   height: auto;
   width: 100%;
   filter: grayscale(100%);
   opacity: 0.5;
+  margin-bottom:-1.6rem;
 }
 #buddy-grid ul li:hover img{
   filter: grayscale(0%);
@@ -441,23 +443,28 @@ a:hover {
 #buddy-grid ul li{
   display: inline-block;
   width: 21%;
-  margin-right: 5% 
+  margin-right: 5%; 
+  text-align: center;
+  margin-bottom: ;
 }
+
 #buddy-grid ul li:nth-child(4n){
-  margin-right: 0
+  margin-right: 0;
 }
 #buddy-grid ul li div, .img-hover div{
   opacity: 0;
-  position: absolute;
+  position: relative;
   display: inline-block;
   background-color: #c99;
   color: #fff;
   border-radius: 0.5rem;
   padding: .05rem .3rem;
-  width: auto;
-  margin-top: 5vw;
-  margin-left: -3.4vw;
+  top: -0.7rem;
   z-index: 20;
+}
+
+#buddy-grid .hidden{
+  display: none;
 }
 
 .img-hover div{
@@ -470,11 +477,11 @@ a.img-hover {
 }
 
 #buddy-grid ul li:hover div, .img-hover:hover div {
-  opacity: 0.7;
+  opacity: 1;
 }
 
 #buddy-grid ul li div, #buddy-grid ul li img, .img-hover div { 
-  transition: all 0.5s ease;
+  transition: all 0.4s ease;
 }
 
 .more-options a {

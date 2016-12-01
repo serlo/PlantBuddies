@@ -32,6 +32,12 @@ function Events(){
 		    scrollToPos(0);
 		});
 
+		$("#show-all-link").click( function(e){
+			e.preventDefault();
+			$('#buddy-grid .hidden').slideToggle();
+			$(this).fadeOut();
+		});
+		
 		// $('.share-buttons a').click(function(e){
 		// 	e.preventDefault();
 		// 	window.open (url);
