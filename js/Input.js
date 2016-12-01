@@ -10,6 +10,7 @@ function Input(){
     	initSelectEvent();
     	initEnterEvent();
     	initOnDelete();
+    	initActiveEvent();
     }
 
     var setupTypeahead = function(){
@@ -41,6 +42,12 @@ function Input(){
 			gPlants.load(suggestion);
 		});
     } //initSelectEvent
+
+    var initActiveEvent = function(){ //mark all on click
+    	input.on('typeahead:active', function(e){
+    		input.select();
+    	});
+    }
 
 	var substringMatcher = function() {
 
