@@ -76,6 +76,7 @@ function Plants(){
 	this.reload = function(html) {
 		gEvents.beforeReload();
 		fadeReload(html);
+		_paq.push(['trackPageView']);
 	}
 
 	var fadeReload = function(html){

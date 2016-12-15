@@ -42,7 +42,7 @@ body {
 
 .content {
   text-align: left;
-  padding-bottom:2rem;
+  padding-bottom: 10rem;
 }
 
 @media only screen and (min-width: 55rem){
@@ -400,7 +400,23 @@ a:hover {
   opacity: .54;
 }
 
+div.iframe_frame {
+  background: #ccc;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  opacity: .8;
+}
 
+div iframe {
+  border: 0;
+  height: 10rem;
+  width: 100%;
+}
+
+#privacy-content {
+}
 
 /* landing start page homepage */
 

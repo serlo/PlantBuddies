@@ -37,13 +37,19 @@ function Events(){
 			$('#buddy-grid .hidden').slideToggle();
 			$(this).fadeOut();
 		});
-		
+
+		$('#privacy-content').each (function() { $(this).css("height", $(this).height()); }).hide();
+
+		$("#toggle-privacy-content").click( function(e){
+			e.preventDefault();
+			$('#privacy-content').slideToggle();
+			$('#privacy-wrap').removeClass('gray');
+		});
+	
 		// $('.share-buttons a').click(function(e){
 		// 	e.preventDefault();
 		// 	window.open (url);
 		// });
-		
-
 	}
 
 	this.updateHash = function(hash){
