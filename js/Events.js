@@ -30,6 +30,8 @@ function Events(){
 		    e.preventDefault();
 		    gEvents.loadStartPage();
 		    scrollToPos(0);
+		    
+			_paq.push(['trackEvent', 'HomeClick', 'at: '+$(this).attr('id') ]);
 		});
 
 		$("#show-all-link").click( function(e){
@@ -69,6 +71,8 @@ function Events(){
 
 	    //special case 
 	    if(hash == 'buddies') { toBuddyGrid(); return false;}
+
+		_paq.push(['trackEvent', 'LoadingFromHash', 'hash: ' + hash ]);
 
 	    //has hash
 	    if(hash.length>1) $('#results .default').hide();
