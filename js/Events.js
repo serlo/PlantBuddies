@@ -36,6 +36,8 @@ function Events(){
 			e.preventDefault();
 			$('#buddy-grid .hidden').slideToggle();
 			$(this).fadeOut();
+
+			_paq.push(['trackEvent', 'SlideToggle', 'Show Buddy List']);
 		});
 
 		$('#privacy-content').each (function() { $(this).css("height", $(this).height()); }).hide();
@@ -44,6 +46,7 @@ function Events(){
 			e.preventDefault();
 			$('#privacy-content').slideToggle();
 			$('#privacy-wrap').removeClass('gray');
+			_paq.push(['trackEvent', 'SlideToggle', 'Toggle Privacy Content']);
 		});
 	
 		// $('.share-buttons a').click(function(e){

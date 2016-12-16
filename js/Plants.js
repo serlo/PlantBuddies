@@ -76,7 +76,9 @@ function Plants(){
 	this.reload = function(html) {
 		gEvents.beforeReload();
 		fadeReload(html);
-		_paq.push(['setDocumentTitle', document.domain + '#' + window.location.hash ]);
+
+		_paq.push(['setDocumentTitle', 'PlantBuddies ' + window.location.hash ]);
+		_paq.push(['setCustomUrl', document.domain + window.location.hash]);
 		_paq.push(['trackPageView']);
 	}
 
@@ -95,6 +97,9 @@ function Plants(){
 			var elem = $(e.target).siblings('div.details');
 			$('div.details',container).not(elem).slideUp('fast');
 			elem.slideToggle('fast');
+
+			_paq.push(['trackEvent', 'BuddyClick', 'Show' + $(e.target).text() ]);
+
 		});
 	}
 
