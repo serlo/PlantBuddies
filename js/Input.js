@@ -40,6 +40,8 @@ function Input(){
 		input.on('typeahead:select typeahead:autocomplete', function(e, suggestion) {
 			gEvents.updateHash(suggestion.id);
 			gPlants.load(suggestion);
+
+			_paq.push(['trackEvent', 'InputSuccess', 'selected: '+suggestion.id ]);
 		});
     } //initSelectEvent
 
