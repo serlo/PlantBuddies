@@ -26,11 +26,11 @@ function Plants(){
 		html += getMainImage(suggestion.id);
 
 		html += '<div class="note">';
-		if(suggestion.alt) html += '<p class="gray">Also known as <b>'+suggestion.alt+'</b></p><br>';
+		if(suggestion.alt) html += '<p class="gray">Also known as <b>'+suggestion.alt+'</b></p>';
 		html += '<p>'+filterContent(suggestion.note)+'</div>';
 
 		if(result.length === 0) {
-			console.log("sorry, no hits.");
+			console.error("Sorry! no hits.");
 		}
 
 		var likey = [];
@@ -51,9 +51,10 @@ function Plants(){
 		html += '</div><div class="bad"><h3>dislikes</h3>';
 		html += buildRelations(nolikey, result, suggestion);
 
-		html += '</div><hr class="clear"/> <div class="backlink"><a href="#buddies">Show me all the plants</a></div>';
-	  	
-	  	fadeReload(html);
+		html += '</div><hr class="clear"/> <div class="more-options"><a href="#buddies">Show me all the plants</a></div>'+getShareButtons(suggestion.name);
+	  		
+	  	gIsFront = false;
+	  	this.reload(html);
 	}
 
 	var getImageSrc = function(slug){
@@ -73,17 +74,20 @@ function Plants(){
 	}	
 
 	this.reload = function(html) {
+		gEvents.beforeReload();
 		fadeReload(html);
+
+		_paq.push(['setDocumentTitle', 'PlantBuddies ' + window.location.hash ]);
+		_paq.push(['setCustomUrl', window.location.href]);
+		_paq.push(['trackPageView']);
 	}
 
 	var fadeReload = function(html){
-
-		var elems = container;//.add(inputWrap);
-
-		container.stop().fadeOut('', function() {
+		container.stop(true).fadeOut('', function() {
 			container.html(html);
 			initBuddyClick();
-			gEvents.initClickEvents();
+			gEvents.afterReload();
+			setShareHrefs();
 		}).fadeIn();
 	}
 
@@ -93,6 +97,9 @@ function Plants(){
 			var elem = $(e.target).siblings('div.details');
 			$('div.details',container).not(elem).slideUp('fast');
 			elem.slideToggle('fast');
+
+			_paq.push(['trackEvent', 'BuddyClick', 'Show: ' + $(e.target).text() ]);
+
 		});
 	}
 
@@ -103,7 +110,6 @@ function Plants(){
 		for (var i = 0; i < relationPlants.length; i++) {
 			html += getOneRelation(relationPlants[i], suggestion);
 		}
-
 
 		return html;
 	}
@@ -145,7 +151,11 @@ function Plants(){
 
 			if( plantObj === undefined ) {
 				console.error("error: \r\n secondaryId: "+secondaryId+ "\r\n plant1: "+plant1);
-				return false;
+				console.error("thisrelation: ");
+				console.log(thisRelation);
+				console.error("suggestion: ");
+				console.log(suggestion);
+				return '';
 			}
 
 			var str = '';
@@ -164,13 +174,19 @@ function Plants(){
 
 		//buddyGridTitle.append(' ('+gPlantData.length+')');
 		var html = '<ul>';
+		var num = 0;
 
 		for (var i = 0; i < gPlantData.length; i++) {
 			var id = gPlantData[i].id;
 			if(!plantReady(id,gPlantData[i].note)) continue;
+			
+			if(num == 16) html += '<div class="hidden">';
+			num++;
+
 			html += '<li><a class="img-hover" href="#'+gPlantData[i].id+'"><img src="'+getImageSrc(id)+'"/><div>'+ gPlantData[i].name + '</div></a></li>';
 		}
 
+		html += '</div><a href="#show-all" id="show-all-link">Show me all of them!</a></ul>';
 		buddyGrid.html(html);
 	}
 

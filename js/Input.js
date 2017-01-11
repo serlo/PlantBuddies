@@ -10,6 +10,7 @@ function Input(){
     	initSelectEvent();
     	initEnterEvent();
     	initOnDelete();
+    	initActiveEvent();
     }
 
     var setupTypeahead = function(){
@@ -39,8 +40,16 @@ function Input(){
 		input.on('typeahead:select typeahead:autocomplete', function(e, suggestion) {
 			gEvents.updateHash(suggestion.id);
 			gPlants.load(suggestion);
+
+			_paq.push(['trackEvent', 'InputSuccess', 'selected: '+suggestion.id ]);
 		});
     } //initSelectEvent
+
+    var initActiveEvent = function(){ //mark all on click
+    	input.on('typeahead:active', function(e){
+    		input.select();
+    	});
+    }
 
 	var substringMatcher = function() {
 

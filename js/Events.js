@@ -18,7 +18,7 @@ function Events(){
 		});
 	}
 
-	this. initClickEvents = function(){
+	this.initClickEvents = function(){
 		$("#results a.img-hover").click(function(e) {
 		    e.preventDefault();
 		    var href=$(this).attr("href");
@@ -30,7 +30,31 @@ function Events(){
 		    e.preventDefault();
 		    gEvents.loadStartPage();
 		    scrollToPos(0);
+		    
+			_paq.push(['trackEvent', 'HomeClick', 'at: '+$(this).attr('id') ]);
 		});
+
+		$("#show-all-link").click( function(e){
+			e.preventDefault();
+			$('#buddy-grid .hidden').slideToggle();
+			$(this).fadeOut();
+
+			_paq.push(['trackEvent', 'SlideToggle', 'Show Buddy List']);
+		});
+
+		$('#privacy-content').each (function() { $(this).css("height", $(this).height()); }).hide();
+
+		$("#toggle-privacy-content").click( function(e){
+			e.preventDefault();
+			$('#privacy-content').slideToggle();
+			$('#privacy-wrap').removeClass('gray');
+			_paq.push(['trackEvent', 'SlideToggle', 'Toggle Privacy Content']);
+		});
+	
+		// $('.share-buttons a').click(function(e){
+		// 	e.preventDefault();
+		// 	window.open (url);
+		// });
 	}
 
 	this.updateHash = function(hash){
@@ -47,6 +71,8 @@ function Events(){
 
 	    //special case 
 	    if(hash == 'buddies') { toBuddyGrid(); return false;}
+
+		_paq.push(['trackEvent', 'LoadingFromHash', 'hash: ' + hash ]);
 
 	    //has hash
 	    if(hash.length>1) $('#results .default').hide();
@@ -66,6 +92,7 @@ function Events(){
 	this.loadStartPage = function(keepHash) {
 		if(!keepHash) this.removeHash();
 		gInput.clearInput();
+		gIsFront = true;
 		gPlants.reload(defaultHTML);
 	}
 
@@ -91,6 +118,16 @@ function Events(){
     		scrollTop: pos
 		}, 600);    	
 	}
+
+
+	this.beforeReload = function(){
+		$('body').toggleClass('front',gIsFront);
+	}
+	
+	this.afterReload = function(){
+		gEvents.initClickEvents();
+		if(gIsFront) decodeMail();
+	}	
 
 	// var initKeyEvents = function(){
 	// 	$(document).keydown(function(e) {
