@@ -21,7 +21,7 @@ function Input(){
 		},{
 			name: 'gPlantData',
 			display: buildDisplayString,
-			limit:30,
+			limit:200,
 			source: substringMatcher(),
 			templates: {
 				empty: [
