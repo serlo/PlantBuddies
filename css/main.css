@@ -25,8 +25,8 @@ body {
   margin:0;
   /* background-color: #cbb; */
   text-align: center;
-  background: url('../img/companion_planting_bg.svg') repeat #e2cd9f fixed -2rem -2rem;
-  background-size: 7rem;
+  background: url('../img/companion_planting_bg.png') repeat #e2cd9f fixed -2rem -2rem;
+  background-size: 11.5rem;
 }
 
 .main-wrap {
