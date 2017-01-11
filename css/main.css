@@ -438,6 +438,10 @@ div iframe {
   .front .logo { width: 100%; }
 }
 
+#buddy-grid {
+  margin-bottom: 8rem;
+}
+
 #buddy-grid ul {
   margin: 0;
   list-style-type: none;
@@ -502,6 +506,13 @@ a.img-hover {
   text-decoration: underline;
   display: block;
 }
+
+.show-all-link-wrap {
+  text-align: center;
+}
+
+.show-all-link-wrap a { text-decoration: none; }
+.show-all-link-wrap a span { text-decoration: underline; }
 
 /* .more-options .share-note {
   float: right;

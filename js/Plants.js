@@ -180,13 +180,13 @@ function Plants(){
 			var id = gPlantData[i].id;
 			if(!plantReady(id,gPlantData[i].note)) continue;
 			
-			if(num == 16) html += '<div class="hidden">';
+			if(num == 20) html += '<div class="hidden">';
 			num++;
 
 			html += '<li><a class="img-hover" href="#'+gPlantData[i].id+'"><img src="'+getImageSrc(id)+'"/><div>'+ gPlantData[i].name + '</div></a></li>';
 		}
 
-		html += '</div><a href="#show-all" id="show-all-link">Show me all of them!</a></ul>';
+		html += '</div><p class="show-all-link-wrap"><a href="#show-all" id="show-all-link">▾ <span>Show me all of them</span> ▾</a></p></ul>';
 		buddyGrid.html(html);
 	}
 

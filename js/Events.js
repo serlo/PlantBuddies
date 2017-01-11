@@ -36,9 +36,16 @@ function Events(){
 
 		$("#show-all-link").click( function(e){
 			e.preventDefault();
-			$('#buddy-grid .hidden').slideToggle();
-			$(this).fadeOut();
 
+			$('#buddy-grid .hidden').slideDown();
+			if($(this).attr('href') === '#top'){
+				toTop();
+				$('#plant-input').focus();
+				return true;
+			}
+			$(this).fadeOut('600', function() {
+				$(this).html('<span>You can also use the 🔍 searchbar at the top</span> ▴').attr('href','#top').fadeIn();
+			});
 			_paq.push(['trackEvent', 'SlideToggle', 'Show Buddy List']);
 		});
 
@@ -71,6 +78,7 @@ function Events(){
 
 	    //special case 
 	    if(hash == 'buddies') { toBuddyGrid(); return false;}
+	    if(hash == 'top') { toTop(); return false;}
 
 		_paq.push(['trackEvent', 'LoadingFromHash', 'hash: ' + hash ]);
 
@@ -100,6 +108,10 @@ function Events(){
 		gEvents.loadStartPage();
 		scrollToElem( '#buddy-grid-title' );
 	}
+	
+	var toTop = function(){
+		scrollToPos( 0 );
+	}	
 
 	var scrollToElem = function(selector){
 		var checkExist = setInterval(function() {
