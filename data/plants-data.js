@@ -77,7 +77,7 @@ var gPlantData = [{"id":"amaranth","name":"Amaranth","alt":"","german":"Amaranth
 {"id":"onion","name":"Onion","alt":"","german":"Zwiebel","latin":"Allim cepa","note":"Aphids dislike me. Beans, too."},
 {"id":"parsley","name":"Parsley","alt":"","german":"Petersilie","latin":"Petroselinum hortense","note":"I go well with other herbs, I only quarrel with Lavender and Mint."},
 {"id":"parsnip","name":"Parsnip","alt":"","german":"Pastinake","latin":"Pastinaca sativa","note":"I make friends easily."},
-{"id":"pea","name":"Pea","alt":"","german":"Erbse","latin":"Pisum sativum","note":"I'm popular because I increase nitrogen in the soil. I like plants that I can grow on.\nI don't like the the onion family!"},
+{"id":"pea","name":"Pea","alt":"","german":"Erbse","latin":"Pisum sativum","note":"I'm popular because I increase nitrogen in the soil. I like plants that I can grow on.\nI don't like the onion family!"},
 {"id":"peach","name":"Peach","alt":"","german":"Pfirsich","latin":"Prunus persica syn. Persica vulgaris","note":"Aphids like to eat me.\nI'm quite shady, so don't plant me to close to other plants."},
 {"id":"peanut","name":"Peanut","alt":"","german":"Erdnuss","latin":"Arachis hypogaea","note":""},
 {"id":"pear","name":"Pear","alt":"","german":"Birne","latin":"Pyrus communis","note":"So many friends! I parter shade for aphid protection."},
