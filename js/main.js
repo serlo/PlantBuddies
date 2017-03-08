@@ -6,11 +6,9 @@ $(document).ready(setup);
 
 //obj    
 var gEvents, gInput, gPlants, gLanguage, gCurrentPlantId, gIsFront;
-var activeLanguage;
 var imagesNames = ["amaranth","apple","apricot","asparagus","aubergine","basil","bay","beet","blackberry","blueberry","borage","broad_bean","broccoli","brussels_sprouts","cabbage","carrot","cauliflower","celery","chamomile","cherry","chilli_pepper","chinese_cabbage","citrus_fruits","cucumber","currant","fennel","fig","garlic","ginger","globe_artichoke","gooseberry","horseradish","jerusalem_artichoke","kale","leek","lemon_balm","lettuce","marrow","nasturtium","nectarine","onion","parsnip","pea","peach","peanut","pear","plum","pole_bean","potato","pumpkin","quince","radish","raspberry","rhabarber","rose","rosemary","spinach","staranis","strawberry","sweet_pepper","swiss_chard","tomato","walnut"];
 
 function setup(){
-
 	$("html").addClass('js').removeClass('no-js');
 
     gLanguage = new Language();
@@ -169,7 +167,10 @@ function getShareButtons(name){
     if(name.slice(-1) == 's' || name.slice(-1) == 'x' || name.slice(-1) == 's' ) name += '\'';
     else name += '\'s';
 
-    var html = '<div class="share-note"><b>Share '+name+' Buddies:</b><br> <ul class="share-buttons"><li><a href="https://www.facebook.com" target="_blank" data-share="facebook" title="Share on Facebook"><img src="img/socialicons/facebook.svg"></a></li><li><a href="https://twitter.com" title="Tweet" target="_blank" data-share="twitter"><img src="img/socialicons/twitter.svg"></a></li><li><a href="http://pinterest.com/" title="Pin it" target="_blank" data-share="pinterest" ><img src="img/socialicons/pinterest.svg"></a></li><li><a href="#" title="Email" target="_blank" data-share="mail"><img src="img/socialicons/email.svg"></a></li></ul></div>';
+    var html = '';
+    if(gLanguage.active === 'en') html += '<div class="share-note"><b>Share '+name+' Buddies:</b><br> <ul class="share-buttons"><li><a href="https://www.facebook.com" target="_blank" data-share="facebook" title="Share on Facebook"><img src="img/socialicons/facebook.svg"></a></li><li><a href="https://twitter.com" title="Tweet" target="_blank" data-share="twitter"><img src="img/socialicons/twitter.svg"></a></li><li><a href="http://pinterest.com/" title="Pin it" target="_blank" data-share="pinterest" ><img src="img/socialicons/pinterest.svg"></a></li><li><a href="#" title="Email" target="_blank" data-share="mail"><img src="img/socialicons/email.svg"></a></li></ul></div>';
+    if(gLanguage.active === 'de') html += '<div class="share-note"><b>Teile '+name+' Buddies:</b><br> <ul class="share-buttons"><li><a href="https://www.facebook.com" target="_blank" data-share="facebook" title="Auf Facebook teilen"><img src="img/socialicons/facebook.svg"></a></li><li><a href="https://twitter.com" title="Tweet" target="_blank" data-share="twitter"><img src="img/socialicons/twitter.svg"></a></li><li><a href="http://pinterest.com/" title="Auf Pinterest teilen" target="_blank" data-share="pinterest" ><img src="img/socialicons/pinterest.svg"></a></li><li><a href="#" title="Per Mail verschicken" target="_blank" data-share="mail"><img src="img/socialicons/email.svg"></a></li></ul></div>';
+    
     return html;
 }
 
@@ -185,9 +186,15 @@ function setShareHrefs() {
 
         var img_src = $('#main-img')[0].src;
         var name = $('#plant-input').typeahead('val');
+        
         var teaser = 'Who likes to grow next to '+name+'?';
+        if(gLanguage.active === 'de') teaser = 'Wer wächst gern neben '+name+'?';
+        
         var msg = teaser + ' – find out at PlantBuddies (It\'s like online dating for plants)';
+        if(gLanguage.active === 'de') msg = teaser + ' – finde es heraus auf PlantBuddies (Wie online dating – für Pflanzen)';
+
         var fb_text = 'Find great Companions for ' +name+ ' at PlantBuddies. It\'s like online dating for plants! \n Ok, it\'s actually about Companion Planting. Some plants just grow well together, while others might be terrible matches.' 
+        if(gLanguage.active === 'de') fb_text = 'Finde gute Pflanzenpartner für ' +name+ ' mit PlantBuddies. Das ist fast wie online dating für Pflanzen! \n Ok, eigentlch geht es um Mischkulturen. Manche Pflanzen wachsen gut und gerne nebeneinander und andere sind schlechte Nachbarn.' 
         var site_url = 'https://plantbuddies.serlo.org';
 
         switch(link.data('share')){
