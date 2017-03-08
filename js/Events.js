@@ -26,7 +26,7 @@ function Events(){
 		    gEvents.loadFromHash(href);
 		});
 
-		$("#results .about-link, #home-link, #about-link").click(function(e) {
+		$("#results .about-link, #home-link, footer .about-link").click(function(e) {
 		    e.preventDefault();
 		    gEvents.loadStartPage();
 		    scrollToPos(0);
@@ -34,27 +34,29 @@ function Events(){
 			_paq.push(['trackEvent', 'HomeClick', 'at: '+$(this).attr('id') ]);
 		});
 
-		$("#show-all-link").click( function(e){
+		$("#results .show-all-link").click( function(e){
 			e.preventDefault();
 
-			$('#buddy-grid .hidden').slideDown();
+			$('#results .buddy-grid .hidden').slideDown();
+			console.log($('#results .buddy-grid .hidden'));
 			if($(this).attr('href') === '#top'){
 				toTop();
 				$('#plant-input').focus();
 				return true;
 			}
 			$(this).fadeOut('600', function() {
-				$(this).html('<span>You can also use the 🔍 searchbar at the top</span> ▴').attr('href','#top').fadeIn();
+				if(gLanguage.active === 'en') $(this).html('<span>You can also use the 🔍 searchbar at the top</span> ▴').attr('href','#top').fadeIn();
+				if(gLanguage.active === 'de') $(this).html('<span>Du kannst auch die 🔍 Suchleiste oben benutzen</span> ▴').attr('href','#top').fadeIn();
 			});
 			_paq.push(['trackEvent', 'SlideToggle', 'Show Buddy List']);
 		});
 
-		$('#privacy-content').each (function() { $(this).css("height", $(this).height()); }).hide();
+		$('#results .privacy-content').each (function() { $(this).css("height", $(this).height()); }).hide();
 
-		$("#toggle-privacy-content").click( function(e){
+		$("#results .toggle-privacy-content").click( function(e){
 			e.preventDefault();
-			$('#privacy-content').slideToggle();
-			$('#privacy-wrap').removeClass('gray');
+			$('#results .privacy-content').slideToggle();
+			$('#results .privacy-wrap').removeClass('gray');
 			_paq.push(['trackEvent', 'SlideToggle', 'Toggle Privacy Content']);
 		});
 	
@@ -92,7 +94,8 @@ function Events(){
 		//plant not found -> startpage
 		if(plantObj === undefined) {gEvents.loadStartPage(); scrollToPos(0); return false;}
 
-		$('.typeahead').typeahead('val', plantObj.name);
+		if(gLanguage.active === 'en') $('.typeahead').typeahead('val', plantObj.name);
+		if(gLanguage.active === 'de') $('.typeahead').typeahead('val', plantObj.name_de);
 		gPlants.load(plantObj);
 		scrollToPos(0);
 	}
@@ -106,7 +109,7 @@ function Events(){
 
 	var toBuddyGrid = function(){
 		gEvents.loadStartPage();
-		scrollToElem( '#buddy-grid-title' );
+		scrollToElem( '#results .buddy-grid-title' );
 	}
 	
 	var toTop = function(){
