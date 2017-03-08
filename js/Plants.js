@@ -8,14 +8,13 @@ function Plants(){
 
     	container = $("#results");
     	inputWrap = $('div.input-wrap');
-    	buddyGrid = $('#buddy-grid');
-    	buddyGridTitle = $('#buddy-grid-title');
+    	buddyGrid = $('#results .buddy-grid');
+    	buddyGridTitle = $('#results .buddy-grid-title');
 
-    	fillBuddyGrid();
+    	this.fillBuddyGrid();
     }
 
 	this.load = function(suggestion){
-
 		if(suggestion === undefined) return false;
 
 		// var result = $.grep(gRelationsData, function(e){ return e.plant1 === suggestion.id });
@@ -26,8 +25,11 @@ function Plants(){
 		html += getMainImage(suggestion.id);
 
 		html += '<div class="note">';
-		if(suggestion.alt) html += '<p class="gray">Also known as <b>'+suggestion.alt+'</b></p>';
-		html += '<p>'+filterContent(suggestion.note)+'</div>';
+		if(gLanguage.active==='en') if(suggestion.alt) html += '<p class="gray">Also known as <b>'+suggestion.alt+'</b></p>';
+		if(gLanguage.active==='de') if(suggestion.alt) html += '<p class="gray">Auch bekannt als <b>'+suggestion.alt_de+'</b></p>';
+		
+		if(gLanguage.active==='en') html += '<p>'+filterContent(suggestion.note)+'</div>';
+		if(gLanguage.active==='de') html += '<p>'+filterContent(suggestion.note_de)+'</div>';
 
 		if(result.length === 0) {
 			console.error("Sorry! no hits.");
@@ -44,14 +46,17 @@ function Plants(){
 		}
 
 		//might like
-		html += '<div class="good"><h3>potential buddies</h3>';
+		if(gLanguage.active==='en') html += '<div class="good"><h3>Potential Buddies</h3>';
+		if(gLanguage.active==='de') html += '<div class="good"><h3>Mögliche Freunde</h3>';
 		html += buildRelations(likey, result, suggestion);
 
 		//won't like
-		html += '</div><div class="bad"><h3>dislikes</h3>';
+		if(gLanguage.active==='en') html += '</div><div class="bad"><h3>dislikes</h3>';
+		if(gLanguage.active==='de') html += '</div><div class="bad"><h3>Abneigungen</h3>';
 		html += buildRelations(nolikey, result, suggestion);
 
-		html += '</div><hr class="clear"/> <div class="more-options"><a href="#buddies">Show me all the plants</a></div>'+getShareButtons(suggestion.name);
+		if(gLanguage.active==='en') html += '</div><hr class="clear"/> <div class="more-options"><a href="#buddies">Show me all the plants</a></div>'+getShareButtons(suggestion.name);
+		if(gLanguage.active==='de') html += '</div><hr class="clear"/> <div class="more-options"><a href="#buddies">Zeig mir alle Pflanzen</a></div>'+getShareButtons(suggestion.name);
 	  		
 	  	gIsFront = false;
 	  	this.reload(html);
@@ -104,35 +109,12 @@ function Plants(){
 	}
 
 	var buildRelations = function(relationPlants, result, suggestion) {
-
 		var html = '';
-
 		for (var i = 0; i < relationPlants.length; i++) {
 			html += getOneRelation(relationPlants[i], suggestion);
 		}
-
 		return html;
 	}
-
-
-		// for (var i = 0; i < relationPlants.length; i++) {
-
-		// 	var plantId = relationPlants[i].plant2;
-		// 	//if(suggestion.id === plantId) plantId = result[i].plant2;
-			
-		// 	if(suggestion.id === plantId) continue;
-
-		// 	var plantObj = $.grep(gPlantData, function(e){return e.id == plantId})[0];
-
-		// 	if( plantObj === undefined ) {
-		// 		console.log("error: "+plantId);
-		// 	}
-
-		// 	var comment = '';
-		// 	details = ' <div class="details">' + getBuddyImage(plantId) + relationPlants[i].comment + ' <p><a class="search-link" href="#'+ plantObj.id +'" title="Find companionship for this one!">Find Companions for this one!</a></p></div>';
-
-		// 	html += '<div class="buddy"><a class="toggle" href="#" title="What\'s the reason?">'+ plantObj.name +'</a>' + details + '</div>';
-		// }
 
 	var getOneRelation = function(thisRelation, suggestion){
 
@@ -159,18 +141,20 @@ function Plants(){
 			}
 
 			var str = '';
-			details = ' <div class="details"><p>' + filterContent(thisRelation.comment) + '</p><a class="img-hover" href="#'+ plantObj.id +'">' +getBuddyImage(secondaryId) + '<div>Find a Buddy for this one.</div></a> </div>';
-			str += '<div class="buddy"><a class="toggle" href="#" title="What\'s the reason?">'+ plantObj.name +'</a>' + details + '</div>';
+			if(gLanguage.active==='en') details = ' <div class="details"><p>' + filterContent(thisRelation.comment) + '</p><a class="img-hover" href="#'+ plantObj.id +'">' +getBuddyImage(secondaryId) + '<div>Find a Buddy for this one.</div></a> </div>';
+			if(gLanguage.active==='de') details = ' <div class="details"><p>' + filterContent(thisRelation.comment_de) + '</p><a class="img-hover" href="#'+ plantObj.id +'">' +getBuddyImage(secondaryId) + '<div>Finde Buddies für diese Pflanze.</div></a> </div>';
+			if(gLanguage.active==='en') str += '<div class="buddy"><a class="toggle" href="#" title="What\'s the reason?">'+ plantObj.name +'</a>' + details + '</div>';
+			if(gLanguage.active==='de') str += '<div class="buddy"><a class="toggle" href="#" title="Warum ist das so?">'+ plantObj.name_de +'</a>' + details + '</div>';
 
 			return str;
 	}
 
 	var filterContent = function(str){
-		
+		if(str === undefined) return '';
 		return str.split('$$$')[0];
 	}
 
-	var fillBuddyGrid = function(){
+	this.fillBuddyGrid = function(){
 
 		//buddyGridTitle.append(' ('+gPlantData.length+')');
 		var html = '<ul>';
@@ -180,13 +164,15 @@ function Plants(){
 			var id = gPlantData[i].id;
 			if(!plantReady(id,gPlantData[i].note)) continue;
 			
-			if(num == 16) html += '<div class="hidden">';
+			if(num == 20) html += '<div class="hidden">';
 			num++;
 
-			html += '<li><a class="img-hover" href="#'+gPlantData[i].id+'"><img src="'+getImageSrc(id)+'"/><div>'+ gPlantData[i].name + '</div></a></li>';
+			if(gLanguage.active==='en') html += '<li><a class="img-hover" href="#'+gPlantData[i].id+'"><img src="'+getImageSrc(id)+'"/><div>'+ gPlantData[i].name + '</div></a></li>';
+			if(gLanguage.active==='de') html += '<li><a class="img-hover" href="#'+gPlantData[i].id+'"><img src="'+getImageSrc(id)+'"/><div>'+ gPlantData[i].name_de + '</div></a></li>';
 		}
 
-		html += '</div><a href="#show-all" id="show-all-link">Show me all of them!</a></ul>';
+		if(gLanguage.active === 'en') html += '</div><p class="show-all-link-wrap"><a href="#show-all" class="show-all-link">▾ <span>Show me all of them</span> ▾</a></p></ul>';
+		if(gLanguage.active === 'de') html += '</div><p class="show-all-link-wrap"><a href="#show-all" class="show-all-link">▾ <span>Alle anzeigen</span> ▾</a></p></ul>';
 		buddyGrid.html(html);
 	}
 

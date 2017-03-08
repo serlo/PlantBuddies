@@ -21,7 +21,7 @@ function Input(){
 		},{
 			name: 'gPlantData',
 			display: buildDisplayString,
-			limit:30,
+			limit:200,
 			source: substringMatcher(),
 			templates: {
 				empty: [
@@ -30,8 +30,17 @@ function Input(){
 				'</div>'
 				].join('\n'),
 				suggestion: function(obj){
-					if(!obj.alt) obj.alt = '';
-					return ("<div>"+obj.name+" <span class='gray'>"+obj.alt+"</span></div>"); }
+					
+					if (gLanguage.active === 'en' ) {	
+						if(!obj.alt) obj.alt = '';
+						return ("<div>"+obj.name+" <span class='gray'>"+obj.alt+"</span></div>");
+					}
+					if (gLanguage.active === 'de' ) {	
+						if(!obj.alt_de) obj.alt_de = '';
+						return ("<div>"+obj.name_de+" <span class='gray'>"+obj.alt_de+"</span></div>");
+					}
+
+				}
 			}
 		});
     } //setupTypeahead
@@ -59,10 +68,20 @@ function Input(){
 	    	substrRegex = new RegExp(q, 'i');
 
 	    for (var i = 0, len = gPlantData.length; i < len; i++) {
-	    	var name = gPlantData[i].name;
-	    	var altName = gPlantData[i].alt;
+	    	
 	    	var id = gPlantData[i].id;
-	    	if( !plantReady(id,gPlantData[i].note) ) continue;
+
+	    	if (gLanguage.active === 'en' ){
+	    		var name = gPlantData[i].name;	
+	    		var altName = gPlantData[i].alt;
+	    		if( !plantReady(id,gPlantData[i].note) ) continue;
+	    	} 
+	    	if (gLanguage.active === 'de' ){
+	    		var name = gPlantData[i].name_de;	
+	    		var altName = gPlantData[i].alt_de;
+	    		if( !plantReady(id,gPlantData[i].note_de) ) continue;
+	    	} 
+
 			if (substrRegex.test(name) || substrRegex.test(altName)) {
 				matches.push( gPlantData[i] );
 			}
@@ -73,7 +92,8 @@ function Input(){
 
 	var buildDisplayString = function(suggestion){
 		// if(!suggestion.alt) suggestion.alt = '';
-		return suggestion.name;
+		if (gLanguage.active === 'en' ) return suggestion.name;
+		if (gLanguage.active === 'de' ) return suggestion.name_de;
 	}
 
 	var initEnterEvent = function() {
