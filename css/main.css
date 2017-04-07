@@ -344,7 +344,7 @@ a:hover {
 .typeahead,
 .tt-query,
 .tt-hint {
-  width: 17rem;
+  width: 100%;
   height: 2rem;
   padding: .4rem .9rem;
   font-size: 1.7rem;
