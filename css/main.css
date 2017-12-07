@@ -247,23 +247,28 @@ h4 {
     width:30rem;
   }  
   
+  .typeahead, .tt-query, .tt-hint {
+    width: 27.5rem;
+  }
+
   .main-img {
-    margin: -2.5rem 0 2rem 1rem;
+    float: left;
+    margin: -2.5rem 1rem 1rem -.5rem;
   }
 
   hr.clear {
     margin-bottom: 4rem;
   }
 
-  .input-wrap {
-    float: left;
-  }
   div.note {
-    margin-top: -3rem;
-    margin-bottom:3rem;
+    float: left;
+    margin-top: -2.5rem;
+    margin-bottom: 1rem;
+    width: 22.5rem;
   } 
+
   #results {
-    margin-top: 4rem;
+    margin-top: 3.5rem;
   }  
   .good, .bad {
     margin-top:0;
@@ -275,7 +280,7 @@ h4 {
     font-size:0.85rem;
   }
 
-  #results:after, hr.clear{
+  #results:after, hr.clear, div.clear{
      content: " ";
      visibility: hidden;
      display: block;
@@ -344,7 +349,8 @@ a:hover {
 .typeahead,
 .tt-query,
 .tt-hint {
-  width: 17rem;
+  width: 100%;
+  max-width: 73vw;
   height: 2rem;
   padding: .4rem .9rem;
   font-size: 1.7rem;
