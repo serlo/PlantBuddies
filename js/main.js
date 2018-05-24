@@ -162,14 +162,14 @@ function logger(msg){
 }
 
 
-function getShareButtons(name){
-    
+function getShareButtons(name,name_de){
+
     if(name.slice(-1) == 's' || name.slice(-1) == 'x' || name.slice(-1) == 's' ) name += '\'';
     else name += '\'s';
 
     var html = '';
     if(gLanguage.active === 'en') html += '<div class="share-note"><b>Share '+name+' Buddies:</b><br> <ul class="share-buttons"><li><a href="https://www.facebook.com" target="_blank" data-share="facebook" title="Share on Facebook"><img src="img/socialicons/facebook.svg"></a></li><li><a href="https://twitter.com" title="Tweet" target="_blank" data-share="twitter"><img src="img/socialicons/twitter.svg"></a></li><li><a href="http://pinterest.com/" title="Pin it" target="_blank" data-share="pinterest" ><img src="img/socialicons/pinterest.svg"></a></li><li><a href="#" title="Email" target="_blank" data-share="mail"><img src="img/socialicons/email.svg"></a></li></ul></div>';
-    if(gLanguage.active === 'de') html += '<div class="share-note"><b>Teile '+name+' Buddies:</b><br> <ul class="share-buttons"><li><a href="https://www.facebook.com" target="_blank" data-share="facebook" title="Auf Facebook teilen"><img src="img/socialicons/facebook.svg"></a></li><li><a href="https://twitter.com" title="Tweet" target="_blank" data-share="twitter"><img src="img/socialicons/twitter.svg"></a></li><li><a href="http://pinterest.com/" title="Auf Pinterest teilen" target="_blank" data-share="pinterest" ><img src="img/socialicons/pinterest.svg"></a></li><li><a href="#" title="Per Mail verschicken" target="_blank" data-share="mail"><img src="img/socialicons/email.svg"></a></li></ul></div>';
+    if(gLanguage.active === 'de') html += '<div class="share-note"><b>'+name_de+'s Buddies verschicken:</b><br> <ul class="share-buttons"><li><a href="https://www.facebook.com" target="_blank" data-share="facebook" title="Auf Facebook teilen"><img src="img/socialicons/facebook.svg"></a></li><li><a href="https://twitter.com" title="Tweet" target="_blank" data-share="twitter"><img src="img/socialicons/twitter.svg"></a></li><li><a href="http://pinterest.com/" title="Auf Pinterest teilen" target="_blank" data-share="pinterest" ><img src="img/socialicons/pinterest.svg"></a></li><li><a href="#" title="Per Mail verschicken" target="_blank" data-share="mail"><img src="img/socialicons/email.svg"></a></li></ul></div>';
     
     return html;
 }

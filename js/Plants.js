@@ -46,6 +46,7 @@ function Plants(){
 		}
 
 		//might like
+		html += '<div class="clear">&nbsp;</div>';
 		if(gLanguage.active==='en') html += '<div class="good"><h3>Potential Buddies</h3>';
 		if(gLanguage.active==='de') html += '<div class="good"><h3>Mögliche Freunde</h3>';
 		html += buildRelations(likey, result, suggestion);
@@ -55,8 +56,8 @@ function Plants(){
 		if(gLanguage.active==='de') html += '</div><div class="bad"><h3>Abneigungen</h3>';
 		html += buildRelations(nolikey, result, suggestion);
 
-		if(gLanguage.active==='en') html += '</div><hr class="clear"/> <div class="more-options"><a href="#buddies">Show me all the plants</a></div>'+getShareButtons(suggestion.name);
-		if(gLanguage.active==='de') html += '</div><hr class="clear"/> <div class="more-options"><a href="#buddies">Zeig mir alle Pflanzen</a></div>'+getShareButtons(suggestion.name);
+		if(gLanguage.active==='en') html += '</div><hr class="clear"/> <div class="more-options"><a href="#buddies">Show me all the plants</a></div>'+getShareButtons(suggestion.name,suggestion.name_de);
+		if(gLanguage.active==='de') html += '</div><hr class="clear"/> <div class="more-options"><a href="#buddies">Zeig mir alle Pflanzen</a></div>'+getShareButtons(suggestion.name,suggestion.name_de);
 	  		
 	  	gIsFront = false;
 	  	this.reload(html);
