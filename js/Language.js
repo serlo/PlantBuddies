@@ -20,13 +20,13 @@ function Language(){
 
     this.getLanguage = function(){
         storedLang = localStorage.getItem("activeLanguage");
-        console.log("stored:" + storedLang); //debug
+        // console.log("stored:" + storedLang); //debug
         //if(storedLang === null) {
             var browserLang = navigator.languages && navigator.languages[0] || navigator.language || navigator.userLanguage;
             if(browserLang === 'de-DE' || browserLang === 'de') browserLang = 'de';
             else browserLang = 'en';
             //return browserLang;
-            console.log("detected:" + browserLang); //debug
+            // console.log("detected:" + browserLang); //debug
         //}
         //else return storedLang;
 
@@ -71,7 +71,7 @@ function Language(){
     }
 
     var initClicks = function(){
-        console.log("init");
+        // console.log("init");
         $("#lang-menu a").click( function(e){
             e.preventDefault();
             var lang = $(this).attr('href').substr(1);
