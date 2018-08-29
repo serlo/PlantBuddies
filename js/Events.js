@@ -31,7 +31,7 @@ function Events(){
 		    gEvents.loadStartPage();
 		    scrollToPos(0);
 		    
-			_paq.push(['trackEvent', 'HomeClick', 'at: '+$(this).attr('id') ]);
+			// _paq.push(['trackEvent', 'HomeClick', 'at: '+$(this).attr('id') ]);
 		});
 
 		$("#results .show-all-link").click( function(e){
@@ -48,7 +48,7 @@ function Events(){
 				if(gLanguage.active === 'en') $(this).html('<span>You can also use the 🔍 searchbar at the top</span> ▴').attr('href','#top').fadeIn();
 				if(gLanguage.active === 'de') $(this).html('<span>Du kannst auch die 🔍 Suchleiste oben benutzen</span> ▴').attr('href','#top').fadeIn();
 			});
-			_paq.push(['trackEvent', 'SlideToggle', 'Show Buddy List']);
+			// _paq.push(['trackEvent', 'SlideToggle', 'Show Buddy List']);
 		});
 
 		$('#results .privacy-content').each (function() { $(this).css("height", $(this).height()); }).hide();
@@ -57,7 +57,7 @@ function Events(){
 			e.preventDefault();
 			$('#results .privacy-content').slideToggle();
 			$('#results .privacy-wrap').removeClass('gray');
-			_paq.push(['trackEvent', 'SlideToggle', 'Toggle Privacy Content']);
+			// _paq.push(['trackEvent', 'SlideToggle', 'Toggle Privacy Content']);
 		});
 	
 		// $('.share-buttons a').click(function(e){
@@ -82,7 +82,7 @@ function Events(){
 	    if(hash == 'buddies') { toBuddyGrid(); return false;}
 	    if(hash == 'top') { toTop(); return false;}
 
-		_paq.push(['trackEvent', 'LoadingFromHash', 'hash: ' + hash ]);
+		// _paq.push(['trackEvent', 'LoadingFromHash', 'hash: ' + hash ]);
 
 	    //has hash
 	    if(hash.length>1) $('#results .default').hide();

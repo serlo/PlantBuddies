@@ -50,7 +50,7 @@ function Input(){
 			gEvents.updateHash(suggestion.id);
 			gPlants.load(suggestion);
 
-			_paq.push(['trackEvent', 'InputSuccess', 'selected: '+suggestion.id ]);
+			// _paq.push(['trackEvent', 'InputSuccess', 'selected: '+suggestion.id ]);
 		});
     } //initSelectEvent
 
