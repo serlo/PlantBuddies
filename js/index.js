@@ -7,6 +7,18 @@ import Plants from './Plants'
 
 $(document).ready(setup);
 
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    let swPath = `service-worker.js`;
+    navigator.serviceWorker.register(swPath).then(function(registration) {
+      console.log('ServiceWorker registration successful with scope: ', registration.scope);
+    }, function(err) {
+      console.log('ServiceWorker registration failed: ', err);
+    });
+  });
+}
+
+
 //obj
 window.gLanguage = []
 window.gEvents = []

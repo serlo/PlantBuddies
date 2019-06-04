@@ -12,7 +12,8 @@
     "js": "^0.1.0"
   },
   "devDependencies": {
-    "parcel-bundler": "^1.12.3"
+    "parcel-bundler": "^1.12.3",
+    "parcel-plugin-sw-precache": "^1.1.1"
   },
   "scripts": {
     "dev": "parcel index.html",
