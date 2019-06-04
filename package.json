@@ -1,0 +1,21 @@
+{
+  "name": "PlantBuddies",
+  "version": "1.0.0",
+  "main": "index.html",
+  "repository": "https://github.com/serlo/PlantBuddies.git",
+  "author": "elbotho <1258870+elbotho@users.noreply.github.com>",
+  "license": "MIT",
+  "dependencies": {
+    "data": "^0.6.1",
+    "jquery": "^3.4.1",
+    "jquery-typeahead": "^2.10.6",
+    "js": "^0.1.0"
+  },
+  "devDependencies": {
+    "parcel-bundler": "^1.12.3"
+  },
+  "scripts": {
+    "dev": "parcel index.html",
+    "build": "parcel build index.html"
+  }
+}

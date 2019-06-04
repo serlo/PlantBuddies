@@ -95,7 +95,7 @@
 					<p><b>Deactivate tracking</b><br>You can deactivate tracking for PlantBuddies below or use a plugin like <a href="https://www.privacytools.io/#addons">uBlock Origin</a> or <a href="http://donottrack.us/">browser settings</a> to deactivate it on most sites. More info at <a href="http://donottrack.us/">donottrack.us</a>.</p>
 					<b>Your status & opt-out</b><br>
 						<div class="iframe_frame">
-						<iframe src="http://piwik.permaculturecommons.org/index.php?module=CoreAdminHome&action=optOut&language=de"></iframe>
+						<!-- <iframe src="http://piwik.permaculturecommons.org/index.php?module=CoreAdminHome&action=optOut&language=de"></iframe> -->
 						<small class="gray">––<br>if this field is empty the connection to the analytics tool was blocked by your browser and analytics is definitely disabled.</small>
 						</div>
 						<hr>
@@ -109,15 +109,15 @@
 
 	<footer class="menu">
 		<nav class="main">
-			<div><a href="/${tMain.show_search_path}" class="about-link">${t.overview}</a> 🌿</div>
+			<!-- <div><a href="/${tMain.show_search_path}" class="about-link">${t.overview}</a> 🌿</div>
 			<div><a href="/${data.language}" class="about-link">${t.about}</a> 💘</div>
-			<div><span>Switch Language:</span> ${langLinks} 🏳️‍🌈</div>
+			<div><span>Switch Language:</span> ${langLinks} 🏳️‍🌈</div> -->
 		</nav>
 
 		<div class="info">
-			${t.made_by}<br>
+			<!-- ${t.made_by}<br>
 			<a href="${t.sus_link_href}" title="${t.sus_link_title}">${t.sus_link_text}</a> &<br>
-			<a href="http://permaculturecommons.org" title="${t.perma_link_title}">PermacultureCommons</a><br>--<br>${t.illus} <a href="http://elenabauer.de/" title="Website Elena Bauer">Elena</a>
+			<a href="http://permaculturecommons.org" title="${t.perma_link_title}">PermacultureCommons</a><br>--<br>${t.illus} <a href="http://elenabauer.de/" title="Website Elena Bauer">Elena</a> -->
 		</div>
 
 	</footer>
@@ -132,22 +132,19 @@
 
 	</footer>
 
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
-        <script>window.jQuery || document.write('<script src="js/jquery-3.0.0.min.js"><\/script>')</script>
+	<!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script> -->
 
-				<script src="js/typeahead.jquery.min.js?v=1"></script>
-	<script src="js/Language.js?v=1"></script>
-	<script src="js/Events.js?v=1"></script>
-	<script src="js/Input.js?v=1"></script>
-	<script src="js/Plants.js?v=1"></script>
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script src="http://twitter.github.io/typeahead.js/releases/latest/typeahead.bundle.min.js"></script>
 
-	<script src="data/plants-data.js?uid=4"></script>
-	<script src="data/relations-data.js?uid=4"></script>
+	<script src="data/plants-data.js"></script>
+	<script src="data/relations-data.js"></script>
 
-	<script src="js/main.js?v=1"></script>
 
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 	<link href='https://fonts.googleapis.com/css?family=Domine:400,700' rel='stylesheet' type='text/css'>
+
+	<script src="js/index.js"></script>
 
 </body>
 </html>
