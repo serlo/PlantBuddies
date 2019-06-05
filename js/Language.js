@@ -63,10 +63,10 @@ export default function Language() {
             $('#plant-input').attr('placeholder', 'Pflanze hier eingeben…');
         }
 
-        if (change) {
-            gEvents.loadFromHash(window.location.hash);
-            gPlants.fillBuddyGrid();
-        }
+        // if (change) {
+        //     gEvents.loadFromHash(window.location.hash);
+        //     gPlants.fillBuddyGrid();
+        // }
         //redirect
         //window.location.replace("/de");
 

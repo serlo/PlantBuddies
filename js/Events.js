@@ -1,38 +1,53 @@
+import Navigo from 'navigo'
+var router = new Navigo('/');
+window.router = router
+
 export default function Events() {
 
 	var defaultHTML;
 
 	this.init = function () {
 
+
+		setupRouter();
 		// initKeyEvents();
-		initHashEvents();
 		this.initClickEvents();
 
 		defaultHTML = $('#results').html();
 	}
 
-	var initHashEvents = function () {
-		$(window).on('hashchange', function () {
-			var hash = location.hash;
-			gEvents.loadFromHash(hash);
-		});
+
+	function setupRouter() {
+
+		router
+			.on({
+				'list': function () {
+					setContent('About');
+				},
+				'buddies': function () {
+					toBuddyGrid();
+				},
+				'top': function () {
+					toTop();
+				},
+				'plant/:id': function (id) {
+					loadPlantPage(id.id)
+				},
+				'': function () {
+					//TODO: Check if changes, otherwise dont render again
+					console.log("landing!")
+					gEvents.loadStartPage(); scrollToPos(0);
+				},
+				'*': function () {
+					gEvents.loadStartPage(); scrollToPos(0);
+				}
+			})
+			.resolve();
+
+
 	}
 
 	this.initClickEvents = function () {
-		$("#results a.img-hover").click(function (e) {
-			e.preventDefault();
-			var href = $(this).attr("href");
-			gEvents.updateHash(href.substr(1));
-			gEvents.loadFromHash(href);
-		});
-
-		$("#results .about-link, #home-link, footer .about-link").click(function (e) {
-			e.preventDefault();
-			gEvents.loadStartPage();
-			scrollToPos(0);
-
-			// _paq.push(['trackEvent', 'HomeClick', 'at: ' + $(this).attr('id')]);
-		});
 
 		$("#results .show-all-link").click(function (e) {
 			e.preventDefault();
@@ -51,48 +66,21 @@ export default function Events() {
 			// _paq.push(['trackEvent', 'SlideToggle', 'Show Buddy List']);
 		});
 
-		$('#results .privacy-content').each(function () { $(this).css("height", $(this).height()); }).hide();
+		// $('#results .privacy-content').each(function () { $(this).css("height", $(this).height()); }).hide();
 
-		$("#results .toggle-privacy-content").click(function (e) {
-			e.preventDefault();
-			$('#results .privacy-content').slideToggle();
-			$('#results .privacy-wrap').removeClass('gray');
-			// _paq.push(['trackEvent', 'SlideToggle', 'Toggle Privacy Content']);
-		});
-
-		// $('.share-buttons a').click(function(e){
+		// $("#results .toggle-privacy-content").click(function (e) {
 		// 	e.preventDefault();
-		// 	window.open (url);
+		// 	$('#results .privacy-content').slideToggle();
+		// 	$('#results .privacy-wrap').removeClass('gray');
 		// });
+
 	}
 
-	this.updateHash = function (hash) {
-		history.pushState(null, null, '#' + hash);
-	}
-
-	this.removeHash = function () {
-		//history.pushState(null, null, '');
-		history.pushState("", document.title, window.location.pathname + window.location.search);
-	}
-
-	this.loadFromHash = function (hash) {
-		hash = hash.substr(1);
-
-		//special case
-		if (hash == 'buddies') { toBuddyGrid(); return false; }
-		if (hash == 'top') { toTop(); return false; }
-
-		// _paq.push(['trackEvent', 'LoadingFromHash', 'hash: ' + hash]);
-
-		//has hash
-		if (hash.length > 1) $('#results .default').hide();
-		//no hash (or anchor)
-		else { gEvents.loadStartPage(); scrollToPos(0); return false; }
-
-		var plantObj = $.grep(gPlantData, function (e) { return e.id == hash })[0];
-
-		//plant not found -> startpage
-		if (plantObj === undefined) { gEvents.loadStartPage(); scrollToPos(0); return false; }
+	var loadPlantPage = function (id) {
+		// $('#results .default').hide();
+		// console.log('plant:' + id)
+		var plantObj = $.grep(gPlantData, function (e) { return e.id == id })[0];
+		if (plantObj === undefined) router.navigate('/')
 
 		if (gLanguage.active === 'en') $('.typeahead').typeahead('val', plantObj.name);
 		if (gLanguage.active === 'de') $('.typeahead').typeahead('val', plantObj.name_de);
@@ -101,7 +89,7 @@ export default function Events() {
 	}
 
 	this.loadStartPage = function (keepHash) {
-		if (!keepHash) this.removeHash();
+		//if (!keepHash) router.navigate('')
 		gInput.clearInput();
 		gIsFront = true;
 		gPlants.reload(defaultHTML);
@@ -134,13 +122,13 @@ export default function Events() {
 		}, 600);
 	}
 
-
 	this.beforeReload = function () {
 		$('body').toggleClass('front', gIsFront);
 	}
 
 	this.afterReload = function () {
 		gEvents.initClickEvents();
+		router.updatePageLinks()
 		if (gIsFront) decodeMail();
 	}
 

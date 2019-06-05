@@ -56,8 +56,8 @@ export default function Plants() {
 		if (gLanguage.active === 'de') html += '</div><div class="bad"><h3>Abneigungen</h3>';
 		html += buildRelations(nolikey, result, suggestion);
 
-		if (gLanguage.active === 'en') html += '</div><hr class="clear"/> <div class="more-options"><a href="#buddies">Show me all the plants</a></div>' + getShareButtons(suggestion.name, suggestion.name_de);
-		if (gLanguage.active === 'de') html += '</div><hr class="clear"/> <div class="more-options"><a href="#buddies">Zeig mir alle Pflanzen</a></div>' + getShareButtons(suggestion.name, suggestion.name_de);
+		if (gLanguage.active === 'en') html += '</div><hr class="clear"/> <div class="more-options"><a href="buddies" data-navigo>Show me all the plants</a></div>' + getShareButtons(suggestion.name, suggestion.name_de);
+		if (gLanguage.active === 'de') html += '</div><hr class="clear"/> <div class="more-options"><a href="buddies" data-navigo>Zeig mir alle Pflanzen</a></div>' + getShareButtons(suggestion.name, suggestion.name_de);
 
 		gIsFront = false;
 		this.reload(html);
@@ -82,19 +82,15 @@ export default function Plants() {
 	this.reload = function (html) {
 		gEvents.beforeReload();
 		fadeReload(html);
-
-		// _paq.push(['setDocumentTitle', 'PlantBuddies ' + window.location.hash]);
-		// _paq.push(['setCustomUrl', window.location.href]);
-		// _paq.push(['trackPageView']);
 	}
 
 	var fadeReload = function (html) {
-		container.stop(true).fadeOut('', function () {
+		container.stop(true).fadeOut(150, function () {
 			container.html(html);
 			initBuddyClick();
 			gEvents.afterReload();
 			setShareHrefs();
-		}).fadeIn();
+		}).fadeIn(150);
 	}
 
 	var initBuddyClick = function () {
@@ -143,8 +139,8 @@ export default function Plants() {
 
 		var str = '';
 		var details = '';
-		if (gLanguage.active === 'en') details = ' <div class="details"><p>' + filterContent(thisRelation.comment) + '</p><a class="img-hover" href="#' + plantObj.id + '">' + getBuddyImage(secondaryId) + '<div>Find a Buddy for this one.</div></a> </div>';
-		if (gLanguage.active === 'de') details = ' <div class="details"><p>' + filterContent(thisRelation.comment_de) + '</p><a class="img-hover" href="#' + plantObj.id + '">' + getBuddyImage(secondaryId) + '<div>Finde Buddies für diese Pflanze.</div></a> </div>';
+		if (gLanguage.active === 'en') details = ' <div class="details"><p>' + filterContent(thisRelation.comment) + '</p><a class="img-hover" href="plant/' + plantObj.id + '" data-navigo>' + getBuddyImage(secondaryId) + '<div>Find a Buddy for this one.</div></a> </div>';
+		if (gLanguage.active === 'de') details = ' <div class="details"><p>' + filterContent(thisRelation.comment_de) + '</p><a class="img-hover" href="plant/' + plantObj.id + '" data-navigo>' + getBuddyImage(secondaryId) + '<div>Finde Buddies für diese Pflanze.</div></a> </div>';
 		if (gLanguage.active === 'en') str += '<div class="buddy"><a class="toggle" href="#" title="What\'s the reason?">' + plantObj.name + '</a>' + details + '</div>';
 		if (gLanguage.active === 'de') str += '<div class="buddy"><a class="toggle" href="#" title="Warum ist das so?">' + plantObj.name_de + '</a>' + details + '</div>';
 
@@ -169,8 +165,8 @@ export default function Plants() {
 			if (num == 20) html += '<div class="hidden">';
 			num++;
 
-			if (gLanguage.active === 'en') html += '<li><a class="img-hover" href="#' + gPlantData[i].id + '"><img src="' + getImageSrc(id) + '"/><div>' + gPlantData[i].name + '</div></a></li>';
-			if (gLanguage.active === 'de') html += '<li><a class="img-hover" href="#' + gPlantData[i].id + '"><img src="' + getImageSrc(id) + '"/><div>' + gPlantData[i].name_de + '</div></a></li>';
+			if (gLanguage.active === 'en') html += '<li><a class="img-hover" href="plant/' + gPlantData[i].id + '" data-navigo><img src="' + getImageSrc(id) + '"/><div>' + gPlantData[i].name + '</div></a></li>';
+			if (gLanguage.active === 'de') html += '<li><a class="img-hover" href="plant/' + gPlantData[i].id + '" data-navigo><img src="' + getImageSrc(id) + '"/><div>' + gPlantData[i].name_de + '</div></a></li>';
 		}
 
 		if (gLanguage.active === 'en') html += '</div><p class="show-all-link-wrap"><a href="#show-all" class="show-all-link">▾ <span>Show me all of them</span> ▾</a></p></ul>';

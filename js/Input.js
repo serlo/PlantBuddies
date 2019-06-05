@@ -1,3 +1,4 @@
+
 export default function Input() {
 	var input;
 
@@ -46,8 +47,8 @@ export default function Input() {
 
 	var initSelectEvent = function () {
 		input.on('typeahead:select typeahead:autocomplete', function (e, suggestion) {
-			gEvents.updateHash(suggestion.id);
-			gPlants.load(suggestion);
+			router.navigate('plant/' + suggestion.id)
+			// gPlants.load(suggestion);
 
 			// _paq.push(['trackEvent', 'InputSuccess', 'selected: ' + suggestion.id]);
 		});
@@ -110,7 +111,7 @@ export default function Input() {
 
 	var initOnDelete = function () {
 		// input.on("keyup cut", function () {
-		if (input.typeahead('val') === '') gEvents.loadStartPage();
+		// if (input.typeahead('val') === '') gEvents.loadStartPage();
 		// });
 	} // initOnDelete
 
