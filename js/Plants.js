@@ -65,7 +65,7 @@ export default function Plants() {
 
 	var getImageSrc = function (slug) {
 		const hasImg = hasImage(slug)
-		var url = hasImg ? hasImg : require('../img/default.jpg');
+		var url = hasImg ? hasImg : '/img/default.jpg';
 		return url;
 	}
 

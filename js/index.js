@@ -8,16 +8,15 @@ import Plants from './Plants'
 
 $(document).ready(setup);
 
-// if ('serviceWorker' in navigator) {
-//   window.addEventListener('load', function() {
-//     let swPath = `service-worker.js`;
-//     navigator.serviceWorker.register(swPath).then(function(registration) {
-//       console.log('ServiceWorker registration successful with scope: ', registration.scope);
-//     }, function(err) {
-//       console.log('ServiceWorker registration failed: ', err);
-//     });
-//   });
-// }
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function () {
+    navigator.serviceWorker.register('../sw.js').then(function (registration) {
+      console.log('ServiceWorker registration successful with scope: ', registration.scope);
+    }, function (err) {
+      console.log('ServiceWorker registration failed: ', err);
+    });
+  });
+}
 
 
 //obj
@@ -27,7 +26,7 @@ window.gPlants = []
 window.gCurrentPlantId = []
 window.gIsFront = []
 window.gEvents = []
-const images = require('../img/plants/*.jpg');
+// const images = require('../img/plants/*.jpg');
 
 function setup() {
   $("html").addClass('js').removeClass('no-js');
@@ -130,7 +129,8 @@ function getRelationsIndex(id) {
 }
 
 window.hasImage = function hasImage(id) {
-  return images[id]
+  return '/img/' + id + '.jpg'
+  // return images[id]
 }
 
 window.plantReady = function plantReady(id, note) {
