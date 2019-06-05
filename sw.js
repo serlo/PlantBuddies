@@ -73,7 +73,6 @@ workbox.routing.registerNavigationRoute("/index.html");
 self.addEventListener('fetch', function (event) {
   if (/\.jpg$/.test(event.request.url)) {
 
-
     //TODO: Make sure to cache those images at runtime
     // Inspect the accept header for WebP support
     var supportsWebp = false;
