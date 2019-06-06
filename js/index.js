@@ -134,7 +134,6 @@ window.hasImage = function hasImage(id) {
 }
 
 window.plantReady = function plantReady(id, note) {
-  if (gPlants.isAdmin) return true;
   if (!hasImage(id) || !note) return false;
   else return true;
 }

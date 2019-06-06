@@ -4,8 +4,12 @@ progress,sub,sup{vertical-align:baseline}button,hr,input{overflow:visible}html{f
 /* base styles */
 /* ----------- */
 
+@font-face {  font-family: 'Domine';  font-weight: 400;  font-style: normal;  font-display: swap; src: url('../fonts/domine-regular.woff2') format('woff2');}
+@font-face {  font-family: 'Domine';  font-weight: 700;  font-style: normal;  font-display: swap; src: url('../fonts/domine-bold.woff2') format('woff2');}
+
+
 html, body, input {
-  font-family: Domine, Roboto, sans-serif;
+  font-family: Domine, Georgia, serif;
   color: #333;
 
   line-height:1.5;
@@ -97,7 +101,7 @@ h4 i {
 
 .menu {
   opacity: 0.5;
-  color: #333;  
+  color: #333;
   padding: 0 1rem;
   text-align: left;
   transition: opacity 0.4s ease;
@@ -116,7 +120,7 @@ footer.menu {
   padding-top: 1rem;
 }
 
-.lang-menu { 
+.lang-menu {
   padding-left:1rem;
   font-size: 0.85rem;
   text-align: right;
@@ -172,7 +176,7 @@ footer.menu {
     margin-left:20rem;
     bottom: 0rem;
     width: 15rem;
-  }  
+  }
 
   .lang-menu {
     bottom: auto;
@@ -213,7 +217,7 @@ ul.share-buttons img{
 ul.share-buttons a:hover img{
     -ms-transform: scale(1.1); /* IE 9 */
   -webkit-transform: scale(1.1); /* Safari */
-  transform: scale(1.1);  
+  transform: scale(1.1);
 }
 
 /* ========= RESULTS ======== */
@@ -251,8 +255,8 @@ h4 {
 @media only screen and (min-width: 36rem){
   .default {
     width:30rem;
-  }  
-  
+  }
+
   .typeahead, .tt-query, .tt-hint {
     width: 27.5rem;
   }
@@ -271,11 +275,11 @@ h4 {
     margin-top: -2.5rem;
     margin-bottom: 1rem;
     width: 22.5rem;
-  } 
+  }
 
   #results {
     margin-top: 3.5rem;
-  }  
+  }
   .good, .bad {
     margin-top:0;
     float:left;
@@ -498,7 +502,7 @@ div iframe {
 .buddy-grid ul li{
   display: inline-block;
   width: 21%;
-  margin-right: 5%; 
+  margin-right: 5%;
   text-align: center;
   margin-bottom: ;
 }
@@ -535,7 +539,7 @@ a.img-hover {
   opacity: 1;
 }
 
-.buddy-grid ul li div, .buddy-grid ul li img, .img-hover div { 
+.buddy-grid ul li div, .buddy-grid ul li img, .img-hover div {
   transition: all 0.4s ease;
 }
 

@@ -1,7 +1,6 @@
 export default function Plants() {
 
 	var container, inputWrap, buddyGrid, buddyGridTitle;
-	var admin = false;
 
 	this.init = function () {
 		//where did I put the milk?
@@ -11,7 +10,7 @@ export default function Plants() {
 		buddyGrid = $('#results .buddy-grid');
 		buddyGridTitle = $('#results .buddy-grid-title');
 
-		this.fillBuddyGrid();
+		// this.fillBuddyGrid();
 	}
 
 	this.load = function (suggestion) {

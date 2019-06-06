@@ -1,5 +1,5 @@
 {
-  "name": "PlantBuddies",
+  "name": "plantbuddies",
   "version": "1.0.0",
   "main": "index.html",
   "repository": "https://github.com/serlo/PlantBuddies.git",
@@ -27,7 +27,7 @@
     "strategy": "inject",
     "swSrc": "./sw.js",
     "globPatterns": [
-      "**/*.{html,js,css,svg,eot,ttf,woff,woff2}"
+      "**/*.{html,js,css,svg,woff2,webp}"
     ]
   }
 }

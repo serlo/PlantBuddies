@@ -1,96 +1,121 @@
 
-var workbox = function () {
-  "use strict";
-  try {
-    self.workbox.v["workbox:sw:3.6.3"] = 1
-  } catch (t) { }
-  const t = "https://storage.googleapis.com/workbox-cdn/releases/3.6.3",
-    e = {
-      backgroundSync: "background-sync",
-      broadcastUpdate: "broadcast-cache-update",
-      cacheableResponse: "cacheable-response",
-      core: "core",
-      expiration: "cache-expiration",
-      googleAnalytics: "google-analytics",
-      navigationPreload: "navigation-preload",
-      precaching: "precaching",
-      rangeRequests: "range-requests",
-      routing: "routing",
-      strategies: "strategies",
-      streams: "streams"
-    };
-  return new class {
-    constructor() {
-      return this.v = {}, this.t = {
-        debug: "localhost" === self.location.hostname,
-        modulePathPrefix: null,
-        modulePathCb: null
-      }, this.e = this.t.debug ? "dev" : "prod", this.s = !1, new Proxy(this, {
-        get(t, s) {
-          if (t[s]) return t[s];
-          const o = e[s];
-          return o && t.loadModule(`workbox-${o}`), t[s]
-        }
-      })
-    }
-    setConfig(t = {}) {
-      if (this.s) throw new Error("Config must be set before accessing workbox.* modules");
-      Object.assign(this.t, t), this.e = this.t.debug ? "dev" : "prod"
-    }
-    skipWaiting() {
-      self.addEventListener("install", () => self.skipWaiting())
-    }
-    clientsClaim() {
-      self.addEventListener("activate", () => self.clients.claim())
-    }
-    loadModule(t) {
-      const e = this.o(t);
-      try {
-        importScripts(e), this.s = !0
-      } catch (s) {
-        throw console.error(`Unable to import module '${t}' from '${e}'.`), s
-      }
-    }
-    o(e) {
-      if (this.t.modulePathCb) return this.t.modulePathCb(e, this.t.debug);
-      let s = [t];
-      const o = `${e}.${this.e}.js`,
-        r = this.t.modulePathPrefix;
-      return r && "" === (s = r.split("/"))[s.length - 1] && s.splice(s.length - 1, 1), s.push(o), s.join("/")
-    }
-  }
-}();
+const cachePrefix = 'plantbuddies.0.2';
 
-workbox.skipWaiting();
-workbox.clientsClaim();
+//trick to use parcel-plugin-sw-cache without workbox
+//TODO: Replace with other plugin or custom code
+const cacheFunction = {
+    precacheAndRoute: function(arr){
+      return arr
+    }
+}
+const cacheFilesObj = cacheFunction.precacheAndRoute([])
+const cacheFiles = cacheFilesObj.map(function(item) {
+  return item['url'];
+});
 
-workbox.precaching.suppressWarnings();
-workbox.precaching.precacheAndRoute([])
-
-workbox.routing.registerNavigationRoute("/index.html");
+self.addEventListener('install', event => {
+  event.waitUntil(
+    caches.open(`${cachePrefix}-shell`).then(cache => {
+      return cache.addAll(cacheFiles);
+    }).then(() => self.skipWaiting())
+  );
+});
 
 
-self.addEventListener('fetch', function (event) {
-  if (/\.jpg$/.test(event.request.url)) {
-
-    //TODO: Make sure to cache those images at runtime
-    // Inspect the accept header for WebP support
-    var supportsWebp = false;
-    if (event.request.headers.has('accept')) {
-      supportsWebp = event.request.headers
-        .get('accept')
-        .includes('webp');
+function fetchFromCache (request) {
+  return caches.match(request).then(response => {
+    if (!response) {
+      throw Error(`${request.url} not found in cache`);
     }
-    if (supportsWebp) {
-      var req = event.request.clone();
-      // Build the return URL
-      var returnUrl = req.url.substr(0, req.url.lastIndexOf(".")) + ".webp";
+    return response;
+  });
+}
 
-      event.respondWith(
-        fetch(returnUrl, {
-          mode: 'no-cors'
-        })
-      );
-    }
+self.addEventListener('fetch', event => {
+  var request = event.request;
+  var url     = new URL(request.url);
+  if (cacheFiles.indexOf(url.pathname) !== -1) {
+    event.respondWith(
+      fetchFromCache(request)
+        .catch(() => fetch(request))
+    );
   }
 });
+
+
+self.addEventListener('activate', event => {
+  event.waitUntil(clients.claim());
+});
+
+
+// function fetchFromCache(request) {
+//   return caches.match(request).then(response => {
+//     if (!response) {
+//       throw Error(`${request.url} not found in cache`);
+//     }
+//     return response;
+//   });
+// }
+
+// function addToCache(request, response) {
+//   if (response.ok) {
+//     const copy = response.clone();
+//     caches.open(`${cachePrefix}-assets`).then(cache => {
+//       cache.put(request, copy);
+//     });
+//   }
+//   return response;
+// }
+
+// function offlinePage() {
+//   return caches.open(`${cachePrefix}-offline`).then(cache => {
+//     return cache.match('offline.html');
+//   });
+// }
+
+// function isNavigateRequest(request) {
+//   return (request.mode === 'navigate' ||
+//     (request.method === 'GET' &&
+//       request.headers.get('accept').includes('text/html')));
+// }
+
+// function isImageRequest(request) {
+//   return (request.headers.get('Accept').indexOf('image') !== -1);
+// }
+
+// self.addEventListener('install', event => {
+//   self.skipWaiting();
+//   // const offlineURL = 'offline.html';
+//   // event.waitUntil(
+//   //   fetch(new Request(offlineURL)).then(response => {
+//   //     return caches.open(`${cachePrefix}-offline`).then(cache => {
+//   //       return cache.put(offlineURL, response);
+//   //     });
+//   //   })
+//   // );
+// });
+
+// self.skipWaiting();
+// self.addEventListener('activate', event => {
+//   event.waitUntil(clients.claim());
+// });
+
+// self.addEventListener('fetch', event => {
+//   var request = event.request;
+//   if (isNavigateRequest(request)) {
+//     event.respondWith(
+//       fetch(request)
+//         .then(response => addToCache(request, response))
+//         .catch(() => fetchFromCache(request))
+//       // .catch(() => offlinePage())
+//     );
+//   } else if (isImageRequest(request)) {
+//     event.respondWith(
+//       fetchFromCache(request)
+//         .catch(() => fetch(request)
+//           .then(response => addToCache(request, response)))
+//         .catch(() => console.log('unable to respond to request'))
+//     );
+//   }
+// });
+
