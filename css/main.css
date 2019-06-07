@@ -19,18 +19,17 @@ html, body {
   height: 100%;
 }
 
-html {
-  /* background: url('../img/bg.jpg') no-repeat;
-  background-size: cover;   */
-}
+/* html {
+  background: url('../img/bg.jpg') no-repeat;
+  background-size: cover;
+} */
 
 
 body {
   margin:0;
-  /* background-color: #cbb; */
   text-align: center;
-  background: url('../img/companion_planting_bg.png') repeat #e2cd9f fixed -2rem -2rem;
-  background-size: 10rem;
+  background: url('../img/companion_planting_bg.svg') repeat #e2cd9f fixed -2rem -2rem;
+  background-size: 12rem;
 }
 
 .main-wrap {
@@ -220,6 +219,11 @@ ul.share-buttons a:hover img{
   transform: scale(1.1);
 }
 
+
+*[aria-hidden="false"] {
+  display: none;
+}
+
 /* ========= RESULTS ======== */
 
 
@@ -234,7 +238,7 @@ blockquote {
 }
 
 h4 {
-  margin: 3rem 0 0 0;
+  margin: 0rem 0 0 0;
 }
 
 .main-img{
@@ -344,9 +348,9 @@ a {
   }
 }
 
-a:hover {
-/*   text-decoration: underline;
- */}
+/* a:hover {
+  text-decoration: underline;
+} */
 
 #results a.search-link {
   color: #333;
@@ -504,7 +508,7 @@ div iframe {
   width: 21%;
   margin-right: 5%;
   text-align: center;
-  margin-bottom: ;
+  margin-bottom: 1rem;
 }
 
 .buddy-grid ul li:nth-child(4n){

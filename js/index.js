@@ -26,7 +26,9 @@ window.gPlants = []
 window.gCurrentPlantId = []
 window.gIsFront = []
 window.gEvents = []
+
 // const images = require('../img/plants/*.jpg');
+var images = ["amaranth","apple","apricot","asparagus","aubergine","basil","bay","beet","blackberry","blueberry","borage","broad_bean","broccoli","brussels_sprouts","cabbage","carrot","cauliflower","celery","chamomile","cherry","chilli_pepper","chinese_cabbage","citrus_fruits","pole_bean","cucumber","currant","fennel","fig","garlic","ginger","globe_artichoke","gooseberry","horseradish","jerusalem_artichoke","kale","leek","lemon_balm","lettuce","marrow","nasturtium","nectarine","onion","parsnip","pea","peach","peanut","pear","plum","potato","pumpkin","quince","radish","raspberry","rose","rosemary","spinach","strawberry","sweet_pepper","swiss_chard","tomato","walnut"]
 
 function setup() {
   $("html").addClass('js').removeClass('no-js');
@@ -128,8 +130,9 @@ function getRelationsIndex(id) {
   return gRelationsData.findIndex(function (x) { return x.id == id });
 }
 
-window.hasImage = function hasImage(id) {
-  return '/img/' + id + '.jpg'
+window.hasImage = function hasImage(slug) {
+  var exists = images.indexOf(slug) > -1
+  return exists
   // return images[id]
 }
 

@@ -10,7 +10,7 @@ export default function Plants() {
 		buddyGrid = $('#results .buddy-grid');
 		buddyGridTitle = $('#results .buddy-grid-title');
 
-		// this.fillBuddyGrid();
+		this.fillBuddyGrid();
 	}
 
 	this.load = function (suggestion) {
@@ -63,8 +63,11 @@ export default function Plants() {
 	}
 
 	var getImageSrc = function (slug) {
-		const hasImg = hasImage(slug)
-		var url = hasImg ? hasImg : '/img/default.jpg';
+		var hasImg = hasImage(slug)
+		const path = '/img/' + slug + '.svg'
+		// console.log(path)
+		var url = hasImage(slug) ? path : '/img/default.svg';
+		// return ''
 		return url;
 	}
 
