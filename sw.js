@@ -38,7 +38,7 @@ function isNavigateRequest (request) {
 
 function offlineRedirect () {
   return caches.open(currentCacheName).then(cache => {
-    return cache.match('/');
+    return cache.match('index.html');
   });
 }
 
