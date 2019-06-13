@@ -1,0 +1,134 @@
+/* important from the beginning */
+
+.buddy-grid {
+  list-style-type: none;
+  display: flex;
+  -webkit-box-pack: justify;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin: 3rem -2rem 8rem;
+}
+
+.buddy-grid li {
+  text-align: center;
+  margin-bottom: 2rem;
+  width: 7rem;
+  flex: 1 0 23%;
+}
+
+.buddy-grid li.hidden {
+  display: none;
+}
+
+.no-js .buddy-grid li.hidden {
+  display: block;
+}
+
+.buddy-grid li a {
+  text-decoration: none;
+  display: inline-block;
+  padding: 0.1rem 0.05rem;
+  color: #333;
+}
+
+.buddy-grid li a img {
+  display: block;
+  height: auto;
+  width: 100%;
+  transition: all 0.4s ease 0s;
+  width: 9.5rem;
+  margin: -0.2rem auto -0.5rem auto;
+}
+
+.buddy-grid li a span {
+  display: inline-block;
+  border-radius: 0.5rem;
+  padding: 0.08rem 0.5rem 0.02rem 0.5rem;
+  border: 0.1rem solid transparent;
+}
+
+input.filterinput {
+  background-color: #fcc;
+  color: #333;
+  font-size: 1.4rem;
+  border: 0;
+  display: block;
+  width: 20rem;
+  padding: 0.6rem 0.9rem 0.5rem 0.9rem;
+  line-height: 2.2rem;
+  border-radius: 0.5rem;
+  outline: none;
+  border: 0.1rem solid transparent;
+}
+
+input.filterinput::placeholder {
+  color: #333;
+  opacity: 0.6;
+  font-size: 1.2rem;
+}
+
+/* rest of the styles / for interaction etc */
+
+@media screen and (hover: hover) {
+  .buddy-grid img {
+    filter: grayscale(40%);
+    opacity: 1;
+  }
+
+  .buddy-grid > li:hover img {
+    filter: grayscale(0%);
+    opacity: 1;
+  }
+}
+
+.buddy-grid span {
+  transition: all 0.4s ease;
+}
+
+.buddy-grid > li > a {
+  outline: none;
+}
+
+.buddy-grid > li:hover span,
+.buddy-grid a:focus span {
+  background-color: #fcc;
+  border: 0.1rem solid transparent;
+}
+
+.buddy-grid a:focus span {
+  border: dashed 0.1rem #c99;
+}
+
+.buddy-grid a:active span {
+  border-color: transparent;
+}
+
+.filterinput:focus,
+.filterinput:hover,
+.filterinput:active {
+  opacity: 1;
+  border-color: #d99;
+}
+
+#no-results {
+  margin-top: -8rem;
+}
+
+/*
+.show-all-link-wrap {
+  text-align: center;
+}
+
+.show-all-link-wrap a {
+  text-decoration: none;
+}
+.show-all-link-wrap a span {
+  text-decoration: underline;
+} */
+
+/*
+
+// const ClearA = styled.a`
+//   color: #c99;
+//   text-decoration: underline;
+// ` */

@@ -1,0 +1,50 @@
+header nav ul {
+  display: flex;
+  height: 2.8rem;
+  line-height: 2.7rem;
+  padding: 0 2rem;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+header nav a,
+footer a {
+  color: #333;
+  text-decoration: none;
+}
+
+header nav a:hover,
+footer a:hover {
+  text-decoration: underline;
+}
+
+footer a {
+  font-weight: bold;
+}
+
+header nav li {
+  margin-right: 1rem;
+  flex-grow: 2;
+}
+header nav li:nth-child(1) {
+  text-align: left;
+}
+
+header nav li:nth-child(3) {
+  text-align: right;
+  flex-grow: 1;
+  margin-right: 0;
+}
+
+header nav li span {
+  display: none;
+}
+
+@media only screen and (min-width: 40rem) {
+  header nav li span {
+    display: inline;
+  }
+  header nav li:nth-child(3) {
+    flex-grow: 2;
+  }
+}

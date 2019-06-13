@@ -1,0 +1,27 @@
+div.share-note {
+  margin-top: 3rem;
+}
+
+ul.share-buttons li {
+  display: inline;
+  opacity: 0.5;
+}
+
+ul.share-buttons li:hover {
+  opacity: 1;
+}
+
+ul.share-buttons a {
+  padding: 0 0.4rem 0 0;
+}
+
+ul.share-buttons img {
+  width: 2.5rem;
+  height: 2.5rem;
+}
+
+ul.share-buttons a:hover img {
+  -ms-transform: scale(1.1); /* IE 9 */
+  -webkit-transform: scale(1.1); /* Safari */
+  transform: scale(1.1);
+}

@@ -1,0 +1,33 @@
+a.logo {
+  display: block;
+  margin-top: 2.5rem;
+  text-align: left;
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+.logo img {
+  width: 100%;
+  transition: all 0.4s ease;
+
+  -webkit-filter: grayscale(100%);
+  filter: grayscale(100%);
+  filter: gray;
+}
+
+.front .logo img,
+.logo:hover img {
+  width: 100%;
+  -webkit-filter: none;
+  filter: none;
+}
+
+@media only screen and (min-width: 36rem) {
+  .logo img,
+  .logo:hover img {
+    width: 60%;
+  }
+  .front .logo img {
+    width: 100%;
+  }
+}
