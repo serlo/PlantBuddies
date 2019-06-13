@@ -8,15 +8,15 @@ import Plants from './Plants'
 
 $(document).ready(setup);
 
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', function () {
-    navigator.serviceWorker.register('../sw.js').then(function (registration) {
-      console.log('ServiceWorker registration successful with scope: ', registration.scope);
-    }, function (err) {
-      console.log('ServiceWorker registration failed: ', err);
-    });
-  });
-}
+// if ('serviceWorker' in navigator) {
+//   window.addEventListener('load', function () {
+//     navigator.serviceWorker.register('../sw.js').then(function (registration) {
+//       console.log('ServiceWorker registration successful with scope: ', registration.scope);
+//     }, function (err) {
+//       console.log('ServiceWorker registration failed: ', err);
+//     });
+//   });
+// }
 
 
 //obj
@@ -24,11 +24,11 @@ window.gLanguage = []
 window.gInput = []
 window.gPlants = []
 window.gCurrentPlantId = []
-window.gIsFront = []
+window.gPage = []
 window.gEvents = []
 
 // const images = require('../img/plants/*.jpg');
-var images = ["amaranth","apple","apricot","asparagus","aubergine","basil","bay","beet","blackberry","blueberry","borage","broad_bean","broccoli","brussels_sprouts","cabbage","carrot","cauliflower","celery","chamomile","cherry","chilli_pepper","chinese_cabbage","citrus_fruits","pole_bean","cucumber","currant","fennel","fig","garlic","ginger","globe_artichoke","gooseberry","horseradish","jerusalem_artichoke","kale","leek","lemon_balm","lettuce","marrow","nasturtium","nectarine","onion","parsnip","pea","peach","peanut","pear","plum","potato","pumpkin","quince","radish","raspberry","rose","rosemary","spinach","strawberry","sweet_pepper","swiss_chard","tomato","walnut"]
+var images = ["amaranth", "apple", "apricot", "asparagus", "aubergine", "basil", "bay", "beet", "blackberry", "blueberry", "borage", "broad_bean", "broccoli", "brussels_sprouts", "cabbage", "carrot", "cauliflower", "celery", "chamomile", "cherry", "chilli_pepper", "chinese_cabbage", "citrus_fruits", "pole_bean", "cucumber", "currant", "fennel", "fig", "garlic", "ginger", "globe_artichoke", "gooseberry", "horseradish", "jerusalem_artichoke", "kale", "leek", "lemon_balm", "lettuce", "marrow", "nasturtium", "nectarine", "onion", "parsnip", "pea", "peach", "peanut", "pear", "plum", "potato", "pumpkin", "quince", "radish", "raspberry", "rose", "rosemary", "spinach", "strawberry", "sweet_pepper", "swiss_chard", "tomato", "walnut"]
 
 function setup() {
   $("html").addClass('js').removeClass('no-js');
@@ -36,11 +36,11 @@ function setup() {
   gLanguage = new Language();
   gLanguage.init();
 
-  gPlants = new Plants();
-  gPlants.init();
-
   gInput = new Input();
   gInput.init();
+
+  gPlants = new Plants();
+  gPlants.init();
 
   gEvents = new Events();
   gEvents.init();

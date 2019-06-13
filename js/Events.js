@@ -10,7 +10,7 @@ export default function Events() {
 
 
 		setupRouter();
-		// initKeyEvents();
+		this.initKeyEvents();
 		this.initClickEvents();
 
 		defaultHTML = $('#results').html();
@@ -21,29 +21,42 @@ export default function Events() {
 
 		router
 			.on({
-				'list': function () {
-					setContent('About');
+				'plants': function () {
+					loadPlantList();
+					gPage = 'plants';
 				},
 				'buddies': function () {
 					toBuddyGrid();
+					gPage = 'front';
 				},
 				'top': function () {
 					toTop();
 				},
 				'plant/:id': function (id) {
+					gPage = 'plant';
 					loadPlantPage(id.id)
 				},
 				'': function () {
 					//TODO: Check if changes, otherwise dont render again
-					console.log("landing!")
-					gEvents.loadStartPage(); scrollToPos(0);
+					gPage = 'front';
+					gEvents.loadStartPage();
 				},
 				'*': function () {
 					gEvents.loadStartPage(); scrollToPos(0);
+					gPage = 'front';
 				}
 			})
 			.resolve();
 
+		// router.hooks({
+		// 	before: function(done, params) {
+		// 		// console.log(done)
+		// 		// console.log(params)
+		// 		done()
+		// 	 },
+		// 	after: function(params) {
+		// 	 }
+		// });
 
 	}
 
@@ -77,21 +90,20 @@ export default function Events() {
 	}
 
 	var loadPlantPage = function (id) {
-		// $('#results .default').hide();
-		// console.log('plant:' + id)
 		var plantObj = $.grep(gPlantData, function (e) { return e.id == id })[0];
 		if (plantObj === undefined) router.navigate('/')
 
-		if (gLanguage.active === 'en') $('.typeahead').typeahead('val', plantObj.name);
-		if (gLanguage.active === 'de') $('.typeahead').typeahead('val', plantObj.name_de);
 		gPlants.load(plantObj);
 		scrollToPos(0);
 	}
 
+	var loadPlantList = function () {
+		gPlants.reload(gPlants.buildPlantList());
+	}
+
 	this.loadStartPage = function (keepHash) {
 		//if (!keepHash) router.navigate('')
-		gInput.clearInput();
-		gIsFront = true;
+		// gInput.clearInput();
 		gPlants.reload(defaultHTML);
 	}
 
@@ -111,7 +123,7 @@ export default function Events() {
 
 				$('html, body').stop().animate({
 					scrollTop: $(selector).offset().top
-				}, 600);
+				}, 500);
 			}
 		}, 100); // check every 100ms
 	}
@@ -119,18 +131,102 @@ export default function Events() {
 	var scrollToPos = function (pos) {
 		$('html, body').stop().animate({
 			scrollTop: pos
-		}, 600);
+		}, 500);
 	}
 
-	this.beforeReload = function () {
-		$('body').toggleClass('front', gIsFront);
+	this.beforeReload = function() {
+		$('body').toggleClass('front', gPage !== 'plant');
 	}
 
 	this.afterReload = function () {
 		gEvents.initClickEvents();
 		router.updatePageLinks()
-		if (gIsFront) decodeMail();
+		gInput.findInput();
+		if (gPage === 'front') decodeMail();
+		scrollOrFocusInput()
+		document.activeElement.blur();
+		document.dispatchEvent(new Event('prerender-trigger'));
 	}
+
+	var scrollOrFocusInput = function () {
+		if (gPage !== 'plants') return false
+		if (window.innerHeight > 700) gInput.input.focus()
+		else {
+			setTimeout(function () {
+				window.scroll({ top: gInput.input.offsetTop - 20 })
+			}, 50)
+		}
+	}
+
+	this.initKeyEvents = function () {
+		//list and input set in plantsFilter
+
+		document.addEventListener('keydown', onKeyDown, false)
+	}
+
+	//TODO: INPUT AND FILTER EVENTS
+	function onKeyDown(e) {
+		const onInput = e.target.tagName.toLowerCase() === 'input'
+		if (gPage !== 'plants') return true
+
+		if (
+			!onInput &&
+			e.keyCode >= 65 &&
+			e.keyCode <= 90 &&
+			!e.altKey &&
+			!e.ctrlKey &&
+			!e.metaKey
+		) {
+			gInput.input.focus()
+			return true
+		}
+
+		switch (e.keyCode) {
+			case 27: //esc
+				setFilter('')
+				gInput.input.blur()
+				break
+
+			case 13: //enter
+				if (onInput) setFilterToFirstPlant()
+				break
+
+			case 38: //up arrow
+				moveFocus(-4, e)
+				break
+			case 40: //down arrow
+				moveFocus(4, e)
+				break
+			case 37: //left arrow
+				if (!onInput) moveFocus(-1, e)
+				break
+			case 39: //right arrow
+				if (!onInput) moveFocus(1, e)
+				break
+
+			default:
+				return true
+		}
+	}
+
+	function moveFocus(incr, e) {
+		e.preventDefault()
+
+		let pos = 0
+		const lis = gInput.list.querySelectorAll('li:not([hidden])')
+		const activeLiPos = [].indexOf.call(lis, document.activeElement.parentElement)
+
+		if (activeLiPos > -1) {
+			pos = incr + activeLiPos
+		}
+		if (pos < 0) {
+			gInput.input.focus()
+			return
+		}
+		if (pos > lis.length - 1) pos = lis.length - 1
+		lis[pos].firstElementChild.focus()
+	}
+
 
 	// var initKeyEvents = function(){
 	// 	$(document).keydown(function(e) {

@@ -10,7 +10,7 @@ export default function Plants() {
 		buddyGrid = $('#results .buddy-grid');
 		buddyGridTitle = $('#results .buddy-grid-title');
 
-		this.fillBuddyGrid();
+		// this.fillBuddyGrid();
 	}
 
 	this.load = function (suggestion) {
@@ -58,16 +58,12 @@ export default function Plants() {
 		if (gLanguage.active === 'en') html += '</div><hr class="clear"/> <div class="more-options"><a href="buddies" data-navigo>Show me all the plants</a></div>' + getShareButtons(suggestion.name, suggestion.name_de);
 		if (gLanguage.active === 'de') html += '</div><hr class="clear"/> <div class="more-options"><a href="buddies" data-navigo>Zeig mir alle Pflanzen</a></div>' + getShareButtons(suggestion.name, suggestion.name_de);
 
-		gIsFront = false;
 		this.reload(html);
 	}
 
 	var getImageSrc = function (slug) {
-		var hasImg = hasImage(slug)
 		const path = '/img/' + slug + '.svg'
-		// console.log(path)
 		var url = hasImage(slug) ? path : '/img/default.svg';
-		// return ''
 		return url;
 	}
 
@@ -101,9 +97,6 @@ export default function Plants() {
 			var elem = $(e.target).siblings('div.details');
 			$('div.details', container).not(elem).slideUp('fast');
 			elem.slideToggle('fast');
-
-			// _paq.push(['trackEvent', 'BuddyClick', 'Show: ' + $(e.target).text()]);
-
 		});
 	}
 
@@ -174,6 +167,28 @@ export default function Plants() {
 		if (gLanguage.active === 'en') html += '</div><p class="show-all-link-wrap"><a href="#show-all" class="show-all-link">▾ <span>Show me all of them</span> ▾</a></p></ul>';
 		if (gLanguage.active === 'de') html += '</div><p class="show-all-link-wrap"><a href="#show-all" class="show-all-link">▾ <span>Alle anzeigen</span> ▾</a></p></ul>';
 		buddyGrid.html(html);
+	}
+
+
+
+	this.buildPlantList = function () {
+
+		var html = gInput.getFilterCode();
+		html += '<ul id="buddy-grid" class="buddy-grid">';
+		var num = 0;
+
+		for (var i = 0; i < gPlantData.length; i++) {
+			var plant = gPlantData[i]
+			var hidden = ''
+			var href = 'plant' + '/' + plant.id
+			var altName = (typeof plant.alt === 'undefined') ? '' : ' ' + plant.alt
+			var alt = plant.name + altName + ' Illustration'
+
+			html += '<li ' + hidden + '><a href="' + href + '" data-navigo title="Open ' + plant.name + '"><img src="' + getImageSrc(plant.id) + '" alt="' + alt + '"/><span>' + plant.name + '</span></a></li>';
+		}
+
+		html += '<div hidden id="no-results">${tMain.no_plant_found} <a href="#liste-anzeigen" onClick="clearFilter(event)">${tMain.no_plant_found_link_text}</a></div>'
+		return html;
 	}
 
 }//Plants
