@@ -1,9 +1,11 @@
 a.logo {
   display: block;
-  margin-top: 2.5rem;
   text-align: left;
   padding-left: 2rem;
   padding-right: 2rem;
+  text-align: center;
+  margin-top: 2.5rem;
+  margin-bottom: 0.5rem;
 }
 
 .logo img {
@@ -23,11 +25,20 @@ a.logo {
 }
 
 @media only screen and (min-width: 36rem) {
-  .logo img,
-  .logo:hover img {
-    width: 60%;
+  .plant .logo img,
+  .plant .logo:hover img {
+    width: 26rem;
+    opacity: 0;
+    height: 0;
   }
-  .front .logo img {
+
+  .plant a.logo {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+  .logo img {
     width: 100%;
+    opacity: 1;
+    height: auto;
   }
 }

@@ -5,30 +5,35 @@ export default function Plants() {
 	this.init = function () {
 		//where did I put the milk?
 
-		container = $("#results");
-		inputWrap = $('div.input-wrap');
-		buddyGrid = $('#results .buddy-grid');
-		buddyGridTitle = $('#results .buddy-grid-title');
+		// container = document.querySelector("main");
+		container = document.querySelector("main");
+		inputWrap = document.querySelector('div.input-wrap');
+		buddyGrid = document.querySelector('main .buddy-grid');
+		buddyGridTitle = document.querySelector('main .buddy-grid-title');
 
-		// this.fillBuddyGrid();
 	}
 
 	this.load = function (suggestion) {
 		if (suggestion === undefined) return false;
 
-		// var result = $.grep(gRelationsData, function(e){ return e.plant1 === suggestion.id });
-		var result = $.grep(gRelationsData, function (e) { return e.plant1 == suggestion.id || e.plant2 == suggestion.id });
-		//|| e.plant1 === suggestion.id;
+		var result = gRelationsData.filter(function(e) {
+    	return e.plant1 == suggestion.id || e.plant2 == suggestion.id
+		});
+
+		var url = getImageSrc(suggestion.id);
+		var noteTag = suggestion.note.length > 0 ? `<blockquote>${suggestion.note}</blockquote>` : ''
 		var html = '';
 
-		html += getMainImage(suggestion.id);
+		//|| e.plant1 === suggestion.id;
 
-		html += '<div class="note">';
-		if (gLanguage.active === 'en') if (suggestion.alt) html += '<p class="gray">Also known as <b>' + suggestion.alt + '</b></p>';
-		if (gLanguage.active === 'de') if (suggestion.alt) html += '<p class="gray">Auch bekannt als <b>' + suggestion.alt_de + '</b></p>';
+			//TODO: Build nicer alt string
+		  // const alt = plant.name + altName + ' Mischkulturpartner'
 
-		if (gLanguage.active === 'en') html += '<p>' + filterContent(suggestion.note) + '</div>';
-		if (gLanguage.active === 'de') html += '<p>' + filterContent(suggestion.note_de) + '</div>';
+		html += '<img class="main" alt="Icon for ' + suggestion.id + '" src="' + url + '"/>';
+		html += '<h1><a class="button" href="plants" title="?" data-navigo>'+suggestion.name+'</a></h1>'+noteTag;
+		if (suggestion.alt) html += '<p class="gray">Also known as <b>' + suggestion.alt + '</b></p>';
+
+
 
 		if (result.length === 0) {
 			console.error("Sorry! no hits.");
@@ -45,18 +50,14 @@ export default function Plants() {
 		}
 
 		//might like
-		html += '<div class="clear">&nbsp;</div>';
-		if (gLanguage.active === 'en') html += '<div class="good"><h3>Potential Buddies</h3>';
-		if (gLanguage.active === 'de') html += '<div class="good"><h3>Mögliche Freunde</h3>';
+		html += '<div id="results"><div><h3>Potential Buddies</h3><ul class="good">';
 		html += buildRelations(likey, result, suggestion);
 
 		//won't like
-		if (gLanguage.active === 'en') html += '</div><div class="bad"><h3>dislikes</h3>';
-		if (gLanguage.active === 'de') html += '</div><div class="bad"><h3>Abneigungen</h3>';
+		html += '</ul></div><div><h3>dislikes</h3><ul class="bad">';
 		html += buildRelations(nolikey, result, suggestion);
 
-		if (gLanguage.active === 'en') html += '</div><hr class="clear"/> <div class="more-options"><a href="buddies" data-navigo>Show me all the plants</a></div>' + getShareButtons(suggestion.name, suggestion.name_de);
-		if (gLanguage.active === 'de') html += '</div><hr class="clear"/> <div class="more-options"><a href="buddies" data-navigo>Zeig mir alle Pflanzen</a></div>' + getShareButtons(suggestion.name, suggestion.name_de);
+		html += '</ul></div></div><div class="more-options"><a href="buddies" data-navigo>Show me all the plants</a></div>' + getShareButtons(suggestion.name, suggestion.name_de);
 
 		this.reload(html);
 	}
@@ -65,11 +66,6 @@ export default function Plants() {
 		const path = '/img/' + slug + '.svg'
 		var url = hasImage(slug) ? path : '/img/default.svg';
 		return url;
-	}
-
-	var getMainImage = function (slug) {
-		var url = getImageSrc(slug);
-		return '<img alt="Icon for ' + slug + '" src="' + url + '" id="main-img" class="main-img"/>';
 	}
 
 	var getBuddyImage = function (slug) {
@@ -83,21 +79,12 @@ export default function Plants() {
 	}
 
 	var fadeReload = function (html) {
-		container.stop(true).fadeOut(150, function () {
-			container.html(html);
-			initBuddyClick();
-			gEvents.afterReload();
-			setShareHrefs();
-		}).fadeIn(150);
-	}
-
-	var initBuddyClick = function () {
-		$('div.buddy > a.toggle', container).click(function (e) {
-			e.preventDefault();
-			var elem = $(e.target).siblings('div.details');
-			$('div.details', container).not(elem).slideUp('fast');
-			elem.slideToggle('fast');
-		});
+		fade(container,false,function(){
+				container.innerHTML = html
+				gEvents.afterReload();
+				setShareHrefs()
+				fade(container,true)
+			})
 	}
 
 	var buildRelations = function (relationPlants, result, suggestion) {
@@ -121,7 +108,11 @@ export default function Plants() {
 
 		//if(suggestion.id === secondaryId) secondaryId = result[i].plant2;
 
-		var plantObj = $.grep(gPlantData, function (e) { return e.id == secondaryId })[0];
+		// var plantObj = $.grep(gPlantData, function (e) { return e.id == secondaryId })[0];
+
+		var plantObj = gPlantData.filter(function(e) {
+    	return e.id == secondaryId
+		})[0];
 
 		if (plantObj === undefined) {
 			console.error("error: \r\n secondaryId: " + secondaryId + "\r\n plant1: " + plant1);
@@ -134,10 +125,15 @@ export default function Plants() {
 
 		var str = '';
 		var details = '';
-		if (gLanguage.active === 'en') details = ' <div class="details"><p>' + filterContent(thisRelation.comment) + '</p><a class="img-hover" href="plant/' + plantObj.id + '" data-navigo>' + getBuddyImage(secondaryId) + '<div>Find a Buddy for this one.</div></a> </div>';
-		if (gLanguage.active === 'de') details = ' <div class="details"><p>' + filterContent(thisRelation.comment_de) + '</p><a class="img-hover" href="plant/' + plantObj.id + '" data-navigo>' + getBuddyImage(secondaryId) + '<div>Finde Buddies für diese Pflanze.</div></a> </div>';
-		if (gLanguage.active === 'en') str += '<div class="buddy"><a class="toggle" href="#" title="What\'s the reason?">' + plantObj.name + '</a>' + details + '</div>';
-		if (gLanguage.active === 'de') str += '<div class="buddy"><a class="toggle" href="#" title="Warum ist das so?">' + plantObj.name_de + '</a>' + details + '</div>';
+		details = ' <span>'
+		+ filterContent(thisRelation.comment)
+		+ '</span><a href="plant/' + plantObj.id + '" data-navigo>'
+		+ getBuddyImage(secondaryId) + '<span>Find a Buddy for this one.</span></a></div>';
+
+		str = str
+		+ '<li><a class="toggle fc" onClick="openBuddy(event)" href="#" title="What\'s the reason?">'
+		+ plantObj.name
+		+ '</a><div>' + details + '<div></li>';
 
 		return str;
 	}
@@ -146,30 +142,6 @@ export default function Plants() {
 		if (str === undefined) return '';
 		return str.split('$$$')[0];
 	}
-
-	this.fillBuddyGrid = function () {
-
-		//buddyGridTitle.append(' ('+gPlantData.length+')');
-		var html = '<ul>';
-		var num = 0;
-
-		for (var i = 0; i < gPlantData.length; i++) {
-			var id = gPlantData[i].id;
-			if (!plantReady(id, gPlantData[i].note)) continue;
-
-			if (num == 20) html += '<div class="hidden">';
-			num++;
-
-			if (gLanguage.active === 'en') html += '<li><a class="img-hover" href="plant/' + gPlantData[i].id + '" data-navigo><img src="' + getImageSrc(id) + '"/><div>' + gPlantData[i].name + '</div></a></li>';
-			if (gLanguage.active === 'de') html += '<li><a class="img-hover" href="plant/' + gPlantData[i].id + '" data-navigo><img src="' + getImageSrc(id) + '"/><div>' + gPlantData[i].name_de + '</div></a></li>';
-		}
-
-		if (gLanguage.active === 'en') html += '</div><p class="show-all-link-wrap"><a href="#show-all" class="show-all-link">▾ <span>Show me all of them</span> ▾</a></p></ul>';
-		if (gLanguage.active === 'de') html += '</div><p class="show-all-link-wrap"><a href="#show-all" class="show-all-link">▾ <span>Alle anzeigen</span> ▾</a></p></ul>';
-		buddyGrid.html(html);
-	}
-
-
 
 	this.buildPlantList = function () {
 
@@ -187,7 +159,7 @@ export default function Plants() {
 			html += '<li ' + hidden + '><a href="' + href + '" data-navigo title="Open ' + plant.name + '"><img src="' + getImageSrc(plant.id) + '" alt="' + alt + '"/><span>' + plant.name + '</span></a></li>';
 		}
 
-		html += '<div hidden id="no-results">${tMain.no_plant_found} <a href="#liste-anzeigen" onClick="clearFilter(event)">${tMain.no_plant_found_link_text}</a></div>'
+		html += '</ul><div hidden id="no-results">${tMain.no_plant_found} <a href="#liste-anzeigen" onClick="clearFilter(event)">${tMain.no_plant_found_link_text}</a></div>'
 		return html;
 	}
 

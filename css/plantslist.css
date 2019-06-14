@@ -59,6 +59,7 @@ input.filterinput {
   border-radius: 0.5rem;
   outline: none;
   border: 0.1rem solid transparent;
+  margin: 0 auto;
 }
 
 input.filterinput::placeholder {

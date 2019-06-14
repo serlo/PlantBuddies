@@ -34,11 +34,11 @@ header nav ul {
   margin-right: auto;
 }
 
-@media only screen and (min-width: 57rem) {
+/* @media only screen and (min-width: 57rem) {
   header nav ul {
     margin-right: 0;
   }
-}
+} */
 
 .content {
   text-align: left;
@@ -48,4 +48,10 @@ header nav ul {
 footer {
   text-align: left;
   padding: 3rem 2rem 2rem 2rem;
+}
+
+@media only screen and (min-width: 70rem) {
+  html {
+    font-size: 17px;
+  }
 }

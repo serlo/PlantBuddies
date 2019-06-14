@@ -2,12 +2,9 @@ import Language from './Language'
 import Input from './Input'
 import Events from './Events'
 import Plants from './Plants'
+require('./plantFunctions')
 
 "use strict";
-
-
-$(document).ready(setup);
-
 // if ('serviceWorker' in navigator) {
 //   window.addEventListener('load', function () {
 //     navigator.serviceWorker.register('../sw.js').then(function (registration) {
@@ -17,7 +14,6 @@ $(document).ready(setup);
 //     });
 //   });
 // }
-
 
 //obj
 window.gLanguage = []
@@ -31,7 +27,7 @@ window.gEvents = []
 var images = ["amaranth", "apple", "apricot", "asparagus", "aubergine", "basil", "bay", "beet", "blackberry", "blueberry", "borage", "broad_bean", "broccoli", "brussels_sprouts", "cabbage", "carrot", "cauliflower", "celery", "chamomile", "cherry", "chilli_pepper", "chinese_cabbage", "citrus_fruits", "pole_bean", "cucumber", "currant", "fennel", "fig", "garlic", "ginger", "globe_artichoke", "gooseberry", "horseradish", "jerusalem_artichoke", "kale", "leek", "lemon_balm", "lettuce", "marrow", "nasturtium", "nectarine", "onion", "parsnip", "pea", "peach", "peanut", "pear", "plum", "potato", "pumpkin", "quince", "radish", "raspberry", "rose", "rosemary", "spinach", "strawberry", "sweet_pepper", "swiss_chard", "tomato", "walnut"]
 
 function setup() {
-  $("html").addClass('js').removeClass('no-js');
+  document.documentElement.classList.replace('no-js','js')
 
   gLanguage = new Language();
   gLanguage.init();
@@ -52,73 +48,6 @@ function setup() {
 
 function resetEvents() {
 
-  $('#plant-note').off("change").on("change", function (e) {
-    var val = $(this).val();
-    gPlantData[getCurrentPlantIndex()].note = val;
-    console.log(gPlantData[getCurrentPlantIndex()]);
-  });
-
-  $('.edit-cell textarea').off("change").on("change", function (e) {
-    var elem = $(this);
-    var val = elem.val();
-    var id = elem.closest('.edit-cell').data('id');
-
-    var index = getRelationsIndex(id);
-
-    gRelationsData[index].comment = val;
-
-    console.log(gRelationsData[index]);
-  });
-
-  $('.edit-cell .change').off("click").on("click", function (e) {
-    e.preventDefault();
-
-    var elem = $(this);
-    var cell = $(this).closest('.edit-cell');
-    var id = cell.data('id');
-    var state = cell.data('state');
-    var index = getRelationsIndex(id);
-
-    if (state == '' || state == undefined) state = 'good';
-    else if (state == 'good') state = 'bad';
-    else if (state == 'bad') state = '';
-
-    cell.data('state', state).removeClass('bad good').addClass(state);
-
-    gRelationsData[index].state = state;
-
-    console.log(gRelationsData[index]);
-  });
-
-  $('.edit-cell .delete').off("click").on("click", function (e) {
-    e.preventDefault();
-    var elem = $(this);
-    var cell = $(this).closest('.edit-cell');
-    var id = cell.data('id');
-    var index = getRelationsIndex(id);
-    gRelationsData.splice(index, 1);
-    cell.remove();
-  });
-
-  $('#add-rel').off("click").on("click", function (e) {
-    e.preventDefault();
-    //sort by id
-    gRelationsData.sort(function (a, b) {
-      return parseFloat(a.id) - parseFloat(b.id);
-    });
-    //get highest id +1
-    var id = gRelationsData[gRelationsData.length - 1].id + 1;
-    var plant2 = $('#select-plant').val();
-
-    var relation = { id: id, plant1: gCurrentPlantId, plant2: plant2, state: "good", comment: "" };
-    gRelationsData.push(relation);
-    var suggestion = { id: gCurrentPlantId };
-
-    var html = gPlants.getOneRelation(relation, suggestion);
-
-    $(this).closest('.edit-cell').before(html);
-    resetEvents();
-  });
 }
 
 function getCurrentPlantIndex() {
@@ -141,11 +70,6 @@ window.plantReady = function plantReady(id, note) {
   else return true;
 }
 
-function logger(msg) {
-  $('#log').text(msg);
-}
-
-
 window.getShareButtons = function getShareButtons(name, name_de) {
 
   if (name.slice(-1) == 's' || name.slice(-1) == 'x' || name.slice(-1) == 's') name += '\'';
@@ -160,16 +84,18 @@ window.getShareButtons = function getShareButtons(name, name_de) {
 
 
 window.setShareHrefs = function setShareHrefs() {
-  $('.share-buttons a').each(function (e) {
-    var link = $(this);
+
+  var shareLinks = document.querySelectorAll('.share-buttons a');
+  Array.prototype.forEach.call(shareLinks, function(link){
 
     var url = '';
-    var img = $('#main-img')[0];
+    var img = document.getElementById('main-img')
+    if (!img) return false;
 
-    if ($('#main-img')[0] === undefined) return false;
+    var img_src = img.src;
 
-    var img_src = $('#main-img')[0].src;
-    var name = $('#plant-input').typeahead('val');
+    //TODO: Get Plant Name from input field or global Var
+    var name="name"
 
     var teaser = 'Who likes to grow next to ' + name + '?';
     if (gLanguage.active === 'de') teaser = 'Wer wächst gern neben ' + name + '?';
@@ -181,7 +107,7 @@ window.setShareHrefs = function setShareHrefs() {
     if (gLanguage.active === 'de') fb_text = 'Finde gute Pflanzenpartner für ' + name + ' mit PlantBuddies. Das ist fast wie online dating für Pflanzen! \n Ok, eigentlch geht es um Mischkulturen. Manche Pflanzen wachsen gut und gerne nebeneinander und andere sind schlechte Nachbarn.'
     var site_url = 'https://plantbuddies.serlo.org';
 
-    switch (link.data('share')) {
+    switch (link.getAttribute('data-share')) {
 
       case 'facebook':
         url = 'https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(site_url) + '&title=' + encodeURIComponent(teaser) + '&description=' + encodeURIComponent(fb_text);
@@ -200,15 +126,19 @@ window.setShareHrefs = function setShareHrefs() {
         break;
 
     }
-    link.attr('href', url);
+    link.setAttribute('href', url);
   });
 }
 
 
 window.decodeMail = function decodeMail() {
-  var link = $('.mail-address');
+  var link = document.querySelectorAll('.mail-address');
+  if(!link[0]) return false;
   var at = / \[a\] /;
   var dot = / \[:\] /;
-  var addr = link.first().text().replace(at, "@").replace(dot, ".");
-  link.text(addr).attr('href', 'mailto:' + addr + '?subject=[PlantBuddies]');
+  var addr = link[0].innerText.replace(at, "@").replace(dot, ".");
+  link[0].innerText = addr
+  link[0].setAttribute('href', 'mailto:' + addr + '?subject=[PlantBuddies]');
 }
+
+setup();

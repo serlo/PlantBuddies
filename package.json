@@ -6,10 +6,6 @@
   "author": "elbotho <1258870+elbotho@users.noreply.github.com>",
   "license": "MIT",
   "dependencies": {
-    "data": "^0.6.1",
-    "jquery": "^3.4.1",
-    "jquery-typeahead": "^2.10.6",
-    "js": "^0.1.0",
     "navigo": "^7.1.2"
   },
   "devDependencies": {
@@ -23,7 +19,7 @@
     "build": "parcel build index.html"
   },
   "cache": {
-    "inDev": true,
+    "inDev": false,
     "strategy": "inject",
     "swSrc": "./sw.js",
     "globPatterns": [

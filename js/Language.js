@@ -9,14 +9,13 @@ export default function Language() {
 
     this.init = function () {
 
-        default_de = $('#results .default.de').html();
-        default_en = $('#results .default.en').html();
+        default_en = document.querySelector('#results .default').innerHTML;
 
         this.active = this.getLanguage();
 
-        this.setLanguage(this.active);
+        // this.setLanguage(this.active);
 
-        initClicks();
+        // initClicks();
         //$('#lang-menu a.'+this.active).addClass("hidden");
     }
 
@@ -65,7 +64,6 @@ export default function Language() {
 
         // if (change) {
         //     gEvents.loadFromHash(window.location.hash);
-        //     gPlants.fillBuddyGrid();
         // }
         //redirect
         //window.location.replace("/de");
