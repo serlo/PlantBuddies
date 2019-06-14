@@ -5,7 +5,6 @@ export default function Plants() {
 	this.init = function () {
 		//where did I put the milk?
 
-		// container = document.querySelector("main");
 		container = document.querySelector("main");
 		inputWrap = document.querySelector('div.input-wrap');
 		buddyGrid = document.querySelector('main .buddy-grid');
@@ -24,14 +23,12 @@ export default function Plants() {
 		var noteTag = suggestion.note.length > 0 ? `<blockquote>${suggestion.note}</blockquote>` : ''
 		var html = '';
 
-		//|| e.plant1 === suggestion.id;
-
 			//TODO: Build nicer alt string
 		  // const alt = plant.name + altName + ' Mischkulturpartner'
 
 		html += '<img class="main" alt="Icon for ' + suggestion.id + '" src="' + url + '"/>';
-		html += '<h1><a class="button" href="plants" title="?" data-navigo>'+suggestion.name+'</a></h1>'+noteTag;
-		if (suggestion.alt) html += '<p class="gray">Also known as <b>' + suggestion.alt + '</b></p>';
+		html += '<h1><a class="button" href="plants" title="?" data-navigo>'+suggestion.name+'</a></h1>';
+		if (suggestion.alt) html += '<p class="gray">You can also call me <b>' + suggestion.alt + '</b></p>'+noteTag;
 
 
 

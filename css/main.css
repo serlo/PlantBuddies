@@ -38,8 +38,8 @@ h2 i {
 }
 
 .front h2 {
-  margin-bottom: 3rem;
-  text-align: center;
+  margin-top: 4rem;
+  margin-bottom: 0rem;
 }
 
 h3 {
@@ -47,74 +47,7 @@ h3 {
   font-size: 1rem;
 }
 
-/* ========= Plant ======== */
-/*
-.main-img {
-  height: 14rem;
-  width: 14rem;
-  margin-top: 1rem;
-  margin-left: -2rem;
-}
-
-.buddy-img {
-  height: 10rem;
-  width: 10rem;
-} */
-/*
-.good,
-.bad {
-  margin-top: 3rem;
-} */
-
-/* #results {
-  margin-top: 3.5rem;
-} */
-
 @media only screen and (min-width: 36rem) {
-  /* .default {
-    width: 30rem;
-  } */
-  /*
-  .main-img {
-    float: left;
-    margin: -0.5rem 1rem 1rem -2.5rem;
-  }
-
-  hr.clear {
-    margin-bottom: 4rem;
-  }
-
-  div.note {
-    float: left;
-    /* margin-top: -2.5rem;
-    margin-bottom: 1rem;
-    width: 19rem;
-  } */
-
-  /* #results {
-
-  } */
-  /* .good,
-  .bad {
-    margin-top: 0;
-    float: left;
-    width: 14.6rem;
-    margin-right: 1rem;
-  }
-  .buddy .details {
-    font-size: 0.85rem;
-  }
-
-  #results:after,
-  hr.clear,
-  div.clear {
-    content: ' ';
-    visibility: hidden;
-    display: block;
-    height: 0;
-    clear: both;
-    border: 0;
-  } */
 }
 
 @media only screen and (min-width: 55rem) {
@@ -122,47 +55,7 @@ h3 {
 
 @media only screen and (min-width: 75rem) {
 }
-/*
-.good div a {
-  color: #99cc99;
-}
 
-.bad div a {
-  color: #cc9999;
-}
-
-.buddy > a:after {
-  content: ' \25BE';
-}
-
-.buddy .details {
-  display: none;
-  margin: 0 0 2rem 0;
-}
-
-.details img {
-  display: block;
-}
-
-.gray {
-  opacity: 0.54;
-} */
-
-/* div.iframe_frame {
-  background: #ccc;
-  padding: 1rem;
-  border-radius: 0.5rem;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-  opacity: 0.8;
-}
-
-div iframe {
-  border: 0;
-  height: 10rem;
-  width: 100%;
-}
- */
 /* landing start page homepage */
 
 .img-hover div {

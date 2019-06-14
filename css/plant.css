@@ -84,6 +84,7 @@ blockquote::after {
 }
 
 .plant .gray {
+  color: #777;
   text-align: center;
 }
 

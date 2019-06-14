@@ -4,14 +4,18 @@ window.router = router
 
 export default function Events() {
 
-	var defaultHTML;
+	var cache = {}
 	var currentRoute, lastRoute
 
 	this.init = function () {
 
-		defaultHTML = document.getElementById('results').innerHTML;
+		cache['front'] = document.getElementById('results').innerHTML;
 		setupRouter();
 		this.initKeyEvents();
+
+		window.onload = function() {
+			if( !cache['plants'] ) cache['plants'] = gPlants.buildPlantList()
+		};
 	}
 
 
@@ -73,14 +77,18 @@ export default function Events() {
 	}
 
 	var loadPlantList = function () {
-		gPlants.reload(gPlants.buildPlantList());
+		if( cache['plants'] ) gPlants.reload(cache['plants'])
+		else {
+			cache['plants'] = gPlants.buildPlantList()
+			gPlants.reload(cache['plants']);
+		}
 	}
 
 	this.loadStartPage = function (keepHash) {
 		//if (!keepHash) router.navigate('')
 		// gInput.clearInput()
-		if(!defaultHTML) return false;
-		gPlants.reload(defaultHTML);
+		if(!cache['front']) return false;
+		gPlants.reload(cache['front']);
 	}
 
 	var toBuddyGrid = function () {

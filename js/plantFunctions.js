@@ -93,7 +93,7 @@ window.fade = function fade(el,fadeIn,callback) {
   var last = +new Date();
   var tick = function() {
 
-    var amount = (new Date() - last) / 150;
+    var amount = (new Date() - last) / 100;
     el.style.opacity = fadeIn ? +el.style.opacity + amount : +el.style.opacity - amount
 
     last = +new Date();
