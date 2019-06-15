@@ -53,13 +53,14 @@ input.filterinput {
   font-size: 1.4rem;
   border: 0;
   display: block;
-  width: 20rem;
+  width: 22.8rem;
   padding: 0.6rem 0.9rem 0.5rem 0.9rem;
-  line-height: 2.2rem;
+  line-height: 1.6rem;
   border-radius: 0.5rem;
   outline: none;
   border: 0.1rem solid transparent;
   margin: 0 auto;
+  text-align: center;
 }
 
 input.filterinput::placeholder {
@@ -114,18 +115,6 @@ input.filterinput::placeholder {
 #no-results {
   margin-top: -8rem;
 }
-
-/*
-.show-all-link-wrap {
-  text-align: center;
-}
-
-.show-all-link-wrap a {
-  text-decoration: none;
-}
-.show-all-link-wrap a span {
-  text-decoration: underline;
-} */
 
 /*
 

@@ -1,5 +1,4 @@
 import Language from './Language'
-import Input from './Input'
 import Events from './Events'
 import Plants from './Plants'
 require('./plantFunctions')
@@ -24,16 +23,13 @@ window.gPage = []
 window.gEvents = []
 
 // const images = require('../img/plants/*.jpg');
-var images = ["amaranth", "apple", "apricot", "asparagus", "aubergine", "basil", "bay", "beet", "blackberry", "blueberry", "borage", "broad_bean", "broccoli", "brussels_sprouts", "cabbage", "carrot", "cauliflower", "celery", "chamomile", "cherry", "chilli_pepper", "chinese_cabbage", "citrus_fruits", "pole_bean", "cucumber", "currant", "fennel", "fig", "garlic", "ginger", "globe_artichoke", "gooseberry", "horseradish", "jerusalem_artichoke", "kale", "leek", "lemon_balm", "lettuce", "marrow", "nasturtium", "nectarine", "onion", "parsnip", "pea", "peach", "peanut", "pear", "plum", "potato", "pumpkin", "quince", "radish", "raspberry", "rose", "rosemary", "spinach", "strawberry", "sweet_pepper", "swiss_chard", "tomato", "walnut"]
+// var images = ["amaranth", "apple", "apricot", "asparagus", "aubergine", "basil", "bay", "beet", "blackberry", "blueberry", "borage", "broad_bean", "broccoli", "brussels_sprouts", "cabbage", "carrot", "cauliflower", "celery", "chamomile", "cherry", "chilli_pepper", "chinese_cabbage", "citrus_fruits", "pole_bean", "cucumber", "currant", "fennel", "fig", "garlic", "ginger", "globe_artichoke", "gooseberry", "horseradish", "jerusalem_artichoke", "kale", "leek", "lemon_balm", "lettuce", "marrow", "nasturtium", "nectarine", "onion", "parsnip", "pea", "peach", "peanut", "pear", "plum", "potato", "pumpkin", "quince", "radish", "raspberry", "rose", "rosemary", "spinach", "strawberry", "sweet_pepper", "swiss_chard", "tomato", "walnut"]
 
 function setup() {
   document.documentElement.classList.replace('no-js','js')
 
-  gLanguage = new Language();
-  gLanguage.init();
-
-  gInput = new Input();
-  gInput.init();
+  // gLanguage = new Language();
+  // gLanguage.init();
 
   gPlants = new Plants();
   gPlants.init();
@@ -59,25 +55,39 @@ function getRelationsIndex(id) {
   return gRelationsData.findIndex(function (x) { return x.id == id });
 }
 
-window.hasImage = function hasImage(slug) {
-  var exists = images.indexOf(slug) > -1
-  return exists
-  // return images[id]
+window.toSlug = function(v) {
+  v = v.toLowerCase()
+  v = v.replace(/\u00e4/g, 'ae')
+  v = v.replace(/\u00f6/g, 'oe')
+  v = v.replace(/\u00fc/g, 'ue')
+  v = v.replace(/\u00df/g, 'ss')
+  v = v.replace(/ /g, '-')
+  v = v.replace(/\./g, '')
+  v = v.replace(/,/g, '')
+  v = v.replace(/\(/g, '')
+  v = v.replace(/\)/g, '')
+  v = encodeURIComponent(v)
+  return v
 }
 
-window.plantReady = function plantReady(id, note) {
-  if (!hasImage(id) || !note) return false;
-  else return true;
-}
+// window.hasImage = function hasImage(slug) {
+//   var exists = images.indexOf(slug) > -1
+//   return exists
+//   // return images[id]
+// }
 
-window.getShareButtons = function getShareButtons(name, name_de) {
+// window.plantReady = function plantReady(id, note) {
+//   if (!hasImage(id) || !note) return false;
+//   else return true;
+// }
+
+window.getShareButtons = function getShareButtons(name) {
 
   if (name.slice(-1) == 's' || name.slice(-1) == 'x' || name.slice(-1) == 's') name += '\'';
   else name += '\'s';
 
   var html = '';
-  if (gLanguage.active === 'en') html += '<div class="share-note"><b>Share ' + name + ' Buddies:</b><br> <ul class="share-buttons"><li><a href="https://www.facebook.com" target="_blank" data-share="facebook" title="Share on Facebook"><img src="' + require('../img/socialicons/facebook.svg') + '"></a></li><li><a href="https://twitter.com" title="Tweet" target="_blank" data-share="twitter"><img src="' + require('../img/socialicons/twitter.svg') + '"></a></li><li><a href="http://pinterest.com/" title="Pin it" target="_blank" data-share="pinterest" ><img src="' + require('../img/socialicons/pinterest.svg') + '"></a></li><li><a href="#" title="Email" target="_blank" data-share="mail"><img src="' + require('../img/socialicons/email.svg') + '"></a></li></ul></div>';
-  if (gLanguage.active === 'de') html += '<div class="share-note"><b>' + name_de + 's Buddies verschicken:</b><br> <ul class="share-buttons"><li><a href="https://www.facebook.com" target="_blank" data-share="facebook" title="Auf Facebook teilen"><img src="' + require('../img/socialicons/facebook.svg') + '"></a></li><li><a href="https://twitter.com" title="Tweet" target="_blank" data-share="twitter"><img src="' + require('../img/socialicons/twitter.svg') + '"></a></li><li><a href="http://pinterest.com/" title="Auf Pinterest teilen" target="_blank" data-share="pinterest" ><img src="' + require('../img/socialicons/pinterest.svg') + '"></a></li><li><a href="#" title="Per Mail verschicken" target="_blank" data-share="mail"><img src="' + require('../img/socialicons/email.svg') + '"></a></li></ul></div>';
+  html += '<div class="share-note"><b>Share ' + name + ' Buddies:</b><br> <ul class="share-buttons"><li><a href="https://www.facebook.com" target="_blank" data-share="facebook" title="Share on Facebook"><img src="' + require('../img/socialicons/facebook.svg') + '"></a></li><li><a href="https://twitter.com" title="Tweet" target="_blank" data-share="twitter"><img src="' + require('../img/socialicons/twitter.svg') + '"></a></li><li><a href="http://pinterest.com/" title="Pin it" target="_blank" data-share="pinterest" ><img src="' + require('../img/socialicons/pinterest.svg') + '"></a></li><li><a href="#" title="Email" target="_blank" data-share="mail"><img src="' + require('../img/socialicons/email.svg') + '"></a></li></ul></div>';
 
   return html;
 }

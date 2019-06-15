@@ -6,7 +6,6 @@ export default function Input() {
 	var filterBy = ''
 	var plantArray = Object.keys(gPlantData)
 
-
 	this.init = function () {
 
 	}
@@ -23,7 +22,7 @@ export default function Input() {
 				type="text"
 				aria-label="filter-label"
 				value="${filter}"
-				placeholder="type to search …"
+				placeholder="${gLangMain.type_to_search}"
 				name="filterinput${inputHash}"
 				id="filterinput"
 				class="filterinput"

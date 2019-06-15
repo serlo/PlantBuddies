@@ -12,22 +12,21 @@ a.logo {
   width: 100%;
   transition: all 0.4s ease;
 
-  -webkit-filter: grayscale(100%);
+  /* -webkit-filter: grayscale(100%);
   filter: grayscale(100%);
-  filter: gray;
+  filter: gray; */
 }
 
-.front .logo img,
+/* .front .logo img,
 .logo:hover img {
-  width: 100%;
   -webkit-filter: none;
   filter: none;
-}
+} */
 
 @media only screen and (min-width: 36rem) {
   .plant .logo img,
   .plant .logo:hover img {
-    width: 26rem;
+    width: 25rem;
     opacity: 0;
     height: 0;
   }
@@ -37,7 +36,7 @@ a.logo {
     margin-bottom: 0;
   }
   .logo img {
-    width: 100%;
+    width: 25rem;
     opacity: 1;
     height: auto;
   }

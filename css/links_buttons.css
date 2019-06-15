@@ -1,6 +1,7 @@
 /* ========= LINKS ======== */
 
-.fc {
+.fc,
+nav a {
   text-decoration: none;
   display: inline-block;
   outline: none;
@@ -10,12 +11,14 @@
   border: 0.1rem dashed transparent;
 }
 
-.fc:focus {
+.fc:focus,
+nav a:focus {
   text-decoration: none;
   border: 0.1rem dashed rgb(204, 153, 153);
 }
 
-.fc:active {
+.fc:active,
+nav a:active {
   border: 0.1rem dashed transparent;
 }
 
@@ -58,15 +61,18 @@ a.button {
   color: rgb(51, 51, 51);
   font-size: 1.4rem;
   cursor: pointer;
-  font-weight: bold;
-  max-width: 73vw;
-  line-height: 30px;
+  font-weight: normal;
+  line-height: 1.4rem;
   opacity: 0.85;
   margin: 0 auto;
   padding: 0.6rem 0.9rem 0.5rem !important;
   border-radius: 0.5rem;
   outline: none;
   border: 0.1rem solid transparent;
+}
+
+.main-button .button {
+  width: 22.8rem;
 }
 
 .default a.button {

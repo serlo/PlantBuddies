@@ -1,6 +1,6 @@
 
 //Todo: For Loop
-let routesArray = ["/","/plants","/plant/amaranth"]
+let routesArray = ["/","/🌿","/🌿/amaranth"]
 
 module.exports = {
     "routes": routesArray,

@@ -1,6 +1,9 @@
 import Navigo from 'navigo'
 var router = new Navigo('/');
 window.router = router
+window.gLang = 'en'
+window.gPlant = ''
+
 
 export default function Events() {
 
@@ -9,51 +12,83 @@ export default function Events() {
 
 	this.init = function () {
 
-		cache['front'] = document.getElementById('results').innerHTML;
-		setupRouter();
 		this.initKeyEvents();
 
 		window.onload = function() {
-			if( !cache['plants'] ) cache['plants'] = gPlants.buildPlantList()
+			// if( !cache['front'] ) cache['front'] = buildFrontPage();
+			// if( !cache['plants'] ) cache['plants'] = gPlants.buildPlantList()
 		};
+
+		setupLangMenu(gLang)
+
+		setupRouter();
 	}
 
+	function setGlobals(p,pageName,callback){
+		gPage = pageName;
+		if (typeof p === undefined) gLang = 'en'
+		else gLang = p.lang.length !== 2 ? 'en' : p.lang
+		setLanguage(callback)
+	}
+
+	var setLanguage = function (callback) {
+		console.log("setLang:" + gLang)
+		if(gLang ==='en') import('../data/lang/en/main').then(function() {
+			callback()
+		})
+		if(gLang ==='de') import('../data/lang/de/main').then(function() {
+			console.log(gLangMain)
+			callback()
+		})
+		document.documentElement.setAttribute('lang',gLang)
+		document.getElementById('lang-select').value = '_change';
+	}
 
 	function setupRouter() {
+		// cache = {}
 		router
 			.on({
-				'plants': function () {
-					loadPlantList();
-					gPage = 'plants';
+				':lang/🌿': function (p) {
+					setGlobals(p,'plants',loadPlantList)
 				},
-				'buddies': function () {
-					toBuddyGrid();
-					gPage = 'front';
+				':lang/🌿/:id': function (p) {
+					gPlant = p.id
+					setGlobals(p,'plant',loadPlantPage)
+					console.log("plant.id: "+gPlant)
 				},
-				'top': function () {
-					toTop();
-				},
-				'plant/:id': function (id) {
-					console.log("plant")
-					gPage = 'plant';
-					loadPlantPage(id.id)
-				},
-				'': function () {
+				':lang': function (p) {
+					console.log("landing?!")
+					setGlobals(p,'front',gEvents.loadStartPage)
 					//TODO: Check if changes, otherwise dont render again
-					gPage = 'front';
-					gEvents.loadStartPage();
 				},
-				'*': function () {
-					gEvents.loadStartPage(); scrollToPos(0);
-					gPage = 'front';
+				'*': function (p) {
+					setGlobals(p,'front',gEvents.loadStartPage)
+					// (); scrollToPos(0);
 				}
 			})
 			.resolve();
 
-					document.body.className = gPage //for first load
+			console.log("gPage: "+gPage)
+			console.log("gLang: "+gLang)
+			document.body.className = gPage //for first load
+
+			router.getLinkPath = function(link) {
+					var href = gLang === 'en' ? link.getAttribute('href') : gLang+'/'+link.getAttribute('href');
+    			return href;
+  		}
+			// router.getLinkPath = function(link){
+			// 	var location = link.getAttribute('href');
+			// 	console.log(location)
+			// 	console.log(link)
+			// 	  e.preventDefault();
+			// 	// router.navigate(location);
+			// 	return false
+
+			// }
 
 		router.hooks({
 			before: function(done, params) {
+				// console.log(params)x
 				// console.log("router before")
 				// console.log(done)
 				// console.log(params)
@@ -69,11 +104,37 @@ export default function Events() {
 
 	}
 
-	var loadPlantPage = function (id) {
-		var plantObj = gPlantData.filter(function(e) { return e.id == id })[0];
-		if (plantObj === undefined) router.navigate('/')
+	var loadPlantPage = function () {
+		var plantObj = gPlantDataLang[gPlant];
+		if (plantObj === undefined){
+			//find in language
+			for(var o in gPlantDataLang) {
+				var slug = toSlug(gPlantDataLang[o].name)
+				if( slug !== gPlant ) continue
+				//success
+				gPlant = o
+				// console.log(gPlant)
+				loadPlantPage();
+				return false;
+			}
+			router.navigate('');
+			return false
+		}
 		gPlants.load(plantObj);
 		scrollToPos(0);
+	}
+
+	var setupLangMenu = function(){
+		var menu = document.getElementById('lang-select')
+		menu.addEventListener('change', onLangMenuChange, false)
+		menu.value = '_change';
+		// setLanguage(gLang)
+	}
+
+	var onLangMenuChange = function(e) {
+		var lang = e.target.value
+		if(lang !== 'en' && lang !== 'de') return false;
+		window.location.href = '/'+lang;
 	}
 
 	var loadPlantList = function () {
@@ -87,13 +148,18 @@ export default function Events() {
 	this.loadStartPage = function (keepHash) {
 		//if (!keepHash) router.navigate('')
 		// gInput.clearInput()
-		if(!cache['front']) return false;
-		gPlants.reload(cache['front']);
+		if( cache['front'] ) gPlants.reload(cache['front'])
+		else {
+			buildFrontPage()
+		}
 	}
 
-	var toBuddyGrid = function () {
-		gEvents.loadStartPage();
-		scrollToElem('#results');
+
+	var buildFrontPage = function(){
+		import('./frontpage').then(function(e){
+			cache['front'] = e;
+			gEvents.loadStartPage()
+		})
 	}
 
 	var toTop = function () {
@@ -125,7 +191,7 @@ export default function Events() {
 	this.afterReload = function () {
 		document.body.className = gPage
 		router.updatePageLinks()
-		gInput.findInput();
+		if(gPage ==='plants') gInput.findInput();
 		if (gPage === 'front') decodeMail();
 		scrollOrFocusInput()
 		document.activeElement.blur();
@@ -153,7 +219,7 @@ export default function Events() {
 		const onInput = e.target.tagName.toLowerCase() === 'input'
 
 
-		if (gPage === 'plant' && e.keyCode === 27 ) router.navigate('plants')
+		if (gPage === 'plant' && e.keyCode === 27 ) router.navigate('🌿')
 		if (gPage === 'plant' && e.keyCode === 8 ) window.history.back()
 		if (gPage !== 'plants') return true
 
