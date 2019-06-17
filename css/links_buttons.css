@@ -1,0 +1,105 @@
+/* ========= LINKS ======== */
+
+.fc,
+nav a {
+  text-decoration: none;
+  display: inline-block;
+  outline: none;
+  border-radius: 0.4em;
+  padding: 0.1em 0.1em 0 0.1em;
+  color: #333;
+  border: 0.1rem dashed transparent;
+}
+
+.fc:focus,
+nav a:focus {
+  text-decoration: none;
+  border: 0.1rem dashed rgb(204, 153, 153);
+}
+
+.fc:active,
+nav a:active {
+  border: 0.1rem dashed transparent;
+}
+
+a {
+  text-decoration: none;
+  display: inline-block;
+  /* mobile clicktargets */
+  padding: 0.15rem 0.5rem 0.15rem 0;
+  color: #333;
+}
+
+@media only screen and (min-width: 36rem) {
+  a {
+    display: inline;
+  }
+}
+
+/* a:hover {
+  text-decoration: underline;
+} */
+
+#results a.search-link {
+  color: #333;
+  text-decoration: underline;
+}
+
+a.img-hover {
+  padding: 0;
+}
+
+div.main-button {
+  /* margin-top: -2rem; */
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+a.button {
+  display: inline-block;
+  background-color: rgb(255, 206, 206);
+  color: rgb(51, 51, 51);
+  font-size: 1.4rem;
+  cursor: pointer;
+  font-weight: normal;
+  line-height: 1.4rem;
+  opacity: 0.85;
+  margin: 0 auto;
+  padding: 0.6rem 0.9rem 0.5rem !important;
+  border-radius: 0.5rem;
+  outline: none;
+  border: 0.1rem solid transparent;
+}
+
+.main-button .button {
+  max-width: 90%;
+  width: 22.8rem;
+}
+
+.default a.button {
+  text-decoration: none;
+}
+
+a.button:hover,
+a.button:focus {
+  opacity: 1;
+  text-decoration: none;
+}
+
+a.button:focus {
+  border: dashed 0.1rem rgba(0, 0, 0, 0.4);
+}
+
+.button:active {
+  border-color: transparent;
+}
+
+.button:focus {
+  border-color: #c99;
+  /* background: transparent; */
+  outline: none;
+}
+
+.button:active {
+  border-color: transparent;
+}

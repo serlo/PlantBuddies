@@ -1,0 +1,28 @@
+{
+  "name": "PlantBuddies – Companion Planting Helper",
+  "version": "0.2",
+  "short_name": "PlantBuddies",
+  "theme_color": "#cc9999",
+  "background_color": "#e2cd9f",
+  "display": "standalone",
+  "scope": "/",
+  "start_url": "/",
+  "developer": {
+    "name": "Botho Willer",
+    "url": "http://github.com/elbotho"
+  },
+  "homepage_url": "https://plantbuddies.serlo.org",
+
+  "icons": [
+    {
+      "src": "/img/fav/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/img/fav/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

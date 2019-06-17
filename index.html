@@ -1,215 +1,103 @@
 <!DOCTYPE html>
 <html class="no-js" lang="en">
-<head>
-	<title>Plant Buddies – Online Dating for Plants</title>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-	<meta name="viewport" content="width=device-width,initial-scale=1">
+  <head>
+    <title>PlantBuddies 🌿💘 Easy Companion Planting</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
 
-	<meta name="description" content="It's like online dating for plants! Plant Buddies is an easy to use tool that helps you with companion planting. Need a good compaion for your plant? Find it here fast. It's like a companion planting chart but in 2017.">
+    <meta
+      name="description"
+      content="It's like online dating for plants! Plant Buddies is an easy to use tool that helps you with companion planting. Need a good compaion for your plant? Find it here fast. It's like a companion planting chart but in 2017."
+    />
 
-	<meta property="og:type" content="article">
-	<meta property="og:title" content="Plant Buddies – Online Dating for Plants">
-	<meta property="og:site_name" content="Plant Buddies">
-	<meta property="og:url" content="https://planbuddies.serlo.org/">
-	<meta property="og:image" content="https://plantbuddies.serlo.org/img/plant_buddies_logo_big.png">
-	<meta property="article:author" content="https://www.facebook.com/serlo.org/">
+    <meta property="og:type" content="article" />
+    <meta
+      property="og:title"
+      content="Plant Buddies – Online Dating for Plants"
+    />
+    <meta property="og:site_name" content="Plant Buddies" />
+    <meta property="og:url" content="https://planbuddies.serlo.org/" />
+    <meta
+      property="og:image"
+      content="https://plantbuddies.serlo.org/img/plant_buddies_logo_big.png"
+    />
+    <meta
+      property="article:author"
+      content="https://www.facebook.com/serlo.org/"
+    />
 
-	<meta name="google-site-verification" content="r0SPHQUDbxHzNX23dYt-epIwNsJ_Vm82APSnFMVoJyA" />
+    <meta
+      name="google-site-verification"
+      content="r0SPHQUDbxHzNX23dYt-epIwNsJ_Vm82APSnFMVoJyA"
+    />
 
-	<link rel="apple-touch-icon" sizes="180x180" href="img/fav/apple-touch-icon.png">
-	<link rel="icon" type="image/png" href="img/fav/favicon-32x32.png" sizes="32x32">
-	<link rel="icon" type="image/png" href="img/fav/favicon-16x16.png" sizes="16x16">
-	<link rel="manifest" href="img/fav/manifest.json">
-	<link rel="mask-icon" href="img/fav/safari-pinned-tab.svg" color="#99d150">
-	<link rel="shortcut icon" href="img/fav/favicon.ico">
-	<meta name="msapplication-config" content="img/fav/browserconfig.xml">
-	<meta name="theme-color" content="#e2cd9f">
+    <link rel="manifest" href="manifest.webmanifest" />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="img/fav/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      href="img/fav/favicon-32x32.png"
+      sizes="32x32"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      href="img/fav/favicon-16x16.png"
+      sizes="16x16"
+    />
+    <link
+      rel="mask-icon"
+      href="img/fav/safari-pinned-tab.svg"
+      color="#99d150"
+    />
+    <link rel="shortcut icon" href="img/fav/favicon.ico" />
+    <meta name="msapplication-config" content="img/fav/browserconfig.xml" />
+    <meta name="theme-color" content="#cc9999" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="msapplication-starturl" content="/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-</head>
+    <link
+      rel="preload"
+      as="font"
+      href="./fonts/domine-regular.woff2"
+      type="font/woff2"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="preload"
+      as="font"
+      href="./fonts/domine-bold.woff2"
+      type="font/woff2"
+      crossorigin="anonymous"
+    />
 
-<body class="front">
-	<div class="lang-menu menu" id="lang-menu">
-	<span>Switch Language:</span> <a title="Switch to English" class="en" href="#en">EN</a> <a title="Auf Deutsch ansehen" class="de" href="#de">DE</a></div>
+    <link rel="stylesheet" type="text/css" href="css/main.css" />
+  </head>
 
-	<div class="main-wrap">
-		<div class="content">
-			<h1><a href="#" id="home-link"><img class="logo" src="img/plant_buddies_logo.svg" alt="PlantBuddies – The Modern Companion Planting Chart – Logo"></a></h1>
+  <body class="front">
+    <header>
+      <nav></nav>
+      <a href="/" id="logo" data-navigo class="fc logo"
+        ><img
+          src="/img/plant_buddies_logo.svg"
+          alt="PlantBuddies – Easy Companion Planting – Logo"
+      /></a>
+    </header>
 
-			<form action="#">
-			    <div class="input-wrap">
-			      <input id="plant-input" class="typeahead" type="text" placeholder="lonely plant here…">
-			    </div>
-			    <!-- <button type="submit">Go</button> -->
-			</form>
+    <main></main>
 
-			<div id="main-img-wrap"></div>
-			
-			<div id="results">
-				<div class="default en">
-					<div class="clear">&nbsp;</div>
-					<h4>Welcome to PlantBuddies!<i> – It's like online dating for plants!</i></h4>
-					<p>Just type in the name of a lonely plant in the text box above.</p>
+    <footer></footer>
 
-					<h4>Ok, it's actually about Companion Planting.</h4>
-					<p>Some plants just grow well together, while others might be terrible matches. Or as <a href="https://en.wikipedia.org/wiki/Companion_planting" title="Companion Planting on Wikipedia"> Aunt Wikipedia would say</a>:</p>
-
-					<blockquote>
-						"Companion planting in gardening and agriculture is the planting of different crops in proximity for pest control, pollination, providing habitat for beneficial creatures, maximizing use of space, and to otherwise increase crop productivity (…)"
-					</blockquote>	
-
-					<p><h4 class="buddy-grid-title">Meet the potential Buddies</h4></p>
-					<div class="buddy-grid"></div>
-
-					<div class="share-note"><b>Share this Project:</b><br> <ul class="share-buttons"><li><a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fplantbuddies.serlo.org&title=Plant%20Buddies%20%E2%80%93%20Online%20Dating%20for%20Plants&description=Plant%20Buddies%20is%20an%20easy%20to%20use%20tool%20that%20helps%20you%20with%20companion%20planting.%20Need%20a%20good%20compaion%20for%20your%20plant%3F%20Find%20it%20here%20fast.%20A%20companion%20planting%20chart%20but%20from%20the%20future" target="_blank" data-share="facebook" title="Share on Facebook"><img src="img/socialicons/facebook.svg"></a></li><li><a href="https://twitter.com/intent/tweet?text=Plant%20Buddies%20is%20an%20easy%20to%20use%20tool%20that%20helps%20you%20with%20companion%20planting:%20https%3A%2F%2Fplantbuddies.serlo.org" title="Tweet" target="_blank" data-share="twitter"><img src="img/socialicons/twitter.svg"></a></li><li><a href="https://de.pinterest.com/pin/create/button/?url=https%3A%2F%2Fplantbuddies.serlo.org&media=https%3A%2F%2Fplantbuddies.serlo.org%2Fimg%2Fplant_buddies_logo_big.png%3F&description=Plant%20Buddies%20%E2%80%93%20Online%20Dating%20for%20PlantsPlant%20Buddies%20is%20an%20easy%20to%20use%20tool%20that%20helps%20you%20with%20companion%20planting" title="Pin it" target="_blank" data-share="pinterest" ><img src="img/socialicons/pinterest.svg"></a></li><li><a href="mailto:?subject=Companion%20Planting%20with%20PlantBuddies&amp;body=Plant%20Buddies%20is%20an%20easy%20to%20use%20tool%20that%20helps%20you%20with%20companion%20planting%0ATry%20it%20at%3A%20https%3A%2F%2Fplantbuddies.serlo.org%0A%0A(It's%20like%20online%20dating%20for%20plants)" title="Email" target="_blank" data-share="mail"><img src="img/socialicons/email.svg"></a></li></ul></div>
-
-					<h4>Usage & License</h4>
-					<p>It's free! Please use and learn. <br> The code of this website is also <a href="https://github.com/serlo-org/PlantBuddies" title="PlantBuddies – Open Source Companion Planting Tool on GitHub">available</a>!<br>We want to make most things available with an open license for the final version.</p>
-
-					<h4>Contact, Contribution & Feeback</h4>
-					<p>This project is an early version so please do send your feedback and ideas to <a title="Ui, I'm exited!" href="mailto:botho [a] serlo [:] org" class="mail-address">botho [a] serlo [:] org</a> or contribute to <a href="https://github.com/serlo-org/PlantBuddies" title="PlantBuddies – Open Source Companion Planting Tool on GitHub">this project at GitHub</a>.<br>Thank you!</p>
-
-					<div class="gray" class="privacy-wrap">
-					<h4>Privacy</h4>
-					<p>To better understand the usage and needs of the people using this website we use analytics and we do it in a way that protects your privacy. Currenty we deactivated all tracking!
-					<p>Please refer to the (german) <a href="https://de.serlo.org/datenschutz" title="Datenschutzrichtline der freien Lernseite serlo.org">privacy Information on serlo.org</a></p>
-					<div class="privacy-content">
-						<a href="#" class="toggle-privacy-content">Show me the details / opt-out</a>.</p>
-					<hr>
-					<p><b>Software</b><br><a href="https://plantbuddies.serlo.org">PlantBuddies</a> uses the open source software <a href="https://piwik.org">Piwik</a> for web analytics.
-					</p>
-					<p><b>Cookies & anonymity</b><br>
-					Piwik uses cookies to help us to understand how users use the site. In this case cookies are text files that are stored on you computer and make your browser identifiable.<br><i>We will never use this data to identify you as a person</i>.</p>
-
-					<p><b>Storage</b><br>
-					The information about your use of the website (including your IP address anonymized prior to its storage) will be stored on the server of our <a href="https://ssl.greensta.de/">service provider</a> in Germany.</p>
-
-					<p><b>What for?</b><br>
-					<i>We will only use this data to improve the experience on PlantBuddies and not for commercial or marketing reasons.</i>
-					</p>
-
-					<p><b>Deactivate tracking</b><br>You can deactivate tracking for PlantBuddies below or use a plugin like <a href="https://www.privacytools.io/#addons">uBlock Origin</a> or <a href="http://donottrack.us/">browser settings</a> to deactivate it on most sites. More info at <a href="http://donottrack.us/">donottrack.us</a>.</p>
-					<b>Your status & opt-out</b><br>
-						<div class="iframe_frame">
-						<iframe src="http://piwik.permaculturecommons.org/index.php?module=CoreAdminHome&action=optOut&language=de"></iframe>
-						<small class="gray">––<br>if this field is empty the connection to the analytics tool was blocked by your browser and analytics is definitely disabled.</small>
-						</div>
-						<hr>
-					</div>
-					</div> <!-- privacy done -->
-				</div>	
-				<div class="default de">
-					<div class="clear">&nbsp;</div>
-					<h4>Willkommen bei PlantBuddies!<i> – Fast wie Online Dating für Pflanzen</i></h4>
-					<p>Gib einfach den Namen einer einsamen Pflanze in das Textfeld oben ein.</p>
-
-					<h4>Ok, eigentlich geht es um Mischkulturen…</h4>
-					<p>Manche Pflanzen wachsen einfach gerne nebeneinander, andere dagegen sind schlechte Partner. Auf <a href="https://de.serlo.org/nachhaltigkeit/anbau-permakulturgarten/gelaende-anbauplanung/mischkultur" title="Mischkultur auf Serlo.org">Serlo.org</a> heißt es dazu:</p>
-
-					<blockquote>
-					Bei der Mischkultur werden verschiedene Pflanzenarten auf der Beetfläche so kombiniert, dass sie sich gegenseitig optimal unterstützen.
-					</blockquote>	
-
-					<p><h4 class="buddy-grid-title">Hier findest du die Buddy-Kandidaten</h4></p>
-					<div class="buddy-grid"></div>
-
-					<div class="share-note"><b>Dieses Projekt teilen:</b><br> <ul class="share-buttons"><li><a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fplantbuddies.serlo.org&title=Plant%20Buddies%20%E2%80%93%20Wie%20Online%20Dating%20f%C3%BCr%20FPflanzen&description=PlantBuddies%20ist%20ein%20einfaches%20Tool%2C%20dass%20dir%20mit%20deinen%20Mischkulturen%20hilft.%20Brauchst%20du%20eine%20guten%20Freund%20f%C3%BCr%20deine%20Pflanze%3F%20Benutze%20die%20Mischkulturtabelle%20aus%20der%20Zukunft%20%3A%29" target="_blank" data-share="facebook" title="Share on Facebook"><img src="img/socialicons/facebook.svg"></a></li><li><a href="https://twitter.com/intent/tweet?text=Plant%20Buddies%20ist%20ein%20einfaches%20Tool%2C%20dass%20dir%20mit%20deinen%20Mischkulturen%20hilft%3A%20https%3A%2F%2Fplantbuddies.serlo.org" title="Tweet" target="_blank" data-share="twitter"><img src="img/socialicons/twitter.svg"></a></li><li><a href="https://de.pinterest.com/pin/create/button/?url=https%3A%2F%2Fplantbuddies.serlo.org&media=https%3A%2F%2Fplantbuddies.serlo.org%2Fimg%2Fplant_buddies_logo_big.png%3F&description=PlantBuddies%20%E2%80%93%20Wie%20Online%20Dating%20f%C3%BCr%20Pflanzen%20%2F%20Buddies%20is%20ein%20einfaches%20Tool%2C%20dass%20dir%20mit%20deinen%20Mischkulturen%20hilft." title="Pin it" target="_blank" data-share="pinterest" ><img src="img/socialicons/pinterest.svg"></a></li><li><a href="mailto:?subject=Mischkulturen%20mit%20PlantBuddies&amp;body=PlantBuddies%20einfaches%20Tool%2C%20dass%20dir%20mit%20deinen%20Mischkulturen%20hilft%0AProbier%20es%20aus%3A%20https%3A%2F%2Fplantbuddies.serlo.org" title="Email" target="_blank" data-share="mail"><img src="img/socialicons/email.svg"></a></li></ul></div>
-
-					<h4>Benutzung & Lizenz</h4>
-					<p>Es ist kostenlos! Bitte lerne damit und schick es weiter. <br> Außerdem ist auch der Quelltext dieser Seite <a href="https://github.com/serlo-org/PlantBuddies" title="PlantBuddies – Open Source Companion Planting Tool on GitHub">frei verfügbar</a>!<br> Für die finale Version wollen wir auch Illustrationen und Inhalte unter eine freie Lizenz stellen.</p>
-
-					<h4>Kontakt, Mitmischen & Feedback</h4>
-					<p>Diese Projekt ist noch in einer frühen Phase. Schick uns gern deine Ideen und Feedback an <a title="Ui, I'm exited!" href="mailto:botho [a] serlo [:] org" class="mail-address">botho [a] serlo [:] org</a> oder beteilige dich <a href="https://github.com/serlo-org/PlantBuddies" title="PlantBuddies – Open Source Companion Planting Tool on GitHub">auf GitHub an diesem Projekt</a>.<br>Danke dir!</p>
-
-					<div class="gray" class="privacy-wrap">
-					<h4>Datenschutz</h4>
-					<p>Um die Benutzung dieser Seite und die Bedürfnisse der NutzerInnen besser zu verstehen analysieren wir normalerweise den Traffic dieser Seite – aktuell machen wir das nicht mehr. 
-					</p>
-					<p>Allgemein gilt die <a href="https://de.serlo.org/datenschutz" title="Datenschutzrichtline der freien Lernseite serlo.org">Datenschutzrichtline von serlo.org</a></p>
-					<div class="privacy-content">
-						<a href="#" class="toggle-privacy-content">Zeig mir die Details / Zustimmung verweigern</a>.
-						<hr>
-						…allerdings so, dass deine Privatsphäre geschützt ist. 
-						<p>Die angaben hier sind aktuell ungültig. Das Tracking wurde  es gilt die <a href="https://de.serlo.org/datenschutz" title="Datenschutzrichtline der freien Lernseite serlo.org">Datenschutzrichtline von serlo.org</a></p>
-
-						<p><b>Software</b><br><a href="https://plantbuddies.serlo.org">PlantBuddies</a> benutzt die open-source Software <a href="https://piwik.org">Piwik</a> für die Analyse des Datenverkehrs.
-						</p>
-						<p><b>Cookies & Anonymität</b><br>
-						Piwik benutzt Cookies, damit wir verstehen, wie BesucherInnen die Seite benutzen.
-						In diesem Fall sind Cookies kleine Textdateien, die auf deinem Computer/Gerät gespeichert werden, um deinen Browser zu wiederzuerkennen (tracking).
-						<br><i>Wir werden diese Daten nie benutzen um dich als Person zu identifizieren</i>.</p>
-
-						<p><b>Speicherung</b><br>
-						Die Informationen über deine Benutzung der Webseite (inklusive einer vorher anonymisierten IP-Adresse) wird auf einem Webserver unseres <a href="https://ssl.greensta.de/">Anbieters</a> in Deutschland gespeichert.
-						</p>
-
-						<p><b>Und warum macht ihr das?</b><br>
-						<i>Wir werden die Daten nur dazu nutzen um die Bedienung von PlantBuddies zu verbessern und niemals für kommerzielle Interessen oder Marketing.</i>
-						</p>
-
-						<p><b>Tracking deaktivieren</b><br>
-						Du kannst Tracking auf PlantBuddies unten deaktivieren, oder ein Plugin wie z.B. <a href="https://www.privacytools.io/#addons">uBlock Origin</a> benutzen oder deinen <a href="http://donottrack.us/">Browser so einstellen</a>, dass du auf den meisten Seiten nicht getrackt wirst. Mehr dazu unter <a href="http://donottrack.us/">donottrack.us</a>.</p>
-						<b>Dein Tracking-Status</b><br>
-							<div class="iframe_frame">
-							<iframe src="http://piwik.permaculturecommons.org/index.php?module=CoreAdminHome&action=optOut&language=de"></iframe>
-							<small class="gray">––<br>wenn diese Feld leer ist, konnte sich die Seite nicht mit der Analytics-Software verbinden und Tracking ist sicher deaktiviert.
-							</small>
-							</div>
-							<hr>
-						</div>
-					</div> <!-- privacy wrap done -->
-					
-					<div class="gray">
-					<h4>Impressum</h4>
-					<p>Es gilt das <a href="https://de.serlo.org/impressum" title="Impressum der freien Lernseite serlo.org">Impressum von serlo.org</a></p>
-					</div>
-
-				</div>	
-			</div>
-
-		</div>
-	</div>
-
-	<footer class="menu en">
-		<p><a href="./" class="about-link">About the Project</a> &#9728;</p>
-
-		<p>
-		Made by<br>
-		 <a href="https://en.serlo.org/sustainability" title="Applied Sustainability as a subject on the free and open learning platform serlo.org">Serlo Sustainability</a> &<br>
-		<a href="http://permaculturecommons.org" title="Free Knowledge about Permaculture">PermacultureCommons</a><br>--<br>Illustrations by <a href="http://elenabauer.de/" title="Website of Elena Bauer">Elena</a></p>
-
-	</footer>
-
-	<footer class="menu de">
-		<p><a href="./" class="about-link">Über das Projekt</a> &#9728;</p>
-
-		<p>
-		Gemacht von<br>
-		 <a href="https://de.serlo.org/nachhaltigkeit" title="Angewandte Nachhaltigkeit als Fachbereich auf der freien Lernplattform serlo.org">Serlo Nachhaltigkeit</a> &<br>
-		<a href="http://permaculturecommons.org" title="Freies Wissen über Permaculture">PermacultureCommons</a><br>--<br>Illustrationen von <a href="http://elenabauer.de/" title="Webseite von Elena Bauer">Elena</a></p>
-
-	</footer>	
-
-	<!-- Piwik – Open Source Analytics Tool  -->
-	<!-- Privacy & Piwik please read: https://piwik.org/faq/new-to-piwik/#faq_130 -->
-	<script type="text/javascript">var _paq=_paq||[];_paq.push(["setDomains",["*.plantbuddies.serlo.org"]]),_paq.push(["setDoNotTrack",!0]),_paq.push(["trackPageView"]),_paq.push(["enableLinkTracking"]),function(){var e="//piwik.permaculturecommons.org/";_paq.push(["setTrackerUrl",e+"piwik.php"]),_paq.push(["setSiteId","1"]);var a=document,p=a.createElement("script"),r=a.getElementsByTagName("script")[0];p.type="text/javascript",p.async=!0,p.defer=!0,p.src=e+"piwik.js",r.parentNode.insertBefore(p,r)}();</script>
-	<noscript><p><img src="//piwik.permaculturecommons.org/piwik.php?idsite=1" style="border:0;" alt="" /></p></noscript>
-
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-        <script>window.jQuery || document.write('<script src="js/jquery-3.0.0.min.js"><\/script>')</script>
-	<script src="js/typeahead.jquery.min.js?v=1"></script>
-	<script src="js/Language.js?v=1"></script>
-	<script src="js/Events.js?v=1"></script>
-	<script src="js/Input.js?v=1"></script>
-	<script src="js/Plants.js?v=1"></script>
-
-	<script src="data/plants-data.js?uid=4"></script>
-	<script src="data/relations-data.js?uid=4"></script>
-
-	<script src="js/main.js?v=1"></script>
-
-</body>
+    <script src="/data/plants-data.js"></script>
+    <script src="/js/index.js"></script>
+  </body>
 </html>
 
- 	<link rel="stylesheet" type="text/css" href="css/main.css">
-	<link href='https://fonts.googleapis.com/css?family=Domine:400,700' rel='stylesheet' type='text/css'>
+<!-- <script src="data/relations-data.js"></script> -->

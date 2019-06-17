@@ -1,0 +1,13 @@
+[[redirects]]
+from = "/*"
+to = "/de/:splat"
+status = 302
+force = false
+conditions = {Language = "de"}
+
+[[redirects]]
+from = "/*"
+to = "/index.html"
+status = 200
+force = false
+

@@ -1,163 +1,321 @@
-function Events(){
+import Navigo from 'navigo'
 
-	var defaultHTML;
+import getHeaderContent from './header'
+import getFooterContent from './footer'
 
-    this.init = function(){
+var router = new Navigo('/');
+window.router = router
+window.gLang = 'en'
+window.gPlant = ''
 
-		// initKeyEvents();
-        initHashEvents();
-        this.initClickEvents();
 
-        defaultHTML = $('#results').html();
-    }
+export default function Events() {
 
-	var initHashEvents = function(){
-		$( window ).on('hashchange',function() {
-		    var hash = location.hash;
-		    gEvents.loadFromHash(hash);
-		});
+	var cache = {}
+	var currentRoute, lastRoute
+
+	this.init = function () {
+
+		this.initKeyEvents();
+
+		// setupLangMenu(gLang)
+
+		setupRouter();
 	}
 
-	this.initClickEvents = function(){
-		$("#results a.img-hover").click(function(e) {
-		    e.preventDefault();
-		    var href=$(this).attr("href");
-		    gEvents.updateHash(href.substr(1));
-		    gEvents.loadFromHash(href);
-		});
+	function buildCache() {
+		if (!cache['front']) cache['front'] = buildFrontPage(true);
+		if (!cache['plants']) cache['plants'] = gPlants.buildPlantList()
+	}
 
-		$("#results .about-link, #home-link, footer .about-link").click(function(e) {
-		    e.preventDefault();
-		    gEvents.loadStartPage();
-		    scrollToPos(0);
-		    
-			_paq.push(['trackEvent', 'HomeClick', 'at: '+$(this).attr('id') ]);
-		});
+	function setGlobals(p, pageName, callback) {
+		gPage = pageName;
+		if (typeof p === undefined) gLang = 'en'
+		else gLang = p.lang.length !== 2 ? 'en' : p.lang
+		setLanguage(callback)
+	}
 
-		$("#results .show-all-link").click( function(e){
-			e.preventDefault();
+	var buildPage = function () {
+		document.title = gLangMain.meta.title
+		document.querySelector('meta[name=description]').setAttribute('content', gLangMain.meta.desc)
+		document.querySelector('meta[property=og\\:title]').setAttribute('content', gLangMain.meta.title)
+		document.querySelector('#logo img').setAttribute('alt', gLangMain.meta.title + ' Logo')
 
-			$('#results .buddy-grid .hidden').slideDown();
-			console.log($('#results .buddy-grid .hidden'));
-			if($(this).attr('href') === '#top'){
-				toTop();
-				$('#plant-input').focus();
-				return true;
+		// import('./header.js').then(function(e){
+		// 	document.querySelector('header > nav').innerHTML = e
+		// 	setupLangMenu(gLang)
+		// })
+
+		document.querySelector('header > nav').innerHTML = getHeaderContent(gLangMain)
+		setupLangMenu(gLang)
+		document.getElementsByTagName('footer')[0].innerHTML = getFooterContent(gLangMain)
+
+		setTimeout(buildCache, 200)
+
+		// import('./footer'.js).then(function(e){
+		// 	document.getElementsByTagName('footer')[0].innerHTML = e
+		// 	setTimeout(buildCache,200)
+		// })
+
+	}
+
+	var setLanguage = function (callback) {
+		console.log("setLang:" + gLang)
+		if (gLang === 'en') import('../data/lang/en/main').then(function () {
+			buildPage()
+			callback()
+		})
+		else if (gLang === 'de') import('../data/lang/de/main').then(function () {
+			buildPage()
+			callback()
+		})
+		else return false
+		document.documentElement.setAttribute('lang', gLang)
+		document.cookie = "nf_lang=" + gLang;
+	}
+
+	function setupRouter() {
+		// cache = {}
+		router
+			.on({
+				':lang/🌿': function (p) {
+					setGlobals(p, 'plants', loadPlantList)
+				},
+				':lang/🌿/:id': function (p) {
+					gPlant = p.id
+					setGlobals(p, 'plant', loadPlantPage)
+					console.log("plant.id: " + gPlant)
+				},
+				':lang': function (p) {
+					console.log("landing?!")
+					setGlobals(p, 'front', gEvents.loadStartPage)
+					//TODO: Check if changes, otherwise dont render again
+				},
+				'*': function (p) {
+					setGlobals(p, 'front', gEvents.loadStartPage)
+					// (); scrollToPos(0);
+				}
+			})
+			.resolve();
+
+		console.log("gPage: " + gPage)
+		console.log("gLang: " + gLang)
+		document.body.className = gPage //for first load
+
+		router.getLinkPath = function (link) {
+			// var href = gLang === 'en' ? link.getAttribute('href') : gLang + '/' + link.getAttribute('href');
+			var href = link.getAttribute('href');
+			if (href[0] === '/') href = href.replace('/', './')
+			return href;
+		}
+		// router.getLinkPath = function(link){
+		// 	var location = link.getAttribute('href');
+		// 	console.log(location)
+		// 	console.log(link)
+		// 	  e.preventDefault();
+		// 	// router.navigate(location);
+		// 	return false
+
+		// }
+
+		router.hooks({
+			before: function (done, params) {
+				// console.log(params)x
+				// console.log("router before")
+				// console.log(done)
+				// console.log(params)
+				// if(!currentRoute) currentRoute = window.location.href
+				// console.log(window.location.href)
+				// lastRoute = currentRoute;
+				// currentRoute = router.lastRouteResolved()
+				done()
+			},
+			after: function (params) {
 			}
-			$(this).fadeOut('600', function() {
-				if(gLanguage.active === 'en') $(this).html('<span>You can also use the 🔍 searchbar at the top</span> ▴').attr('href','#top').fadeIn();
-				if(gLanguage.active === 'de') $(this).html('<span>Du kannst auch die 🔍 Suchleiste oben benutzen</span> ▴').attr('href','#top').fadeIn();
-			});
-			_paq.push(['trackEvent', 'SlideToggle', 'Show Buddy List']);
 		});
 
-		$('#results .privacy-content').each (function() { $(this).css("height", $(this).height()); }).hide();
-
-		$("#results .toggle-privacy-content").click( function(e){
-			e.preventDefault();
-			$('#results .privacy-content').slideToggle();
-			$('#results .privacy-wrap').removeClass('gray');
-			_paq.push(['trackEvent', 'SlideToggle', 'Toggle Privacy Content']);
-		});
-	
-		// $('.share-buttons a').click(function(e){
-		// 	e.preventDefault();
-		// 	window.open (url);
-		// });
 	}
 
-	this.updateHash = function(hash){
-        history.pushState(null, null, '#'+hash);
-	}
-
-	this.removeHash = function(){
-        //history.pushState(null, null, '');
-        history.pushState("", document.title, window.location.pathname + window.location.search);
-	}
-
-	this.loadFromHash = function(hash) {
-	    hash = hash.substr(1);
-
-	    //special case 
-	    if(hash == 'buddies') { toBuddyGrid(); return false;}
-	    if(hash == 'top') { toTop(); return false;}
-
-		_paq.push(['trackEvent', 'LoadingFromHash', 'hash: ' + hash ]);
-
-	    //has hash
-	    if(hash.length>1) $('#results .default').hide();
-	    //no hash (or anchor)
-	    else {gEvents.loadStartPage(); scrollToPos(0); return false;}
-		
-		var plantObj = $.grep(gPlantData, function(e){ return e.id == hash })[0];
-		
-		//plant not found -> startpage
-		if(plantObj === undefined) {gEvents.loadStartPage(); scrollToPos(0); return false;}
-
-		if(gLanguage.active === 'en') $('.typeahead').typeahead('val', plantObj.name);
-		if(gLanguage.active === 'de') $('.typeahead').typeahead('val', plantObj.name_de);
+	var loadPlantPage = function () {
+		var plantObj = gPlantDataLang[gPlant];
+		if (plantObj === undefined) {
+			//find in language
+			for (var o in gPlantDataLang) {
+				var slug = toSlug(gPlantDataLang[o].name)
+				if (slug !== gPlant) continue
+				//success
+				gPlant = o
+				loadPlantPage();
+				return false;
+			}
+			router.navigate('');
+			return false
+		}
 		gPlants.load(plantObj);
 		scrollToPos(0);
 	}
 
-	this.loadStartPage = function(keepHash) {
-		if(!keepHash) this.removeHash();
-		gInput.clearInput();
-		gIsFront = true;
-		gPlants.reload(defaultHTML);
+	var setupLangMenu = function () {
+		var menu = document.getElementById('lang-select')
+		menu.addEventListener('change', onLangMenuChange, false)
+		menu.value = '_change';
+		// setLanguage(gLang)
 	}
 
-	var toBuddyGrid = function(){
-		gEvents.loadStartPage();
-		scrollToElem( '#results .buddy-grid-title' );
-	}
-	
-	var toTop = function(){
-		scrollToPos( 0 );
-	}	
-
-	var scrollToElem = function(selector){
-		var checkExist = setInterval(function() {
-		   if ($(selector).length) {
-		      clearInterval(checkExist);
-
-		      $('html, body').stop().animate({
-	        		scrollTop: $(selector).offset().top
-	    	  }, 600);
-		   }
-		}, 100); // check every 100ms
+	var onLangMenuChange = function (e) {
+		var lang = e.target.value
+		if (lang !== 'en' && lang !== 'de') return false;
+		if (lang === 'en') lang = '';
+		window.location.href = '/' + lang;
 	}
 
-	var scrollToPos = function(pos) {
-		$('html, body').stop().animate({
-    		scrollTop: pos
-		}, 600);    	
+	var loadPlantList = function () {
+		if (cache['plants']) gPlants.reload(cache['plants'])
+		else {
+			cache['plants'] = gPlants.buildPlantList()
+			gPlants.reload(cache['plants']);
+		}
+	}
+
+	this.loadStartPage = function (keepHash) {
+		//if (!keepHash) router.navigate('')
+		// gInput.clearInput()
+		if (cache['front']) gPlants.reload(cache['front'])
+		else {
+			buildFrontPage()
+		}
 	}
 
 
-	this.beforeReload = function(){
-		$('body').toggleClass('front',gIsFront);
+	var buildFrontPage = function (preload) {
+		import('./frontpage').then(function (e) {
+			cache['front'] = e(gLangMain);
+			if (!preload) gEvents.loadStartPage()
+		})
 	}
-	
-	this.afterReload = function(){
-		gEvents.initClickEvents();
-		if(gIsFront) decodeMail();
-	}	
 
-	// var initKeyEvents = function(){
-	// 	$(document).keydown(function(e) {
-	// 		switch(e.which){    
-	// 		// case 27: //esc // case 37: //left arrow // case 38: //up arrow // case 39: //right arrow // case 40: //down arrow // case  9: //fall through //case 32: //space
-			
-	// 		// case 13: //return
-	// 		//     e.preventDefault();
-	// 		//     // gInput.onEnter();
-	// 		// break;
+	var toTop = function () {
+		scrollToPos(0);
+	}
 
-	// 		default:
-	// 		break;
-	// 		} //switch
-	// 	});
-	// }
+	var scrollToElem = function (selector) {
+		var checkExist = setInterval(function () {
+			console.log(document.querySelector(selector))
+			if (document.querySelector(selector)) {
+				clearInterval(checkExist);
+				window.scrollTo({
+					top: document.querySelector(selector).offsetTop,
+					behavior: 'smooth'
+				});
+			}
+		}, 50); // check every 50ms
+	}
 
+	var scrollToPos = function (pos) {
+		window.scrollTo({
+			top: pos,
+			behavior: 'smooth'
+		});
+	}
+
+	this.beforeReload = function () {
+		document.body.onclick = function () {
+
+		}
+	}
+
+	this.afterReload = function () {
+		document.body.className = gPage
+		router.updatePageLinks()
+		if (gPage === 'plants') gInput.findInput();
+		if (gPage === 'front') decodeMail();
+		document.activeElement.blur();
+		scrollOrFocusInput()
+		document.dispatchEvent(new Event('prerender-trigger'));
+		//
+	}
+
+	var scrollOrFocusInput = function () {
+		if (gPage !== 'plants') return false
+		if (!gInput.input) return false
+		if (window.innerHeight > 700) gInput.input.focus()
+		else {
+			setTimeout(function () {
+				window.scroll({ top: gInput.input.offsetTop - 20 })
+			}, 50)
+		}
+	}
+
+	this.initKeyEvents = function () {
+		//list and input set in plantsFilter
+
+		document.addEventListener('keydown', onKeyDown, false)
+	}
+
+	//TODO: INPUT AND FILTER EVENTS
+	function onKeyDown(e) {
+		const onInput = e.target.tagName.toLowerCase() === 'input'
+
+
+		if (gPage === 'plant' && e.keyCode === 27) router.navigate('🌿')
+		if (gPage === 'plant' && e.keyCode === 8) window.history.back()
+		if (gPage !== 'plants') return true
+
+		if (
+			!onInput &&
+			e.keyCode >= 65 &&
+			e.keyCode <= 90 &&
+			!e.altKey &&
+			!e.ctrlKey &&
+			!e.metaKey
+		) {
+			gInput.input.focus()
+			return true
+		}
+
+		switch (e.keyCode) {
+			case 27: //esc
+				gInput.setFilter('')
+				if (gInput.input) gInput.input.blur()
+				break
+
+			case 13: //enter
+				if (onInput) gInput.setFilterToFirstPlant()
+				break
+
+			case 38: //up arrow
+				moveFocus(-4, e)
+				break
+			case 40: //down arrow
+				moveFocus(4, e)
+				break
+			case 37: //left arrow
+				if (!onInput) moveFocus(-1, e)
+				break
+			case 39: //right arrow
+				if (!onInput) moveFocus(1, e)
+				break
+
+			default:
+				return true
+		}
+	}
+
+	function moveFocus(incr, e) {
+		e.preventDefault()
+
+		let pos = 0
+		const lis = gInput.list.querySelectorAll('li:not([hidden])')
+		const activeLiPos = [].indexOf.call(lis, document.activeElement.parentElement)
+
+		if (activeLiPos > -1) {
+			pos = incr + activeLiPos
+		}
+		if (pos < 0) {
+			gInput.input.focus()
+			return
+		}
+		if (pos > lis.length - 1) pos = lis.length - 1
+		lis[pos].firstElementChild.focus()
+	}
 }//Events
