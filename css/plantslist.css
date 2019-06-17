@@ -36,8 +36,14 @@
   height: auto;
   width: 100%;
   transition: all 0.4s ease 0s;
-  width: 9.5rem;
+  width: 7rem;
   margin: -0.2rem auto -0.5rem auto;
+}
+
+@media only screen and (min-width: 36rem) {
+  .buddy-grid li a img {
+    width: 9.5rem;
+  }
 }
 
 .buddy-grid li a span {
@@ -54,6 +60,7 @@ input.filterinput {
   border: 0;
   display: block;
   width: 22.8rem;
+  max-width: 90%;
   padding: 0.6rem 0.9rem 0.5rem 0.9rem;
   line-height: 1.6rem;
   border-radius: 0.5rem;

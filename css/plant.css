@@ -90,23 +90,41 @@ blockquote::after {
 
 .good,
 .bad {
-  margin-top: -1rem;
+  margin-top: -0.5rem;
 }
 
-.good a {
-  color: #99cc99;
-}
-
-.bad a {
+.good li > a:before,
+.bad li > a:before {
+  content: '⬤';
   color: #cc9999;
+  margin-left: -0.3rem;
+  padding-right: 0.3rem;
+}
+
+.good li > a:before {
+  color: #9c9;
+}
+
+.good a,
+.bad a {
+  color: #333;
 }
 
 #results li > a:after {
   content: ' \25BE';
+  opacity: 0.4;
+}
+
+#results li > a.note:after {
+  opacity: 1;
 }
 
 #results li > a:hover {
-  text-decoration: underline;
+  text-decoration: none;
+}
+
+#results li > a:hover:before {
+  opacity: 0.7;
 }
 
 #results li > div {
@@ -129,7 +147,7 @@ blockquote::after {
 #results li > div img {
   width: 7rem;
   height: 7rem;
-  margin-right: 3rem;
+  margin-right: 5rem;
 }
 
 #results li > div a span {

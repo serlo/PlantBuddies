@@ -1,4 +1,4 @@
-const currentCacheName = 'plantbuddies-0.01';
+const currentCacheName = 'plantbuddies-0.02';
 
 //trick to use parcel-plugin-sw-cache without workbox
 //TODO: Replace with other plugin or custom code

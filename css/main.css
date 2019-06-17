@@ -25,8 +25,16 @@ ul {
 }
 
 blockquote {
-  color: #888;
+  color: #595959;
+  font-style: italic;
+}
+
+.front blockquote {
   margin-left: 2rem;
+  border-left: 0.5rem solid #9c9;
+  padding: 0.3rem 0 0.3rem 1rem;
+  margin-left: 0;
+  margin-top: 2rem;
 }
 
 h2 {

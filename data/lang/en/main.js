@@ -7,14 +7,12 @@ window.gLangMain = {
   select_plant: "Select a lonely Plant …",
   menu: {
     lang_hint: "Switch to English",
-    about: "About the Project",
+    about: "About",
     overview: "Plantslist",
     made_by: "Made by",
+    sus_link: '<a href="https://en.serlo.org/sustainability" title="Applied Sustainability as a subject on the free and open learning platform serlo.org">Serlo Sustainability</a>',
     illus: "Illustrations by",
-    sus_link_text: "Serlo Sustainability",
-    sus_link_href: "https://en.serlo.org/sustainability",
-    sus_link_title: "Applied Sustainability as a subject on the free and open learning platform serlo.org",
-    perma_link_title: "Free Knowledge about Permaculture"
+    perma_link: '<a href="http://permaculturecommons.org" title="Free Knowledge about Permaculture">PermacultureCommons</a>'
   },
   meta: {
     title: "PlantBuddies 🌿💘  Easy Companion Planting",
@@ -41,7 +39,7 @@ window.gLangMain = {
     companion_planting: {
       title: "So what is Companion Planting actually about?",
       content: 'Some plants just grow well together, while others might be terrible matches. Or as <a href="https://en.wikipedia.org/wiki/Companion_planting" title="Article on Companion Planting – Wikipedia">Aunt Wikipedia would say</a>:',
-      quote: "\"Companion planting in gardening and agriculture is the planting of different crops in proximity for pest control, pollination, providing habitat for beneficial creatures, maximizing use of space, and to otherwise increase crop productivity (…)\""
+      quote: "Companion planting in gardening and agriculture is the planting of different crops in proximity for pest control, pollination, providing habitat for beneficial creatures, maximizing use of space, and to otherwise increase crop productivity (…)"
     },
     license: {
       title: "Usage & License",

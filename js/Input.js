@@ -63,7 +63,7 @@ export default function Input() {
 		let count = 0
 		for (let i = 0; i < plantArray.length; i++) {
 			const item = plantArray[i];
-			if (gPlantData[item].name.toLowerCase().includes(filterBy) ||
+			if (gPlantDataLang[item].name.toLowerCase().includes(filterBy) ||
 				(typeof gPlantData[item].alt !== 'undefined' && gPlantData[item].alt.toLowerCase().includes(filterBy))) {
 				gInput.list.children.item(i).hidden = false
 				count++

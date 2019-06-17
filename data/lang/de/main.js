@@ -10,14 +10,12 @@ window.gLangMain = {
   select_plant: "Pflanze aussuchen",
   menu: {
     lang_hint: "Mischkulturen auf Deutsch entdecken",
-    about: "Über das Project",
+    about: "Über",
     overview: "Pflanzenliste",
     made_by: "Gemacht von",
+    sus_link: '<a href="https://de.serlo.org/nachhaltigkeit" title="Angewandte Nachhaltigkeit als Fachbereich auf der freien Lernplattform serlo.org">Serlo Nachhaltigkeit</a>',
     illus: "Illustrationen von",
-    sus_link_text: "Serlo Nachhaltigkeit",
-    sus_link_href: "https://de.serlo.org/nachhaltigkeit",
-    sus_link_title: "Angewandte Nachhaltigkeit als Fachbereich auf der freien Lernplattform serlo.org",
-    perma_link_title: "Freies Wissen über Permakultur"
+    perma_link: '<a href="http://permaculturecommons.org" title="Freies Wissen über Permakultur">PermacultureCommons</a>'
   },
   meta: {
     title: "PlantBuddies 🌿💘  Mischkulturen in einfach",

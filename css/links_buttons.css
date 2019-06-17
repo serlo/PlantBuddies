@@ -72,6 +72,7 @@ a.button {
 }
 
 .main-button .button {
+  max-width: 90%;
   width: 22.8rem;
 }
 
