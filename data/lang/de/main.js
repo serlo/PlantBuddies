@@ -19,7 +19,12 @@ window.gLangMain = {
   },
   meta: {
     title: "PlantBuddies 🌿💘  Mischkulturen in einfach",
-    desc: "Plant Buddies ist wie eine Mischkultur-Tabelle, aber einfacher. Damit deine Pflanzen bald gute Nachbarn haben! "
+    desc: "PlantBuddies ist wie eine Mischkultur-Tabelle, aber einfacher. Damit deine Pflanzen bald gute Nachbarn haben! "
+  },
+  share: {
+    teaser: "Wer wächst gern neben ",
+    find_out: " – finde es heraus auf ",
+    checkit: ""
   },
   open: "Zeige",
   slide_down: "Aufklappen",

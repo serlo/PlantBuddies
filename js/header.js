@@ -2,10 +2,10 @@ module.exports = function getHeaderContent(langObj) {
   return `
 <ul>
   <li>
-    <a href="/" data-navigo>${langObj.menu.about}<span> PlantBuddies</span></a
+    <a href="${getLangHref()}/" data-navigo>${langObj.menu.about}<span> PlantBuddies</span></a
     >💘
   </li>
-  <li><a href="/🌿" data-navigo>${langObj.menu.overview}</a>🌿</li>
+  <li><a href="${getLangHref()}/🌿" data-navigo>${langObj.menu.overview}</a>🌿</li>
   <li id="lang-menu">
     <select
       aria-label="Change Language"

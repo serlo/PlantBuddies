@@ -23,7 +23,7 @@ export default function Plants() {
 		var html = '';
 
 		html += `<img class="main" alt="Icon for ${gPlant}" src="${url}"/>
-		<h1><a class="button" href="🌿" title="${gLangMain.show_all}" data-navigo>${plantObj.name}</a></h1>`;
+		<h1><a class="button" href="${getLangHref()}/🌿" title="${gLangMain.show_all}" data-navigo>${plantObj.name}</a></h1>`;
 		if (plantObj.alt) html += `<p class="gray">${gLangMain.aka} <b> ${plantObj.alt} </b></p>${noteTag}`;
 
 		//TODO: warn if no buddies found
@@ -32,17 +32,12 @@ export default function Plants() {
 		// }
 
 		html += `<div id="results"><div><h3>${gLangMain.friends}</h3>
-		<ul class="good">${relationsMap(relations,0)}</ul></div>
-		<div><h3>${gLangMain.no_friends}</h3><ul class="bad">${relationsMap(relations,1)}</ul></div></div>
-		<div class="more-options"><a href="🌿" data-navigo>${gLangMain.show_all}</a></div>` + getShareButtons(plantObj.name);
+		<ul class="good">${relationsMap(relations, 0)}</ul></div>
+		<div><h3>${gLangMain.no_friends}</h3><ul class="bad">${relationsMap(relations, 1)}</ul></div></div>
+		<div class="more-options"><a href="${getLangHref()}/🌿" data-navigo>${gLangMain.show_all}</a></div>` + getShareButtons(plantObj.name);
 
 		this.reload(html);
 	}
-
-	// var getBuddyImage = function (slug) {
-	// 	var url = getImageSrc(slug);
-	// 	return '<img alt="' + slug + ' Illustration" src="' + url + '" class="buddy-img"/>';
-	// }
 
 	this.reload = function (html) {
 		gEvents.beforeReload();
@@ -50,12 +45,12 @@ export default function Plants() {
 	}
 
 	var fadeReload = function (html) {
-		fade(container,false,function(){
-				container.innerHTML = html
-				gEvents.afterReload();
-				setShareHrefs()
-				fade(container,true)
-			})
+		fade(container, false, function () {
+			container.innerHTML = html
+			gEvents.afterReload();
+			setShareHrefs()
+			fade(container, true)
+		})
 	}
 
 	var buildRelations = function (relationPlants, result, suggestion) {
@@ -66,52 +61,7 @@ export default function Plants() {
 		return html;
 	}
 
-	// var getOneRelation = function (thisRelation, suggestion) {
-
-	// 	var plant1 = thisRelation.plant1;
-	// 	var plant2 = thisRelation.plant2;
-
-	// 	var secondaryId;
-
-	// 	if (plant1 === plant2) secondaryId = plant1;
-	// 	else if (plant1 === suggestion.id) secondaryId = plant2;
-	// 	else if (plant2 === suggestion.id) secondaryId = plant1;
-
-	// 	//if(suggestion.id === secondaryId) secondaryId = result[i].plant2;
-
-	// 	// var plantObj = $.grep(gPlantData, function (e) { return e.id == secondaryId })[0];
-
-	// 	// console.log(secondaryId)
-
-	// 	var plantObj = gPlantData.filter(function(e) {
-  //   	return e.id == secondaryId
-	// 	})[0];
-
-	// 	if (plantObj === undefined) {
-	// 		console.error("error: \r\n secondaryId: " + secondaryId + "\r\n plant1: " + plant1);
-	// 		console.error("thisrelation: ");
-	// 		console.log(thisRelation);
-	// 		console.error("suggestion: ");
-	// 		console.log(suggestion);
-	// 		return '';
-	// 	}
-
-	// 	var str = '';
-	// 	var details = '';
-	// 	details = ' <span>'
-	// 	+ filterContent(thisRelation.comment)
-	// 	+ '</span><a href="/🌿/' + plantObj.id + '" data-navigo>'
-	// 	+ getBuddyImage(secondaryId) + `<span>${gLangMain.relation_open_plant}</span></a></div>`;
-
-	// 	str += `<li><a class="toggle fc" onClick="openBuddy(event)" aria-label="${gLangMain.slideDown}" href="#" title="${gLangMain.relation_more}">
-	// 	${plantObj.name}</a><div>${details}<div></li>`;
-
-	// 	return str;
-	// }
-
-
-
-	var getRelations = function(){
+	var getRelations = function () {
 		let likey = []
 		let nolikey = []
 
@@ -142,9 +92,9 @@ export default function Plants() {
 	}
 
 	var relationsMap = function (relations, good) {
-    return relations[good].map((item, i) => (
-      getRelation(item.id, item)
-    )).join('')
+		return relations[good].map((item, i) => (
+			getRelation(item.id, item)
+		)).join('')
 	}
 
 	var getImageSrc = function (plantID) {
@@ -154,11 +104,11 @@ export default function Plants() {
 	}
 
 
-	var getRelation = function(plantID, plant) {
+	var getRelation = function (plantID, plant) {
 		const src = getImageSrc(plantID)
 		const altName = !plant.alt ? '' : ' ' + plant.alt
 		const alt = plant.name + altName + ' ' + gLangMain.companion_partners
-		const href = '🌿/' + toSlug(gPlantDataLang[plantID].name)
+		const href = getLangHref() + '/🌿/' + toSlug(gPlantDataLang[plantID].name)
 		const note = plant.comment ? ' note' : ''
 
 		return `
@@ -175,12 +125,6 @@ export default function Plants() {
 		`
 	}
 
-
-	var filterContent = function (str) {
-		if (str === undefined) return '';
-		return str.split('$$$')[0];
-	}
-
 	this.buildPlantList = function () {
 
 		gInput = new Input();
@@ -193,7 +137,7 @@ export default function Plants() {
 		window.gPlantsArray.map((id, i) => {
 			var plant = gPlantDataLang[id]
 			var hidden = ''
-			var href = '🌿' + '/' + id
+			var href = getLangHref() + '/🌿' + '/' + toSlug(plant.name)
 			var altName = (typeof plant.alt === 'undefined') ? '' : ' ' + plant.alt
 			var alt = plant.name + altName + ' Illustration'
 
@@ -210,7 +154,7 @@ export default function Plants() {
 		// 	html += '<li ' + hidden + '><a href="' + href + '" data-navigo title="Open ' + plant.name + '"><img src="' + getImageSrc(plant.id) + '" alt="' + alt + '"/><span>' + plant.name + '</span></a></li>';
 		// }
 
-		html += '</ul><div hidden id="no-results">'+ gLangMain.no_plant_found +' <a href="#'+gLangMain.show_all+'" onClick="clearFilter(event)">'+gLangMain.no_plant_found_link_text+'</a></div>'
+		html += '</ul><div hidden id="no-results">' + gLangMain.no_plant_found + ' <a href="#' + gLangMain.show_all + '" onClick="clearFilter(event)">' + gLangMain.no_plant_found_link_text + '</a></div>'
 		return html;
 	}
 

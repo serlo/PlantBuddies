@@ -1,12 +1,11 @@
 
 module.exports = function getFrontpageContent(langObj) {
-return `
+  return `
 <div id="results">
   <div class="default">
     <div class="main-button">
-      <a class="button" href="🌿" data-navigo>${langObj.select_plant}</a>
+      <a class="button" href="${getLangHref()}/🌿" data-navigo>${langObj.select_plant}</a>
     </div>
-
     <h2>
       ${langObj.landing.title}<br /><i> – ${langObj.landing.subtitle}</i>
     </h2>

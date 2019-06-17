@@ -24,7 +24,6 @@ export default function Events() {
 	}
 
 	function buildCache() {
-		document.dispatchEvent(new Event('prerender-trigger'));
 		if (!cache['front']) cache['front'] = buildFrontPage(true);
 		if (!cache['plants']) cache['plants'] = gPlants.buildPlantList()
 	}
@@ -104,7 +103,8 @@ export default function Events() {
 		document.body.className = gPage //for first load
 
 		router.getLinkPath = function (link) {
-			var href = gLang === 'en' ? link.getAttribute('href') : gLang + '/' + link.getAttribute('href');
+			// var href = gLang === 'en' ? link.getAttribute('href') : gLang + '/' + link.getAttribute('href');
+			var href = link.getAttribute('href');
 			if (href[0] === '/') href = href.replace('/', './')
 			return href;
 		}
@@ -145,7 +145,6 @@ export default function Events() {
 				if (slug !== gPlant) continue
 				//success
 				gPlant = o
-				// console.log(gPlant)
 				loadPlantPage();
 				return false;
 			}
@@ -230,8 +229,10 @@ export default function Events() {
 		router.updatePageLinks()
 		if (gPage === 'plants') gInput.findInput();
 		if (gPage === 'front') decodeMail();
-		scrollOrFocusInput()
 		document.activeElement.blur();
+		scrollOrFocusInput()
+		document.dispatchEvent(new Event('prerender-trigger'));
+		//
 	}
 
 	var scrollOrFocusInput = function () {

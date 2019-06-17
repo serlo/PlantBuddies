@@ -16,7 +16,12 @@ window.gLangMain = {
   },
   meta: {
     title: "PlantBuddies 🌿💘  Easy Companion Planting",
-    desc: "It's like online dating for plants! PlantBuddies is an easy to use tool that helps you with companion planting. Need a good compaion for your plant? Find it here fast. It's like a companion planting chart but in the future."
+    desc: "PlantBuddies is an easy to use tool that helps you with companion planting. Need a good compaion for your plant? Find it here fast. It's like a companion planting chart but in the future."
+  },
+  share: {
+    teaser: "Who likes to grow next to ",
+    find_out: " – find out at ",
+    checkit: ""
   },
   open: "Show",
   slide_down: "Slide down…",
