@@ -3,9 +3,9 @@ module.exports = function getHeaderContent(langObj) {
 <ul>
   <li>
     <a href="${getLangHref()}/" data-navigo>${langObj.menu.about}<span> PlantBuddies</span></a
-    >💘
+    ><span>💘</span>
   </li>
-  <li><a href="${getLangHref()}/🌿" data-navigo>${langObj.menu.overview}</a>🌿</li>
+  <li><a href="${getLangHref()}/🌿" data-navigo>${langObj.menu.overview}</a><span>🌿</span></li>
   <li id="lang-menu">
     <select
       aria-label="Change Language"

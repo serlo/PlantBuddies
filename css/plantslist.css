@@ -6,7 +6,7 @@
   -webkit-box-pack: justify;
   justify-content: space-between;
   flex-wrap: wrap;
-  margin: 3rem -2rem 8rem;
+  /* margin: 3rem -2rem 8rem; */
 }
 
 .buddy-grid li {
@@ -56,24 +56,36 @@
 input.filterinput {
   background-color: #fcc;
   color: #333;
-  font-size: 1.4rem;
-  border: 0;
-  display: block;
-  width: 22.8rem;
-  max-width: 90%;
+  font-size: 1.2rem;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  left: 0;
+  z-index: 2;
   padding: 0.6rem 0.9rem 0.5rem 0.9rem;
   line-height: 1.6rem;
-  border-radius: 0.5rem;
   outline: none;
   border: 0.1rem solid transparent;
   margin: 0 auto;
   text-align: center;
+  box-sizing: border-box;
+}
+
+@media only screen and (min-width: 40rem) {
+  input.filterinput {
+    position: static;
+    font-size: 1.4rem;
+    border-radius: 0.5rem;
+    width: 22.8rem;
+    margin: 0 auto;
+    display: block;
+  }
 }
 
 input.filterinput::placeholder {
   color: #333;
   opacity: 0.6;
-  font-size: 1.2rem;
+  font-size: 1rem;
 }
 
 /* rest of the styles / for interaction etc */
@@ -119,9 +131,9 @@ input.filterinput::placeholder {
   border-color: #d99;
 }
 
-#no-results {
+/* #no-results {
   margin-top: -8rem;
-}
+} */
 
 /*
 
