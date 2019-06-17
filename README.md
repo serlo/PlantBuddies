@@ -1,4 +1,4 @@
-<a href="https://plantbuddies.serlo.org/">![Plant Buddies Companion Planting Tool Logo](https://plantbuddies.serlo.org/img/plant_buddies_logo.svg)</a>
+<a href="https://plantbuddies.serlo.org/">![Plant Buddies Companion Planting Tool Logo](https://plantbuddies.serlo.org/img/plant_buddies_logo_big.png)</a>
 
 &nbsp;
 
