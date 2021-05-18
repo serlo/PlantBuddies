@@ -203,7 +203,7 @@ export default function Events() {
 
   var scrollToElem = function (selector) {
     var checkExist = setInterval(function () {
-      console.log(document.querySelector(selector));
+      //   console.log(document.querySelector(selector));
       if (document.querySelector(selector)) {
         clearInterval(checkExist);
         window.scrollTo({
