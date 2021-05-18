@@ -20,9 +20,15 @@ footer {
 }
 
 main {
-  padding: 0.5rem 2rem 5rem 2rem;
+  padding: 0.5rem 0.5rem 5rem 1.5rem;
   min-height: 100%;
   text-align: left;
+}
+
+@media only screen and (min-width: 30rem) {
+  main {
+    padding: 0.5rem 2rem 5rem 2rem;
+  }
 }
 
 main,
@@ -48,6 +54,12 @@ header nav ul {
 footer {
   text-align: left;
   padding: 3rem 2rem 2rem 2rem;
+}
+
+@media only screen and (max-width: 25rem) {
+  html {
+    font-size: 14px;
+  }
 }
 
 @media only screen and (min-width: 70rem) {

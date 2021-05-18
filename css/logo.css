@@ -23,8 +23,26 @@ a.logo {
   filter: none;
 } */
 
+.plant .logo img,
+.plant .logo:hover img {
+  width: 25rem;
+  opacity: 0;
+  height: 0;
+}
+
+.plant a.logo {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
 @media only screen and (min-width: 36rem) {
-  .plant .logo img,
+  .logo img {
+    width: 25rem;
+    opacity: 1;
+    height: auto;
+  }
+
+  /* .plant .logo img,
   .plant .logo:hover img {
     width: 25rem;
     opacity: 0;
@@ -39,5 +57,5 @@ a.logo {
     width: 25rem;
     opacity: 1;
     height: auto;
-  }
+  } */
 }

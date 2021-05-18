@@ -74,13 +74,16 @@ blockquote::after {
   position: absolute;
 }
 
-.plant #results {
-  display: flex;
-}
+@media only screen and (min-width: 25rem) {
+  .plant #results {
+    display: flex;
+  }
 
-.plant #results > div {
-  display: block;
-  flex-basis: 50%;
+  .plant #results > div {
+    display: block;
+    width: 50%;
+    text-align: left;
+  }
 }
 
 .plant .gray {

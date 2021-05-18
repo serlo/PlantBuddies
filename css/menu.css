@@ -17,6 +17,15 @@ footer a:hover {
   text-decoration: underline;
 }
 
+header nav ul li > span {
+  display: none;
+}
+@media only screen and (min-width: 22rem) {
+  header nav ul li > span {
+    display: inline;
+  }
+}
+
 footer a {
   font-weight: bold;
 }

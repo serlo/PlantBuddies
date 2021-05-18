@@ -6,7 +6,7 @@
   "author": "elbotho <1258870+elbotho@users.noreply.github.com>",
   "license": "MIT",
   "dependencies": {
-    "navigo": "^7.1.2"
+    "navigo": "7.1.2"
   },
   "devDependencies": {
     "parcel-bundler": "^1.12.3",
