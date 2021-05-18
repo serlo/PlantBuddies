@@ -1,13 +1,12 @@
 [[redirects]]
-from = "/*"
-to = "/de/:splat"
-status = 302
+conditions = {Language = ["de"]}
 force = false
-conditions = {Language = "de"}
+from = "/*"
+status = 302
+to = "/de/:splat"
 
 [[redirects]]
-from = "/*"
-to = "/index.html"
-status = 200
 force = false
-
+from = "/*"
+status = 200
+to = "/index.html"
