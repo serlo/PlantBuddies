@@ -13,4 +13,4 @@ Those big companion planting charts and tables always fascinated and confused me
 ## Credits
 
 - Code, Data and Design by Botho and Kati from [Serlo Sustainability](https://en.serlo.org/sustainability) and [PermacultureCommons](http://permaculturecommons.org/)
-- Wonderful illustrations by Elena from [Freilich](jafreilich.com/en/)
+- Wonderful illustrations by [Elena](https://www.elenabauer.de/)
